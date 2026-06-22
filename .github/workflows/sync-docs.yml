@@ -1,0 +1,51 @@
+name: Sync API docs
+
+on:
+  schedule:
+    # Понедельник 06:00 UTC
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-docs
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync Mailganer API documentation
+        run: bash scripts/sync-all-docs.sh
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: |
+            chore(docs): sync Mailganer API documentation
+          title: "chore(docs): sync Mailganer API documentation"
+          body: |
+            Automated sync of cached Mailganer API documentation.
+
+            **Sources**
+            - https://mailganer.com/sitemap.xml
+            - https://mailganer.com/documentation/api/
+            - https://documenter.getpostman.com/view/23131434/VUxPvnhA
+
+            **Review**
+            - `docs/api-index.json` — список страниц
+            - `docs/crosslinks.json` — связи docs ↔ Postman
+            - `docs/endpoints/` — изменения по методам
+
+            Triggered by: ${{ github.event_name }}
+          branch: automation/sync-docs
+          delete-branch: true

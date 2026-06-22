@@ -83,9 +83,7 @@ else
 fi
 
 info "Синхронизация документации API..."
-"$ROOT/.venv/bin/python" "$PACKAGE_ROOT/scripts/sync-api-docs.py"
-"$ROOT/.venv/bin/python" "$PACKAGE_ROOT/scripts/sync-postman.py"
-"$ROOT/.venv/bin/python" "$PACKAGE_ROOT/scripts/build-crosslinks.py"
+"$PACKAGE_ROOT/scripts/sync-all-docs.sh"
 ok "Документация обновлена в docs/"
 
 echo "Готово. Reload MCP в Cursor: Settings → MCP → Reload"

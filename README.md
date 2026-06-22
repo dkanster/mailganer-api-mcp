@@ -76,10 +76,29 @@ POSTMAN_API_KEY=PMAK-your_postman_api_key
 ## Обновить документацию вручную
 
 ```bash
+python3 scripts/sync-all-docs.sh
+```
+
+или по отдельности:
+
+```bash
 python3 scripts/sync-api-docs.py
 python3 scripts/sync-postman.py
 python3 scripts/build-crosslinks.py
 ```
+
+## CI: автоматический sync
+
+Workflow [`.github/workflows/sync-docs.yml`](.github/workflows/sync-docs.yml):
+
+| Триггер | Когда |
+|---|---|
+| `schedule` | Каждый понедельник, 06:00 UTC |
+| `workflow_dispatch` | Вручную: GitHub → Actions → Sync API docs → Run workflow |
+
+Если документация на сайте изменилась, workflow создаёт PR `automation/sync-docs` с обновлённым `docs/`.
+
+После merge PR локально: `git pull` или `./setup.sh .` для обновления кэша.
 
 ## Источники
 
