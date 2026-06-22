@@ -1,0 +1,25 @@
+{
+  "path": "/documentation/task/download",
+  "title": "Скачивание готового файла",
+  "category": "Отчеты",
+  "url": "https://mailganer.com/documentation/task/download",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/tasks/{{task_id}}/download_file"
+  ],
+  "headings": [
+    "Список параметров запроса",
+    "Пример ответов (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответов (json)",
+      "code": "{\n \"status\": \"error\",\n \"error\": \"Task has not file\"\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:25:05.765667+00:00"
+}

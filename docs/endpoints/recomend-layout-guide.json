@@ -1,0 +1,51 @@
+{
+  "path": "/documentation/recomend-layout-guide",
+  "title": "Инструкция по подготовке вёрстки триггера с блоком рекомендаций",
+  "category": "Товарные рекомендации",
+  "url": "https://mailganer.com/documentation/recomend-layout-guide",
+  "http_methods": [],
+  "endpoints": [],
+  "headings": [
+    "Поддерживаемые переменные о товаре",
+    "Пример вёрстки товарного блока",
+    "Использование оператора if",
+    "Использование переменной forloop.",
+    "Использование переменной forloop.counter"
+  ],
+  "paragraphs": [
+    "В вёрстке письма используются 2 цикла: причина рекомендации (например, просмотренные товары или товары из корзины) и рекомендуемые товары. Исходные товары (причина рекомендаций) находятся в массиве s_products, рекомендуемые товары находятся в массиве r_products. Чтобы вывести все товары из массива, нужен оператор цикла. Синтаксис на примере массива с исходными товарами {% for product in s_products %}...{% endfor %} . Внутри цикла подставляются переменные о товаре. Полный список переменных вверху страницы.",
+    "У товара есть 2 цены: до скидки и после. Предположим, что не у всех товаров есть цена до скидки (другими словами не на все товары есть скидка). Тогда в вёрстке нужно использовать проверку {% if product.oldprice %}",
+    "Используемая ниже конструкция {% if forloop.first %} будет срабатывать для первого элемента в массиве, а конструкция\n {% if forloop.last %} соответственно для последнего. Например, это может быть полезно, когда все товары кроме последнего разделены между собой горизонтальной полосой.",
+    "Переменная {{ forloop.counter }} выводит текущий счётчик цикла. Например, его можно использовать для отображения в письме количества товаров в корзине.",
+    "Другой пример, если требуется в строго ограничить количество отображаемых товаров до 6. При этом по 3 товар в каждом ряду.",
+    "Вот так выглядел бы тот же самый пример, только оптимизированный с точки зрения использования количества циклов."
+  ],
+  "code_examples": [
+    {
+      "label": "example_1",
+      "code": "<html>\r\n <body>\r\n ...\r\n <h2>Товары в корзине</h2>\r\n\r\n {% for product in s_products %} //начало цикла, в каждой итерации берётся следующий элемент из массива s_products\r\n <div>\r\n <p><a href=\"{{ product.url }}\"><img src=\"{{ product.image_url }}\"/></a></p>\r\n <p>{{ product.name }}, {{ product.amount }} шт., {{ product.price }} руб.</p>\r\n </div>\r\n {% endfor %} //конец цикла\r\n\r\n <h2>Рекомендуем посмотреть</h2>\r\n\r\n {% for product in r_products %} //начало цикла, в каждой итерации берётся следующий элемент из массива r_products\r\n <div>\r\n <p><a href=\"{{ product.url }}\"><img src=\"{{ product.image_url }}\"/></a></p>\r\n <p>{{ product.name }}, {{ product.price }} руб.</p>\r\n </div>\r\n {% endfor %} //конец цикла\r\n\r\n ...\r\n </body>\r\n</html>"
+    },
+    {
+      "label": "Использование оператора if",
+      "code": "{% for product in r_products %}\r\n...\r\n <p>\r\n Цена:\r\n {% if product.oldprice %}<strike>{{ product.oldprice }} руб.</strike>{% endif %}\r\n {{ product.price }} руб.\r\n </p>\r\n...\r\n{% endfor %}"
+    },
+    {
+      "label": "example_3",
+      "code": "{% for product in r_products %}\r\n <div>...</div>\r\n {% if not forloop.last %}<hr/>{% endif %}\r\n{% endfor %}"
+    },
+    {
+      "label": "Использование переменной forloop.counter",
+      "code": "{% for product in s_products %}\r\n <div>...</div>\r\n {% if forloop.last %}В корзине {{ forloop.counter }} товаров{% endif %}\r\n{% endfor %}"
+    },
+    {
+      "label": "example_5",
+      "code": "<table>\r\n <tr>\r\n {% for product in r_products %}\r\n {% if forloop.counter <= 3 %}\r\n <td>...</td>\r\n {% endif %}\r\n {% endfor %}\r\n </tr>\r\n <tr>\r\n {% for product in r_products %}\r\n {% if forloop.counter > 3 and forloop.counter <= 6 %}\r\n <td>...</td>\r\n {% endif %}\r\n {% endfor %}\r\n <tr>\r\n</table>"
+    },
+    {
+      "label": "example_6",
+      "code": "<table>\r\n <tr>\r\n {% for product in r_products %}\r\n\r\n {% if forloop.counter <= 3 %}\r\n <td>...</td>\r\n {% endif %}\r\n\r\n {% if forloop.counter == 3 %}\r\n </tr>\r\n <tr>\r\n {% endif %}\r\n \r\n {% if forloop.counter > 3 and forloop.counter <= 6 %}\r\n <td>...</td>\r\n {% endif %}\r\n\r\n {% endfor %}\r\n <tr>\r\n</table>"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:29.799731+00:00"
+}

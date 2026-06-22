@@ -1,0 +1,27 @@
+{
+  "path": "/documentation/mailing/send",
+  "title": "Отправка рассылки",
+  "category": "Работа с рассылками",
+  "url": "https://mailganer.com/documentation/mailing/send",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/mailing/send/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Список параметров ответа (json)",
+    "Возможные значения ошибок",
+    "Пример ответа"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответа",
+      "code": "{\n \"статус\": \"success\",\n \"status_text\": \"Mailing has been sent for moderation\"\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:07.835780+00:00"
+}

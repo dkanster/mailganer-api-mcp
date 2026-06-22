@@ -1,0 +1,3725 @@
+{
+  "info": {
+    "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+    "name": "REST API Mailganer",
+    "description": "<html><head></head><body><p>Методы поделены на несколько групп:<br>1. Работа с личным кабинетом Mailganer. Стандартные методы по работе с подписчикам, списками, рассылками.<br>2. Интеграция Mailganer со сторонними приложениями. Группа методов называется \"Работа с пользователями\"</p>\n<p>Напишите нам на <a href=\"https://mailto:mailto:api@mailganer.com\">api@mailganer.com</a>, если вам не хватает какого то метода.</p>\n<p>Методы по работе с <a href=\"https://documenter.getpostman.com/view/26779685/2s93RZM9in#intro\">SMTP</a> задокументированы отдельно и имеют свою отдельную авторизацию</p>\n<h3 id=\"авторизация\">Авторизация</h3>\n<p>1. В методах, содержащих в <strong>url v1,</strong> авторизация происходит через использование апи ключа в теле запроса в переменной <em>api_key</em>.<br>2. В методах, содержащих в <strong>url v2</strong>, авторизация происходит через использование апи ключа в заголовке <code>Authorization: CodeRequest {{api_key}}</code></p>\n<p>API ключ находится в разделе <a href=\"https://mailganer.com/app/profile/\">Мои данные</a></p>\n<h3 id=\"лимиты\">Лимиты</h3>\n<p>К API можно обращаться не чаще <strong>500 раз в минуту</strong>. В случае превышения лимита, вы получите ошибку с кодом 429. Напишите нам, если требуется увеличить лимит.</p>\n<h3 id=\"пагинация\">Пагинация</h3>\n<p>Некоторые методы отдают по 25 записей на странице. В переменной count находится количество записей. Ответ находится в json-масиве result. В переменных next и previous находятся ссылки на следующую или предыдущую страницы. Если следующей или предыдущей страницы нет, то вернётся значение null.</p>\n<pre class=\"click-to-expand-wrapper is-snippet-wrapper\"><code class=\"language-json\">{\n    \"count\": 2,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"source\": 1,\n            \"title\": \"user_var_float\",\n            \"type\": 2,\n            \"type_text\": \"Вещественное число\"\n        },\n        {\n            \"source\": 1,\n            \"title\": \"user_var_datetime\",\n            \"type\": 4,\n            \"type_text\": \"Дата и время\"\n        }\n    ]\n}\n\n</code></pre>\n</body></html>",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "toc": [],
+    "owner": "23131434",
+    "collectionId": "ad2a6101-55ec-46be-9158-ec0369852183",
+    "publishedId": "VUxPvnhA",
+    "public": true,
+    "customColor": {
+      "top-bar": "FFFFFF",
+      "right-sidebar": "656565",
+      "highlight": "2980b9"
+    },
+    "publishDate": "2022-12-09T09:48:32.000Z"
+  },
+  "item": [
+    {
+      "name": "Подписчики",
+      "item": [
+        {
+          "name": "Добавление нового подписчика",
+          "id": "e8ea5497-5c36-491e-8357-338b485a40be",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@example.com\",\n    \"source\": 49767, // [49767,50145] - для добавления в несколько списков, \"all\" - для добавления во все списки\n    \"phone\": \"+79123456789\",\n    \"name\": \"Федор\",\n    \"patronymic\": \"Федорович\",\n    \"surname\": \"Федоров\",\n    \"gender\": 1,\n    \"birthday\": \"01.01.1988\",\n    \"add_tag\": \"метка1\",\n    \"delete_tag\": \"метка2\",\n    \"user_vars\": {\n        \"text\": \"Текст\", // строковый тип переменной\n        \"integer\": 12, // целое число\n        \"float\": 12.5, // вещественное число\n        \"date\": \"01.01.1971\", // дата\n        \"dateTime\": \"01.01.1971 11:00:00\", // дата и время\n        \"boolean\": true, // логический\n        \"goods\": [ // json-массив\n            {\"name\": \"Apple iPhone X\", \"price\": 54000}, \n            {\"name\": \"Samsung Galaxy S21\", \"price\": 64000}\n        ]\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/emails/",
+            "description": "<blockquote>\n<p>Имейл добавляется в статусе <strong>Запрошено подтверждение</strong>. На имейл будет отправлено письмо с подтверждением подписки.<br />Полезная статья: <a href=\"https://mailganer.com/ru/explanation/kak-sozdat-pismo-podtverzhdeniya-podpiski\">Как изменить стандартное письмо-подтверждение подписки</a>.<br />Когда подписчик кликнет по ссылке из письма подтверждения, статус изменится на <strong>Активен</strong>. Параметры not_doi и need_activate по-умолчанию не работают, запросите их активацию в поддержке.</p>\n</blockquote>\n<h2 id=\"список-параметров-запроса-json\">Список параметров запроса (json)</h2>\n<div class=\"click-to-expand-wrapper is-table-wrapper\"><table>\n<thead>\n<tr>\n<th><strong>Переменная</strong></th>\n<th><strong>Название</strong></th>\n<th><strong>Тип</strong></th>\n<th><strong>Обязательный</strong></th>\n<th><strong>Комментарий</strong></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>email</td>\n<td>Имейл</td>\n<td>Строка</td>\n<td>Да</td>\n<td></td>\n</tr>\n<tr>\n<td>source</td>\n<td>ID списка</td>\n<td>Список</td>\n<td>Да</td>\n<td><a href=\"https://mailganer.com/app/settings/\">Узнать ID списка</a></td>\n</tr>\n<tr>\n<td>name</td>\n<td>Имя</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>surname</td>\n<td>Фамилия</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>patronymic</td>\n<td>Отчество</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>gender</td>\n<td>Пол</td>\n<td>Целое число</td>\n<td>Нет</td>\n<td>1-мужской, 2-женский</td>\n</tr>\n<tr>\n<td>birthday</td>\n<td>Дата рождения</td>\n<td>Дата</td>\n<td>Нет</td>\n<td>Формат даты dd.mm.yyyy</td>\n</tr>\n<tr>\n<td>city</td>\n<td>Город</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>add_tag</td>\n<td>Добавить метку</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>delete_tag</td>\n<td>Удалить метку</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>user_vars</td>\n<td>Пользовательские переменные</td>\n<td>Массив</td>\n<td>Нет</td>\n<td>Массив с пользовательскими переменными</td>\n</tr>\n<tr>\n<td>not_doi</td>\n<td>Отменить DOI</td>\n<td>Булев</td>\n<td>Нет</td>\n<td>Наличие этого параметра отменяет отправку письма подтверждения. Имейл добавляется в список в статусе Активен.</td>\n</tr>\n<tr>\n<td>need_activate</td>\n<td>Отправить DOI</td>\n<td>Булев</td>\n<td>Нет</td>\n<td>Наличие этого параметра отправляет письмо подтверждения, даже если имейл в статусе Запрошено подтверждение.</td>\n</tr>\n</tbody>\n</table>\n</div><h2 id=\"список-параметров-ответа-в-случае-успеха-json\">Список параметров ответа в случае успеха (json)</h2>\n<div class=\"click-to-expand-wrapper is-table-wrapper\"><table>\n<thead>\n<tr>\n<th><strong>Переменная</strong></th>\n<th></th>\n<th><strong>Тип</strong></th>\n<th><strong>Обязательный</strong></th>\n<th><strong>Комментарий</strong></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>id</td>\n<td>ID подписчика</td>\n<td>Целое число</td>\n<td>Да</td>\n<td></td>\n</tr>\n<tr>\n<td>mg_hash</td>\n<td>Хэш имейла</td>\n<td>Строка</td>\n<td>Да</td>\n<td></td>\n</tr>\n<tr>\n<td>in_base</td>\n<td>Есть в базе</td>\n<td>Булев</td>\n<td>Да</td>\n<td>Возвращает true если имейл уже был в базе</td>\n</tr>\n<tr>\n<td>email_status</td>\n<td>Статус подписчика</td>\n<td>Строка</td>\n<td>Да</td>\n<td></td>\n</tr>\n<tr>\n<td>bunce_log</td>\n<td>Причина недоступности</td>\n<td>Строка</td>\n<td>Нет</td>\n<td>причина несуществования имейла для статуса not_available</td>\n</tr>\n<tr>\n<td>corrected_email</td>\n<td>Исправленный имейл</td>\n<td>Строка</td>\n<td>Нет</td>\n<td>Для статуса fixed передаётся новый имейл, в случае если в имейле была допущена опечатка</td>\n</tr>\n</tbody>\n</table>\n</div><h2 id=\"возможные-значения-статусов-подписчика\">Возможные значения статусов подписчика</h2>\n<div class=\"click-to-expand-wrapper is-table-wrapper\"><table>\n<thead>\n<tr>\n<th><strong>Название</strong></th>\n<th><strong>Переменная</strong></th>\n<th><strong>Тип</strong></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>active</td>\n<td>Активен</td>\n<td>Адресат получает рассылки</td>\n</tr>\n<tr>\n<td>wait_activated</td>\n<td>Запрошено подтверждение</td>\n<td>Адресат пока не перешёл по ссылке подтверждения в письме подтверждения подписки</td>\n</tr>\n<tr>\n<td>spam</td>\n<td>Сервер считает спамом</td>\n<td>Во время последней отправки почтовый сервер адресата отказался принимать письмо, сочтя его спамом</td>\n</tr>\n<tr>\n<td>unsubscribe</td>\n<td>Отписался от рассылок</td>\n<td>Адресат отписался от рассылки. Рассылать на этот адрес нельзя</td>\n</tr>\n<tr>\n<td>not_available</td>\n<td>Недоступен</td>\n<td>Попытки доставить почту на этот адрес неоднократно заканчивались неудачей. На этот адрес система прекратила отправлять рассылки</td>\n</tr>\n<tr>\n<td>fixed</td>\n<td>Исправлен</td>\n<td>Исправили опечатку в домене имейла</td>\n</tr>\n</tbody>\n</table>\n</div>",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "emails",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [
+            {
+              "id": "f651f31a-91c0-4a0c-abc4-dbc1674ea253",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"test@example.com\",\n    \"source\": 60958,\n    \"phone\": \"+79123456789\",\n    \"name\": \"Федор\",\n    \"patronymic\": \"Федорович\",\n    \"surname\": \"Федоров\",\n    \"gender\": 1,\n    \"birthday\": \"01.01.1988\",\n    \"add_tag\": \"метка1\",\n    \"user_vars\": {\n        \"text\": \"Текст\",\n        \"integer\": 12,\n        \"float\": 12.5,\n        \"date\": \"01.01.1971\",\n        \"dateTime\": \"01.01.1971 11:00:00\",\n        \"boolean\": true,\n        \"goods\": [\n            {\n                \"name\": \"Apple iPhone X\",\n                \"price\": 54000\n            },\n            {\n                \"name\": \"Samsung Galaxy S21\",\n                \"price\": 64000\n            }\n        ]\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "https://mailganer.com/api/v2/emails/"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 09 Dec 2022 09:45:22 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"id\": 143788300,\n    \"mg_hash\": \"0aa106143788300b392b80ecf023c57d75cc70272\",\n    \"email\": \"test@example.com\",\n    \"source\": 60958,\n    \"email_status\": \"fixed\",\n    \"corrected_email\": null,\n    \"name\": \"Федор\",\n    \"patronymic\": \"Федорович\",\n    \"surname\": \"Федоров\",\n    \"gender\": 1,\n    \"birthday\": \"01.01.1988\",\n    \"phone\": \"+79123456789\",\n    \"city\": null,\n    \"country\": null,\n    \"is_valid\": false,\n    \"doi_is_delivery\": false,\n    \"doi_is_open\": false,\n    \"doi_is_click\": false,\n    \"user_vars\": null,\n    \"bunce_log\": \"Global stop list email hash: 554d1a357108862d8de2356531c004a3baf9403\"\n}"
+            },
+            {
+              "id": "37164148-eb56-41a4-bb3c-dad8fcfad418",
+              "name": "Error - Недопустимый токен",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"test@example.com\",\n    \"source\": 60958,\n    \"phone\": \"+79123456789\",\n    \"name\": \"Федор\",\n    \"patronymic\": \"Федорович\",\n    \"surname\": \"Федоров\",\n    \"gender\": 1,\n    \"birthday\": \"01.01.1988\",\n    \"add_tag\": \"метка1\",\n    \"delete_tag\": \"метка2\",\n    \"user_vars\": {\n        \"text\": \"Текст\",\n        \"integer\": 12,\n        \"float\": 12.5,\n        \"date\": \"01.01.1971\",\n        \"dateTime\": \"01.01.1971 11:00:00\",\n        \"boolean\": true,\n        \"goods\": [\n            {\"name\": \"Apple iPhone X\", \"price\": 54000}, \n            {\"name\": \"Samsung Galaxy S21\", \"price\": 64000}\n        ]\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "https://mailganer.com/api/v2/emails/"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 09 Dec 2022 09:41:26 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "WWW-Authenticate",
+                  "value": "CodeRequest"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"status\": \"error\",\n    \"error\": \"Недопустимый токен.\"\n}"
+            },
+            {
+              "id": "4471224a-e8f5-4061-b363-cb7b2057bbd2",
+              "name": "Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"test@example.com\",\n    \"source\": 60958,\n    \"phone\": \"+79123456789\",\n    \"name\": \"Федор\",\n    \"patronymic\": \"Федорович\",\n    \"surname\": \"Федоров\",\n    \"gender\": 1,\n    \"birthday\": \"01.01.1988\",\n    \"add_tag\": \"метка1\",\n    \"delete_tag\": \"метка2\",\n    \"user_vars\": {\n        \"text\": \"Текст\",\n        \"integer\": 12,\n        \"float\": 12.5,\n        \"date\": \"01.01.1971\",\n        \"dateTime\": \"01.01.1971 11:00:00\",\n        \"boolean\": true,\n        \"goods\": [\n            {\"name\": \"Apple iPhone X\", \"price\": 54000}, \n            {\"name\": \"Samsung Galaxy S21\", \"price\": 64000}\n        ]\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "https://mailganer.com/api/v2/emails/"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 09 Dec 2022 09:41:26 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "WWW-Authenticate",
+                  "value": "CodeRequest"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"status\": \"invalid\",\n    \"error\": {\n        \"source\": [\"Not found site (source_id=497671) or site blocked\"],\n        \"birthday\": [\"Неправильный формат date. Используйте формат: DD.MM.YYYY\"]\n    }\n}\n"
+            }
+          ],
+          "_postman_id": "e8ea5497-5c36-491e-8357-338b485a40be"
+        },
+        {
+          "name": "Обновление информации о подписчике 1 способ",
+          "id": "6a6c495c-6736-4b2a-baa5-baeaaef79f1b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"birthday\": \"02.01.1990\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/emails/:email_hash/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "emails",
+                ":email_hash",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "<p>Хэш имейла</p>\n",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "a05ad557332370764cd4f267a251f3b13289bcff",
+                  "key": "email_hash"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "6a6c495c-6736-4b2a-baa5-baeaaef79f1b"
+        },
+        {
+          "name": "Обновление информации о подписчике 2 способ",
+          "id": "d1ce8219-d04f-41fa-a380-ac124173e6d5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@example.com\",\n    \"source\": \"51488\",\n    \"birthday\": \"05.01.1990\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/emails/update/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "emails",
+                "update",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "d1ce8219-d04f-41fa-a380-ac124173e6d5"
+        },
+        {
+          "name": "Массовое добавление подписчиков",
+          "id": "4060bb4c-c135-422b-a043-56d7cb7988ee",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n   {\n    \"email\": \"test1@example.com\",\n    \"source\": 51488,\n    \"name\": \"Федор\",\n    \"patronymic\": \"Федорович\",\n    \"surname\": \"Федоров\",\n    \"gender\": 1,\n    \"birthday\": \"01.01.1988\",\n    \"user_vars\": {\n        \"lastbuy\": \"01.01.1971\"\n       }\n   },\n   {\n    \"email\": \"test2@example.com\",\n    \"source\": 51488,\n    \"name\": \"Пётр\",\n    \"patronymic\": \"Петрович\",\n    \"surname\": \"Петров\",\n    \"gender\": 1,\n    \"birthday\": \"01.01.1988\",\n    \"user_vars\": {\n        \"lastbuy\": \"01.01.1971\"\n       }\n   }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/emails/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "emails",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "4060bb4c-c135-422b-a043-56d7cb7988ee"
+        },
+        {
+          "name": "Получение информации о подписчике 1 способ",
+          "id": "74708a54-725e-4d5f-975f-f212241aa60b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/emails/?email=test@example.com&source=51488",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "emails",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "<p>Имейл, о котором вы хотите получить информацию</p>\n",
+                    "type": "text/plain"
+                  },
+                  "key": "email",
+                  "value": "test@example.com"
+                },
+                {
+                  "description": {
+                    "content": "<p>ID списка, в котором находится имейл</p>\n",
+                    "type": "text/plain"
+                  },
+                  "key": "source",
+                  "value": "51488"
+                }
+              ],
+              "variable": []
+            }
+          },
+          "response": [
+            {
+              "id": "16ea4c2c-fa4c-477d-b1b1-03f5ed9b56cc",
+              "name": "Email найден",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://mailganer.com/api/v2/emails/?email=test@example.com&source=51488",
+                  "protocol": "https",
+                  "host": [
+                    "mailganer",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "emails",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "test@example.com",
+                      "description": "Имейл, о котором вы хотите получить информацию"
+                    },
+                    {
+                      "key": "source",
+                      "value": "51488",
+                      "description": "ID списка, в котором находится имейл"
+                    }
+                  ]
+                }
+              },
+              "status": "OK (Email найден)",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 15 Dec 2022 07:33:33 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 115986334,\n            \"mg_hash\": \"ae2f6611598633414be10fe73380863cb59afe7b8\",\n            \"email\": \"vlad.tochonii@mailganer.ru\",\n            \"source\": 57229,\n            \"email_status\": \"active\",\n            \"corrected_email\": null,\n            \"name\": \"\",\n            \"patronymic\": \"\",\n            \"surname\": \"\",\n            \"gender\": 0,\n            \"birthday\": null,\n            \"phone\": null,\n            \"city\": \"\",\n            \"country\": \"\",\n            \"is_valid\": true,\n            \"doi_is_delivery\": true,\n            \"doi_is_open\": false,\n            \"doi_is_click\": false,\n            \"user_vars\": {\n                \"nps\": \"ok\",\n                \"test_date\": 1667520000\n            },\n            \"bunce_log\": null\n        }\n    ]\n}"
+            },
+            {
+              "id": "289d0e7e-5085-4eac-9bf0-5a86e0c9e779",
+              "name": "Email не найден",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://mailganer.com/api/v2/emails/?email=test@example.com&source=51488",
+                  "protocol": "https",
+                  "host": [
+                    "mailganer",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "emails",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "test@example.com",
+                      "description": "Имейл, о котором вы хотите получить информацию"
+                    },
+                    {
+                      "key": "source",
+                      "value": "51488",
+                      "description": "ID списка, в котором находится имейл"
+                    }
+                  ]
+                }
+              },
+              "status": "OK (Email не найден)",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 15 Dec 2022 07:33:33 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"count\": 0,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": []\n}"
+            }
+          ],
+          "_postman_id": "74708a54-725e-4d5f-975f-f212241aa60b"
+        },
+        {
+          "name": "Получение информации о подписчике 2 способ",
+          "id": "e917fcbe-1b73-41d9-a7bc-dd8e3e469abe",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/emails/:email_hash/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "emails",
+                ":email_hash",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "<p>Хэш имейла</p>\n",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "a05ad557332370764cd4f267a251f3b13289bcff",
+                  "key": "email_hash"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "e917fcbe-1b73-41d9-a7bc-dd8e3e469abe"
+        },
+        {
+          "name": "Отписка подписчика 1 способ",
+          "id": "ef19accb-8086-4818-b203-b03fdf40fddd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/emails/:email_hash/unsubscribe/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "emails",
+                ":email_hash",
+                "unsubscribe",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "<p>Хэш имейла</p>\n",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "a05ad557332370764cd4f267a251f3b13289bcff",
+                  "key": "email_hash"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "ef19accb-8086-4818-b203-b03fdf40fddd"
+        },
+        {
+          "name": "Отписка подписчика 2 способ",
+          "id": "d8039ae0-9b88-4484-a898-7a72a771e93e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@example.com\",\n    \"source\": \"51488\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/emails/unsubscribe/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "emails",
+                "unsubscribe",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "d8039ae0-9b88-4484-a898-7a72a771e93e"
+        },
+        {
+          "name": "Валидация подписчика",
+          "id": "20add6a8-c551-41db-a942-d25566c8a714",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@example.com\",\n    \"source\": 51488\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/emails/validate/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "emails",
+                "validate",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "20add6a8-c551-41db-a942-d25566c8a714"
+        }
+      ],
+      "id": "95e94ec2-5951-40ae-99b8-08f52943c379",
+      "description": "<p>Группа методов для работы с сущностью \"Подписчик\"</p>\n",
+      "_postman_id": "95e94ec2-5951-40ae-99b8-08f52943c379",
+      "auth": {
+        "type": "apikey",
+        "apikey": {
+          "basicConfig": [
+            {
+              "key": "key",
+              "value": "Authorization"
+            },
+            {
+              "key": "value",
+              "value": "<value>"
+            }
+          ]
+        },
+        "isInherited": true,
+        "source": {
+          "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "name": "REST API Mailganer",
+          "type": "collection"
+        }
+      }
+    },
+    {
+      "name": "Списки",
+      "item": [
+        {
+          "name": "Создать список",
+          "id": "e412cc2a-5bdc-4bab-ae0b-e62c2aa6caf4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"domain\": \"test8\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/sites/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "sites",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [
+            {
+              "id": "48542766-b500-4fb2-b2ec-eb4e5914be53",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"domain\": \"test8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "https://mailganer.com/api/v2/sites/"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 09 Dec 2022 10:29:04 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "Location",
+                  "value": ""
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"id\": 60968,\n    \"domain\": \"test8\",\n    \"domain_ext\": \"\",\n    \"url\": \"\",\n    \"logo\": null,\n    \"user\": 10912,\n    \"source_type\": 3,\n    \"source\": 1,\n    \"active\": true,\n    \"click_domain\": \"click.\"\n}"
+            },
+            {
+              "id": "b4bcd73a-a3f3-4f98-8d7c-53a3b1adca24",
+              "name": "Error - Недопустимый токен",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"domain\": \"test8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "https://mailganer.com/api/v2/sites/"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 09 Dec 2022 10:28:28 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "WWW-Authenticate",
+                  "value": "CodeRequest"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"status\": \"error\",\n    \"error\": \"Недопустимый токен.\"\n}"
+            }
+          ],
+          "_postman_id": "e412cc2a-5bdc-4bab-ae0b-e62c2aa6caf4"
+        },
+        {
+          "name": "Получить массив списков",
+          "id": "22942156-686e-4258-a780-dbcc3299cde7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/sites/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "sites",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [
+            {
+              "id": "275663ef-3b31-4bf8-a738-31db57140dc0",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "https://mailganer.com/api/v2/sites/"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 09 Dec 2022 10:30:55 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 60968,\n            \"domain\": \"mailagner.com\",\n            \"domain_ext\": \"\",\n            \"url\": \"\",\n            \"logo\": null,\n            \"user\": 10912,\n            \"source_type\": 3,\n            \"source\": 1,\n            \"active\": true,\n            \"click_domain\": \"click.mailagner.com\"\n        }\n    ]\n}"
+            }
+          ],
+          "_postman_id": "22942156-686e-4258-a780-dbcc3299cde7"
+        },
+        {
+          "name": "Проверка верификации домена",
+          "id": "2b09930b-7969-4c07-9c7f-113e953d476e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "domain",
+                  "value": "mailganer.com",
+                  "description": "<p>Домен, который необходимо проверить</p>\n",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "https://mailganer.com/api/v2/sites/verify_domain/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "sites",
+                "verify_domain",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [
+            {
+              "id": "23f3e08a-a05b-49b6-becb-3f35199ad258",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "domain",
+                      "value": "mailganer.com",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": "https://mailganer.com/api/v2/sites/verify_domain/"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Jan 2023 07:46:39 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, HEAD, OPTIONS"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"verification_status\": true,\n    \"spf_status\": true,\n    \"dmarc_status\": true,\n    \"dkim_status\": true\n}"
+            }
+          ],
+          "_postman_id": "2b09930b-7969-4c07-9c7f-113e953d476e"
+        }
+      ],
+      "id": "b4ca07a4-5892-4bb3-8b1c-a576b04614e2",
+      "_postman_id": "b4ca07a4-5892-4bb3-8b1c-a576b04614e2",
+      "description": "",
+      "auth": {
+        "type": "apikey",
+        "apikey": {
+          "basicConfig": [
+            {
+              "key": "key",
+              "value": "Authorization"
+            },
+            {
+              "key": "value",
+              "value": "<value>"
+            }
+          ]
+        },
+        "isInherited": true,
+        "source": {
+          "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "name": "REST API Mailganer",
+          "type": "collection"
+        }
+      }
+    },
+    {
+      "name": "Сегменты",
+      "item": [
+        {
+          "name": "Создать сегмент",
+          "id": "ab968f90-2a5a-4271-8256-2c842bc931ef",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Тест API\",\n    \"conditions\": [\n        {\n            \"condition\": 6, // Тип условия \"Метка\"\n            \"type_value\": 4, // Тип значения \"Равна одной из\", еще можно указать 5 - \"Не равна одной из\"\n            \"value\": [\n                \"Тест API\"\n            ]\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/segments/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "segments",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [
+            {
+              "id": "e53d2f85-4b09-4476-9c19-7f9ad5fc3210",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\": \"Тест API\",\n    \"conditions\": [\n        {\n            \"condition\": 6, // Тип условия \"Метка\"\n            \"type_value\": 4, // Тип значения \"Равна одной из\", еще можно указать 5 - \"Не равна одной из\"\n            \"value\": [\n                \"Тест API\"\n            ]\n        }\n    ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "https://mailganer.com/api/v2/segments/"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "name": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"status\": \"success\",\n    \"segment_url\": \"https://mailganer.com/app/segment/edit/19254/\",\n    \"segment_id\": 19254\n}"
+            }
+          ],
+          "_postman_id": "ab968f90-2a5a-4271-8256-2c842bc931ef"
+        },
+        {
+          "name": "Получить массив сегментов",
+          "id": "3f5baa2d-e853-4e18-b829-349f73677ed6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/segments/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "segments",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [
+            {
+              "id": "bbff56d0-d670-42ed-a74b-1c9d9a4946d5",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "https://mailganer.com/api/v2/segments/"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 09 Dec 2022 10:33:00 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"count\": 2,\n    \"next\": \"https://mailganer.com/api/v2/segments/?page=2\",\n    \"previous\": null,\n    \"results\": [\n        {\n            \"title\": \"Название сегмента\",\n            \"id\": 1831,\n            \"cnt_email\": 478,\n            \"cnt_active_email\": 478,\n            \"created\": \"2017-05-27T17:35:04.713572\"\n        },\n        {\n            \"title\": \"Название сегмента 2\",\n            \"id\": 1832,\n            \"cnt_email\": 478,\n            \"cnt_active_email\": 478,\n            \"created\": \"2017-05-27T17:35:04.713572\"\n        }\n    ]\n}"
+            }
+          ],
+          "_postman_id": "3f5baa2d-e853-4e18-b829-349f73677ed6"
+        },
+        {
+          "name": "Получить информацию о сегменте",
+          "id": "40c6e519-417c-4a4a-b62c-f49b416bc93b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/segments/:segment_id",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "segments",
+                ":segment_id"
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "12345",
+                  "key": "segment_id"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8202aa63-4bb9-4568-a73a-e800107d96e0",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://mailganer.com/api/v2/segments/:segment_id",
+                  "protocol": "https",
+                  "host": [
+                    "mailganer",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "segments",
+                    ":segment_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "segment_id",
+                      "value": "12345"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 09 Dec 2022 10:35:58 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, HEAD, OPTIONS"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"title\": \"Название сегмента\",\n    \"id\": 12345,\n    \"cnt_email\": 1,\n    \"cnt_active_email\": 1,\n    \"created\": \"2022-12-05T11:26:44.465956\"\n}"
+            }
+          ],
+          "_postman_id": "40c6e519-417c-4a4a-b62c-f49b416bc93b"
+        }
+      ],
+      "id": "2e287fd0-ccc8-459a-a507-d732f095a328",
+      "_postman_id": "2e287fd0-ccc8-459a-a507-d732f095a328",
+      "description": "",
+      "auth": {
+        "type": "apikey",
+        "apikey": {
+          "basicConfig": [
+            {
+              "key": "key",
+              "value": "Authorization"
+            },
+            {
+              "key": "value",
+              "value": "<value>"
+            }
+          ]
+        },
+        "isInherited": true,
+        "source": {
+          "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "name": "REST API Mailganer",
+          "type": "collection"
+        }
+      }
+    },
+    {
+      "name": "Переменные",
+      "item": [
+        {
+          "name": "Добавление пользовательской переменной",
+          "id": "0ef50a4d-0112-43ad-be6f-f1abc6a43dc4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"source\": 53520,\n    \"title\": \"Тип клиента\",\n    \"type\": \"1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/user_vars/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "user_vars",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "0ef50a4d-0112-43ad-be6f-f1abc6a43dc4"
+        },
+        {
+          "name": "Получить список пользовательских переменных",
+          "id": "4dc94701-8033-4164-83f2-01d9b74249ef",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/user_vars/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "user_vars",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "4dc94701-8033-4164-83f2-01d9b74249ef"
+        }
+      ],
+      "id": "f6dd6c68-c54a-432c-8bcd-2c5f44633d13",
+      "_postman_id": "f6dd6c68-c54a-432c-8bcd-2c5f44633d13",
+      "description": "",
+      "auth": {
+        "type": "apikey",
+        "apikey": {
+          "basicConfig": [
+            {
+              "key": "key",
+              "value": "Authorization"
+            },
+            {
+              "key": "value",
+              "value": "<value>"
+            }
+          ]
+        },
+        "isInherited": true,
+        "source": {
+          "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "name": "REST API Mailganer",
+          "type": "collection"
+        }
+      }
+    },
+    {
+      "name": "Рассылки",
+      "item": [
+        {
+          "name": "Создание рассылки",
+          "id": "3ae5e59d-2593-4c4b-8dc8-495755d47fa6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth",
+              "isInherited": false
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "api_key",
+                  "value": "XXX",
+                  "type": "text"
+                },
+                {
+                  "key": "theme",
+                  "value": "Тема рассылки",
+                  "type": "text"
+                },
+                {
+                  "key": "html-content",
+                  "value": "%3Ca%20href%3D%22%7B%7B%20unsubscribeUrl%20%7D%7D%22%3EUnsubscribe%20me%3C%2Fa%3E",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "https://mailganer.com/api/v1/mailing/create/",
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v1",
+                "mailing",
+                "create",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "3ae5e59d-2593-4c4b-8dc8-495755d47fa6"
+        },
+        {
+          "name": "Отправка рассылки",
+          "id": "bdd6d7e2-ce6e-41bb-a797-c164382374b6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"public_id\": 165538131141,\n    \"datetime_send\": \"16.02.2024 15:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/mailing/send/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "mailing",
+                "send",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "bdd6d7e2-ce6e-41bb-a797-c164382374b6"
+        },
+        {
+          "name": "Получение информации о рассылке",
+          "id": "3a2161b3-9d18-4b3b-9f84-cfd123549469",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": "https://mailganer.com/api/v2/mailing/:public_id",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "mailing",
+                ":public_id"
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "<p>public_id рассылки вы можете увидеть в личном кабинете, открыв эту рассылку в браузере</p>\n",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": null,
+                  "key": "public_id"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f4c88c40-9d1f-4b01-9c54-805ff2e17bef",
+              "name": "Получение информации о рассылке",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://mailganer.com/api/v2/mailing/:public_id",
+                  "protocol": "https",
+                  "host": [
+                    "mailganer",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "mailing",
+                    ":public_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "public_id",
+                      "value": null,
+                      "description": "public_id рассылки вы можете увидеть в личном кабинете, открыв эту рассылку в браузере"
+                    }
+                  ]
+                }
+              },
+              "status": "Success",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "name": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"public_id\": 166775985258,\n    \"datetime_send\": \"07.11.2022 03:37\",\n    \"send\": \"2022-11-07T03:37:02.141548\",\n    \"name\": \"Mailing Name\",\n    \"subject\": \"Email subject\",\n    \"segment_name\": \"Segment Name\",\n    \"segment_id\": 7502,\n    \"from_name\": \"Sender Name\",\n    \"from_email\": \"info@mailganer.com\",\n    \"utm_campaign\": \"166775985258\",\n    \"utm_source\": \"mailganer\",\n    \"utm_medium\": \"email\",\n    \"text\": \"HTML Content\",\n    \"count_spam\": 1,\n    \"count_unsubscribe\": 14,\n    \"count_click\": 448,\n    \"count_open\": 1489,\n    \"count_delivery\": 13348,\n    \"webversion\": \"https://click.mailganer.com/webversion/166775985258/\",\n    \"user_utms\": {\n        \"custom_param_1\": \"{{custom_param_1}}\"\n    }\n}"
+            }
+          ],
+          "_postman_id": "3a2161b3-9d18-4b3b-9f84-cfd123549469"
+        },
+        {
+          "name": "Получить список рассылок",
+          "id": "b27af799-e9f0-42d8-b8c1-31921a14f018",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": "https://mailganer.com/api/v2/mailing/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "mailing",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [
+            {
+              "id": "a29e09ae-41b4-417b-99d1-322c6157fc60",
+              "name": "Ошибка",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": "https://mailganer.com/api/v2/mailing/"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 03 Aug 2023 16:14:45 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "WWW-Authenticate",
+                  "value": "CodeRequest"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"status\": \"error\",\n    \"error\": \"Учетные данные не были предоставлены.\"\n}"
+            }
+          ],
+          "_postman_id": "b27af799-e9f0-42d8-b8c1-31921a14f018"
+        }
+      ],
+      "id": "a1a8eda9-8919-4b02-b9e7-ef77bb2aede9",
+      "_postman_id": "a1a8eda9-8919-4b02-b9e7-ef77bb2aede9",
+      "description": "",
+      "auth": {
+        "type": "apikey",
+        "apikey": {
+          "basicConfig": [
+            {
+              "key": "key",
+              "value": "Authorization"
+            },
+            {
+              "key": "value",
+              "value": "<value>"
+            }
+          ]
+        },
+        "isInherited": true,
+        "source": {
+          "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "name": "REST API Mailganer",
+          "type": "collection"
+        }
+      }
+    },
+    {
+      "name": "Триггеры",
+      "item": [
+        {
+          "name": "Отправка триггера",
+          "id": "05e525b8-0d19-42db-89a4-9ac12157f472",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \" 13091975@mail.ru\",\n    \"doi_ok\": true,\n    \"ignore_unsubscribed\": true,\n    \"ignore_spam\": true,\n    \"variables\": {\n        \"order_id\": 1234,\n        \"first_name\": \"Test\",\n        \"delivery_address\": \"Москва, Красная площадь, Кремль\",\n        \"goods\": [\n            {\n                \"link\": \"https://domain.ru/products/11021\",\n                \"title\": \"Туфли1\",\n                \"cost\": \"39500\" \n            },\n            {\n                \"link\": \"https://domain.ru/products/11022\",\n                \"title\": \"Туфли2\",\n                \"cost\": \"39500\" \n            },\n            {\n                \"link\": \"https://domain.ru/products/11023\",\n                \"title\": \"Туфли3\",\n                \"cost\": \"39500\" \n            }\n        ]\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/triggers/:trigger_id/send/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "triggers",
+                ":trigger_id",
+                "send",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "<p>ID триггера</p>\n",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "",
+                  "key": "trigger_id"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "05e525b8-0d19-42db-89a4-9ac12157f472"
+        },
+        {
+          "name": "Статистика триггера",
+          "id": "527e4224-28a1-4639-be1a-381a48bae4df",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/triggers/:trigger_id/stat/?start_date=2022-08-01&end_date=2023-08-03",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "triggers",
+                ":trigger_id",
+                "stat",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "<p>Дата начала</p>\n",
+                    "type": "text/plain"
+                  },
+                  "key": "start_date",
+                  "value": "2022-08-01"
+                },
+                {
+                  "description": {
+                    "content": "<p>Дата конца</p>\n",
+                    "type": "text/plain"
+                  },
+                  "key": "end_date",
+                  "value": "2023-08-03"
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "<p>ID триггера</p>\n",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "1111",
+                  "key": "trigger_id"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "87be530d-ebc9-4d50-8555-422dcf3a6337",
+              "name": "С датой",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://mailganer.com/api/v2/triggers/:trigger_id/send/?start_date=2022-08-01&end_date=2023-08-03",
+                  "protocol": "https",
+                  "host": [
+                    "mailganer",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "triggers",
+                    ":trigger_id",
+                    "send",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2022-08-01",
+                      "description": "Дата начала"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2023-08-03",
+                      "description": "Дата конца"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "trigger_id",
+                      "value": null,
+                      "description": "ID триггера"
+                    }
+                  ]
+                }
+              },
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "name": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"2023-08-01\": {\n        \"delivered\": 338,\n        \"clicked\": 13,\n        \"opened\": 60,\n        \"not_available\": 4,\n        \"unsubscribed\": 1,\n        \"spammed\": 0,\n        \"sent\": 344\n    },\n    \"2023-08-02\": {\n        \"delivered\": 315,\n        \"clicked\": 12,\n        \"opened\": 54,\n        \"not_available\": 0,\n        \"unsubscribed\": 2,\n        \"spammed\": 0,\n        \"sent\": 316\n    },\n    \"2023-08-03\": {\n        \"delivered\": 369,\n        \"clicked\": 13,\n        \"opened\": 57,\n        \"not_available\": 0,\n        \"unsubscribed\": 0,\n        \"spammed\": 0,\n        \"sent\": 369\n    },\n    \"summary\": {\n        \"delivered\": 1022,\n        \"clicked\": 38,\n        \"opened\": 171,\n        \"not_available\": 4,\n        \"unsubscribed\": 3,\n        \"spammed\": 0,\n        \"sent\": 1029\n    }\n}"
+            },
+            {
+              "id": "8900485d-ddad-4ecd-ac44-94e48b685f98",
+              "name": "Без даты",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://mailganer.com/api/v2/triggers/:trigger_id/send/",
+                  "protocol": "https",
+                  "host": [
+                    "mailganer",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "triggers",
+                    ":trigger_id",
+                    "send",
+                    ""
+                  ],
+                  "variable": [
+                    {
+                      "key": "trigger_id",
+                      "value": null,
+                      "description": "ID триггера"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "name": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\r\n    \"summary\": {\r\n        \"delivered\": 163538,\r\n        \"clicked\": 7990,\r\n        \"opened\": 57910,\r\n        \"not_available\": 584,\r\n        \"unsubscribed\": 675,\r\n        \"spammed\": 931,\r\n        \"sent\": 165341\r\n    }\r\n}"
+            },
+            {
+              "id": "84f6498d-2cc2-4c65-a7d4-0fb1d6392a14",
+              "name": "Ошибка авторизации",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://mailganer.com/api/v2/triggers/:trigger_id/send/?start_date=2022-08-01&end_date=2023-08-03",
+                  "protocol": "https",
+                  "host": [
+                    "mailganer",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "triggers",
+                    ":trigger_id",
+                    "send",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2022-08-01",
+                      "description": "Дата начала"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2023-08-03",
+                      "description": "Дата конца"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "trigger_id",
+                      "value": null,
+                      "description": "ID триггера"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 03 Aug 2023 11:46:30 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "Allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "WWW-Authenticate",
+                  "value": "CodeRequest"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"status\": \"error\",\n    \"error\": \"Недопустимый токен.\"\n}"
+            },
+            {
+              "id": "e2af8ac6-13b2-4169-a88d-e87485fd00d6",
+              "name": "Триггер не найден",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://mailganer.com/api/v2/triggers/1111/stat/?start_date=2022-08-01&end_date=2023-08-03",
+                  "protocol": "https",
+                  "host": [
+                    "mailganer",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "triggers",
+                    "1111",
+                    "stat",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2022-08-01",
+                      "description": "Дата начала"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2023-08-03",
+                      "description": "Дата конца"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 03 Aug 2023 11:47:29 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, HEAD, OPTIONS"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"status\": \"error\",\n    \"error\": \"Не найдено.\"\n}"
+            }
+          ],
+          "_postman_id": "527e4224-28a1-4639-be1a-381a48bae4df"
+        },
+        {
+          "name": "Получение статистики по отправке триггера",
+          "id": "89ece591-45c3-48e2-a2bd-1df6a429705c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "api_key",
+                  "value": "XXX",
+                  "type": "text"
+                },
+                {
+                  "key": "id_list",
+                  "value": "66393144",
+                  "type": "text"
+                },
+                {
+                  "key": "id_list",
+                  "value": "66393145",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "https://mailganer.com/api/v1/trigger/id_stat/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v1",
+                "trigger",
+                "id_stat",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "89ece591-45c3-48e2-a2bd-1df6a429705c"
+        },
+        {
+          "name": "Получить список триггеров",
+          "id": "08657dfe-7594-413b-a83f-87bc2d13593d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/triggers/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "triggers",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "08657dfe-7594-413b-a83f-87bc2d13593d"
+        },
+        {
+          "name": "Получить информацию о триггере",
+          "id": "69440eb2-b302-42cd-905f-ec00285097f3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/triggers/:trigger_id/meta/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "triggers",
+                ":trigger_id",
+                "meta",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "",
+                  "key": "trigger_id"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "55950c84-06d0-4dfd-8ed1-284860ca02d0",
+              "name": "Успешный ответ",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://mailganer.com/api/v2/triggers/:trigger_id/meta/",
+                  "protocol": "https",
+                  "host": [
+                    "mailganer",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "triggers",
+                    ":trigger_id",
+                    "meta",
+                    ""
+                  ],
+                  "variable": [
+                    {
+                      "key": "trigger_id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 28 Feb 2024 13:20:15 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "name": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\r\n    \"name\": \"Trigger 1\",\r\n    \"group\": null,\r\n    \"topic\": \"Спасибо, что подписались на нас\",\r\n    \"sites\": [\r\n        12345\r\n    ],\r\n    \"sites_names\": [\r\n        \"mailganer.com\"\r\n    ],\r\n    \"event\": \"Подписчик подтвердил подписку\",\r\n    \"sender_name\": \"Mailganer\",\r\n    \"sender_email\": \"info@mailganer.com\",\r\n    \"utm_campaign\": \"\",\r\n    \"utm_source\": \"\",\r\n    \"utm_medium\": \"\",\r\n    \"user_utms\": \"custom_utm1=value1&custom_utm2=value2\",\r\n    \"webversion\": \"https://mailganer.com/app/trigger/webversion/XXXXXXXXXXX/\",\r\n    \"html_code\": \"<!DOCTYPE html PUBLIC \\\" ..... </html>\"\r\n}"
+            },
+            {
+              "id": "e677dff6-05b0-46b6-befc-9195a173b6ca",
+              "name": "Ошибка авторизации",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://mailganer.com/api/v2/triggers/:trigger_id/meta/",
+                  "protocol": "https",
+                  "host": [
+                    "mailganer",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "triggers",
+                    ":trigger_id",
+                    "meta",
+                    ""
+                  ],
+                  "variable": [
+                    {
+                      "key": "trigger_id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "html",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.16.1"
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 28 Feb 2024 13:20:15 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/html; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Language, Cookie, Origin"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "Content-Language",
+                  "value": "ru"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": null
+            }
+          ],
+          "_postman_id": "69440eb2-b302-42cd-905f-ec00285097f3"
+        }
+      ],
+      "id": "5acff894-bb6b-460a-b5cf-d22a563d5378",
+      "_postman_id": "5acff894-bb6b-460a-b5cf-d22a563d5378",
+      "description": "",
+      "auth": {
+        "type": "apikey",
+        "apikey": {
+          "basicConfig": [
+            {
+              "key": "key",
+              "value": "Authorization"
+            },
+            {
+              "key": "value",
+              "value": "<value>"
+            }
+          ]
+        },
+        "isInherited": true,
+        "source": {
+          "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "name": "REST API Mailganer",
+          "type": "collection"
+        }
+      }
+    },
+    {
+      "name": "Товарные рекомендации",
+      "item": [
+        {
+          "name": "Передача оформленных заказов",
+          "id": "b2d51855-750c-4ef1-8a8f-414996ba16d2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth",
+              "isInherited": false
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"api_key\": \"XXX\",\n    \"source_id\": \"50883\",\n    \"orders\": [\n        {\n            \"id\": \"12345\",\n            \"status\": \"Новый\",\n            \"channel\": \"domain.com\",\n            \"date\": \"1619155834\",\n            \"email\": \"email@domain.com\",\n            \"value\": {\n                \"total\": 0.0\n            },\n            \"items\": [\n                {\n                    \"id\": 0,\n                    \"price\": 0.0,\n                    \"quantity\": 0.0,\n                    \"categories\": [1, 2, 3]\n                }\n            ]\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v1/recomend/orders/",
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v1",
+                "recomend",
+                "orders",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "b2d51855-750c-4ef1-8a8f-414996ba16d2"
+        }
+      ],
+      "id": "84933caa-4df8-475a-bbf6-1244193a9ee0",
+      "_postman_id": "84933caa-4df8-475a-bbf6-1244193a9ee0",
+      "description": "",
+      "auth": {
+        "type": "apikey",
+        "apikey": {
+          "basicConfig": [
+            {
+              "key": "key",
+              "value": "Authorization"
+            },
+            {
+              "key": "value",
+              "value": "<value>"
+            }
+          ]
+        },
+        "isInherited": true,
+        "source": {
+          "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "name": "REST API Mailganer",
+          "type": "collection"
+        }
+      }
+    },
+    {
+      "name": "Пользователи",
+      "item": [
+        {
+          "name": "Создать пользователя",
+          "id": "c256d126-3338-4d28-82e9-b4f344e4f0b7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"first_name\": \"test8\",\n    \"email\": \"email8@domain.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/users/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "users",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "c256d126-3338-4d28-82e9-b4f344e4f0b7"
+        },
+        {
+          "name": "Получить ссылку на пополнение баланса",
+          "id": "0786fd0c-84cd-4cb5-81d9-9d5080ac9747",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 12345,\n    \"summ\": 10000,\n    \"payment_type\": \"invoice\",\n    \"requisites\": {\n        \"inn\": \"12345\",\n        \"bic\": \"12345\",\n        \"rs\": \"12345\",\n        \"kpp\": \"987654321\",\n        \"name_org\": \"ООО Ромашка\",\n        \"address_org\": \"Москва, ул.вава\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/pay/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "pay",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [
+            {
+              "id": "248d0d41-2e22-4930-83e5-9cfff2a118d0",
+              "name": "Оплата по счету",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\": 12345,\n    \"summ\": 10000,\n    \"payment_type\": \"invoice\",\n    \"requisites\": {\n        \"inn\": \"12345\",\n        \"bic\": \"12345\",\n        \"rs\": \"12345\",\n        \"kpp\": \"987654321\",\n        \"name_org\": \"ООО Ромашка\",\n        \"address_org\": \"Москва, ул.вава\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "https://mailganer.com/api/v2/pay/"
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "name": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"url\": \"https://mailganer.com/app/finance/invoices/print/hash\"\n}"
+            },
+            {
+              "id": "0d0452de-9ea3-4862-9e7d-15fd82304115",
+              "name": "Оплата картой",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\": 12345,\n    \"summ\": 10000,\n    \"payment_type\": \"card\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "https://mailganer.com/api/v2/pay/"
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "name": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"url\": \"https://paymentlink.com\"\n}"
+            }
+          ],
+          "_postman_id": "0786fd0c-84cd-4cb5-81d9-9d5080ac9747"
+        },
+        {
+          "name": "Изменить пользователя",
+          "id": "c81e4415-0371-45ed-8ad6-d1acdad667e9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"is_access_api_doi\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/users/:id/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "users",
+                ":id",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "<p>ID пользователя</p>\n",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "",
+                  "key": "id"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "c81e4415-0371-45ed-8ad6-d1acdad667e9"
+        },
+        {
+          "name": "Получить информацию о пользователе",
+          "id": "8b336e55-3937-4348-8f69-0568e060dfaf",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/users/:id/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "users",
+                ":id",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "<p>ID пользователя</p>\n",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "",
+                  "key": "id"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "8b336e55-3937-4348-8f69-0568e060dfaf"
+        },
+        {
+          "name": "Получение токена другого пользователя",
+          "id": "268a7835-3c40-4059-a5fa-0cdb7a32f442",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": false
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"test@mailganer.com\",\n    \"password\": \"cb61c634\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/auth/",
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "auth",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "268a7835-3c40-4059-a5fa-0cdb7a32f442"
+        },
+        {
+          "name": "Получить список пользователей",
+          "id": "ab41f53e-baa6-4a90-b8de-5eff17a8c663",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/users/",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "users",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "ab41f53e-baa6-4a90-b8de-5eff17a8c663"
+        }
+      ],
+      "id": "118f133a-2b9c-4f58-bfa9-54bc60c0faad",
+      "_postman_id": "118f133a-2b9c-4f58-bfa9-54bc60c0faad",
+      "description": "",
+      "auth": {
+        "type": "apikey",
+        "apikey": {
+          "basicConfig": [
+            {
+              "key": "key",
+              "value": "Authorization"
+            },
+            {
+              "key": "value",
+              "value": "<value>"
+            }
+          ]
+        },
+        "isInherited": true,
+        "source": {
+          "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "name": "REST API Mailganer",
+          "type": "collection"
+        }
+      }
+    },
+    {
+      "name": "SMTP",
+      "item": [],
+      "id": "e078058a-3a22-484a-890e-f3a46b7d7b01",
+      "description": "<p>Документация по SMTP методам находится в отдельном разделе:</p>\n<p><a href=\"https://documenter.getpostman.com/view/26779685/2s93RZM9in#intro\">https://documenter.getpostman.com/view/26779685/2s93RZM9in#intro</a></p>\n<p>В качестве хоста используйте</p>\n<p><code>smtp.mailganer.com</code> для SMTP методов</p>\n<p><code>xml.mailganer.com</code> для пакетных методов</p>\n",
+      "auth": {
+        "type": "noauth",
+        "isInherited": false
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "ee705995-90a7-4e5a-81e0-985859daae1d",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "86a000f1-1700-4636-85ff-df1085d262aa",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "_postman_id": "e078058a-3a22-484a-890e-f3a46b7d7b01"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": {
+      "basicConfig": [
+        {
+          "key": "key",
+          "value": "Authorization"
+        },
+        {
+          "key": "value",
+          "value": "<value>"
+        }
+      ]
+    }
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "0f3b924f-1a93-48e5-8d75-ede25b615a1a",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "41dcd9e6-e5fa-4003-8515-35e632f36388",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "smtp_api_key",
+      "value": "XXX"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "path": "/documentation/user_var/get",
+  "title": "Получить список пользовательских переменных",
+  "category": "Работа с переменными",
+  "url": "https://mailganer.com/documentation/user_var/get",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/user_vars/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Список параметров ответа (json)",
+    "Содержимое массива results",
+    "Пример ответа",
+    "Возможные значения переменной type"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответа",
+      "code": "{\n \"count\": 11,\n \"next\": null,\n \"previous\": null,\n \"results\": [\n {\n \"source\": \"1\",\n \"title\": \"Телефон\",\n \"name\": \"phone\",\n \"type\": 0,\n \"is_global\": false\n },\n {\n \"source\": \"1\",\n \"title\": \"Имя\",\n \"name\": \"name\",\n \"type\": 0,\n \"is_global\": false\n },\n {\n \"source\": \"1\",\n \"title\": \"Фамилия\",\n \"name\": \"lastname\",\n \"type\": 0,\n \"is_global\": false\n },\n {\n \"source\": \"1\",\n \"title\": \"Отчество\",\n \"name\": \"patronymic\",\n \"type\": 0,\n \"is_global\": false\n },\n {\n \"source\": \"1\",\n \"title\": \"Дата рождения\",\n \"name\": \"birthday\",\n \"type\": 3,\n \"is_global\": false\n },\n {\n \"source\": \"1\",\n \"title\": \"Пол\",\n \"name\": \"gender\",\n \"type\": 0,\n \"is_global\": false\n },\n {\n \"source\": \"1\",\n \"title\": \"Страна\",\n \"name\": \"country\",\n \"type\": 0,\n \"is_global\": false\n },\n {\n \"source\": \"1\",\n \"title\": \"Город\",\n \"name\": \"city\",\n \"type\": 0,\n \"is_global\": false\n },\n {\n \"source\": \"1\",\n \"title\": \"Дата подписки\",\n \"name\": \"subscribe_date\",\n \"type\": 3,\n \"is_global\": false\n },\n {\n \"source\": 1,\n \"title\": \"float\",\n \"name\": \"float\",\n \"type\": 2,\n \"type_text\": \"Вещественное число\"\n },\n {\n \"source\": 1,\n \"title\": \"datetime\",\n \"name\": \"datetime\",\n \"type\": 4,\n \"type_text\": \"Дата и время\"\n }\n ]\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:02.244180+00:00"
+}

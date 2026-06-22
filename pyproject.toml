@@ -1,0 +1,39 @@
+[project]
+name = "mailganer-api-mcp"
+version = "0.1.0"
+description = "MCP server and knowledge base for Mailganer REST API"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+keywords = ["mailganer", "mcp", "email", "api", "model-context-protocol"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "mcp>=1.0.0",
+]
+
+[project.scripts]
+mailganer-api-mcp = "server:main_sync"
+
+[project.urls]
+Homepage = "https://github.com/dkanster/mailganer-api-mcp"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+only-include = [
+    "server.py",
+    "config.py",
+    "mailganer_client.py",
+    "scripts/sync-api-docs.py",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

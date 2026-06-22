@@ -1,0 +1,31 @@
+{
+  "path": "/documentation/users/balance",
+  "title": "Получить баланс",
+  "category": "Работа с пользователями",
+  "url": "https://mailganer.com/documentation/users/balance",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/users/get_balance/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Список параметров ответа (json)",
+    "Пример запроса",
+    "Пример ответа"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса",
+      "code": "curl --location --request GET 'https://mailganer.com/api/v2/users/get_balance/' \\\n--header 'Authorization: CodeRequest 54654768d9897654456wergdd5' \\\n--form 'api_key=\"54654768d9897654456wergdd5\"'"
+    },
+    {
+      "label": "Пример ответа",
+      "code": "{\n \"balance\": 3457\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:56.354697+00:00"
+}

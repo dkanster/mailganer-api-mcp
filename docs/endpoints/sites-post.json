@@ -1,0 +1,32 @@
+{
+  "path": "/documentation/sites/post",
+  "title": "Создать список",
+  "category": "Работа со списками",
+  "url": "https://mailganer.com/documentation/sites/post",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/sites/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Список параметров ответа (json)",
+    "Пример ответа в случае успеха",
+    "Пример ответа в случае ошибки",
+    "Возможные значения error"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответа в случае успеха",
+      "code": "{\r\n \"id\": 51824,\r\n \"domain\": \"test2\",\r\n \"domain_ext\": \"\",\r\n \"url\": \"\",\r\n \"logo\": null,\r\n \"user\": 6,\r\n \"source_type\": 3,\r\n \"source\": 1,\r\n \"active\": true,\r\n \"click_domain\": \"click.\"\r\n}"
+    },
+    {
+      "label": "Пример ответа в случае ошибки",
+      "code": "{\r\n \"status\": \"invalid\",\r\n \"error\": {\r\n \"domain\": [\r\n \"Содержит недопустимые символы: <, >\"\r\n ]\r\n }\r\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:51.471671+00:00"
+}

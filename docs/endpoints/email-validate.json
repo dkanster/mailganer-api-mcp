@@ -1,0 +1,36 @@
+{
+  "path": "/documentation/email/validate",
+  "title": "Валидация подписчика",
+  "category": "Валидация подписчиков",
+  "url": "https://mailganer.com/documentation/email/validate",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/emails/validate/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Пример запроса (json)",
+    "Пример ответа в случае успеха (json)",
+    "Пример ответа в случае ошибки (json)",
+    "Возможные ошибки"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса (json)",
+      "code": "{\r\n \"email\": \"test@example.com\",\r\n \"source\": 49767\r\n}"
+    },
+    {
+      "label": "Пример ответа в случае успеха (json)",
+      "code": "{\n \"id\": 305384342,\n \"mg_hash\": \"b9827434aeaa159e4c3a723a4a3e91d\",\n \"email\": \"test@internet.ru\",\n \"source\": 93455916,\n \"email_status\": \"wait_activated\", // Active (Активен), not_available (Недоступен), unsubscribe (Отписался), wait_activated (Запрошено подтверждение), fixed (Исправлен) или spam (Адресат считает спамом)\n \"corrected_email\": \"test@internet.ru\",\n \"name\": \"\",\n \"patronymic\": \"\",\n \"surname\": \"\",\n \"gender\": 0,\n \"birthday\": null,\n \"phone\": null,\n \"city\": null,\n \"country\": null,\n \"is_valid\": true,\n \"doi_is_delivery\": false,\n \"doi_is_open\": false,\n \"doi_is_click\": false,\n \"user_vars\": {},\n \"bunce_log\": null,\n \"tags\": [],\n \"categories\": [],\n \"created\": \"2025-10-23T17:19:02.635703\"\n}"
+    },
+    {
+      "label": "Пример ответа в случае ошибки (json)",
+      "code": "{\n \"status\": \"invalid\",\n \"error\": {\n \"source\": [\n \"Это поле обязательно.\"\n ],\n \"email\": [\n \"Это поле обязательно.\"\n ]\n }\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:50.297389+00:00"
+}

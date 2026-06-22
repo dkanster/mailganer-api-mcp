@@ -1,0 +1,26 @@
+{
+  "path": "/documentation/recomend/rfm_segment",
+  "title": "Передача RFM-сегмента",
+  "category": "Товарные рекомендации",
+  "url": "https://mailganer.com/documentation/recomend/rfm_segment",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/recomend/orders/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Список параметров массива orders",
+    "Пример запроса"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса",
+      "code": "{\n \"source_id\": \"9345100\", // id списка\n \"orders\": [\n {\n \"product_id\": \"35463453\", // номер заказа\n \"date\": \"01.03.2024\", // дата покупки\n \"email\": \"test@gmail.com\", // имейл покупателя\n \"amount\": 4564 // стоимость покупки\n }\n ]\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:32.433845+00:00"
+}

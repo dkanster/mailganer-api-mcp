@@ -1,0 +1,36 @@
+{
+  "path": "/documentation/segments/send_trigger",
+  "title": "Отправка триггера на сегмент",
+  "category": "Работа с сегментами",
+  "url": "https://mailganer.com/documentation/segments/send_trigger",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/segments/{segment_id}/send_trigger/",
+    "POST https://mailganer.com/api/v2/segments/27645611/send_trigger/",
+    "POST https://mailganer.com/api/v2/segments/2734511/send_trigger/"
+  ],
+  "headings": [
+    "Список параметров ответа (json)"
+  ],
+  "paragraphs": [
+    "Если ignore_trigger_conditions = false (или параметр опущен), триггер обрабатывается с учётом условий \"Когда отправить\" и \"Время отправки\", заданных в настройках триггера. Если ignore_trigger_conditions = true, отправка выполняется сразу всем подписчикам без проверки каких-либо условий (кроме принадлежности сегменту и триггеру). Актуальный список подписчиков определяется по текущему состоянию сегмента на момент запуска (пересчёт происходит автоматически). Для предотвращения повторных массовых запусков действует внутреннее кэширование — повторный вызов для одного и того же сегмента игнорируется в течение 5 минут. Отправка производится только тем подписчикам, чьи email-адреса находятся в статусе \"Активен\""
+  ],
+  "code_examples": [
+    {
+      "label": "example_1",
+      "code": "{\n \"status\": \"success\",\n \"message\": \"Trigger sent successfully!\",\n \"data\": {\n \"segment_id\": 2712311,\n \"site_id\": 1012348,\n \"trigger_id\": 13824,\n \"ignore_conditions_and_time_send\": true,\n \"segment_name\": \"Тестовый сегмент\",\n \"trigger_name\": \"Тестовый триггер\"\n }\n}"
+    },
+    {
+      "label": "example_2",
+      "code": "{\n \"trigger_id\": 34521\n}"
+    },
+    {
+      "label": "example_3",
+      "code": "{\n \"trigger_id\": 1345234,\n \"ignore_trigger_conditions\": true\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:58.395968+00:00"
+}

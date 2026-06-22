@@ -1,0 +1,25 @@
+{
+  "path": "/documentation/sites/set_webhook_url",
+  "title": "Задать ссылку на webhook",
+  "category": "Работа со списками",
+  "url": "https://mailganer.com/documentation/sites/set_webhook_url",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/sites/set_webhook"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Пример ответа (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответа (json)",
+      "code": "{\n \"id\": 1008,\n \"is_active\": true,\n \"url\": \"https://webhook.site/b27b31cd-1fc9-48df-be47-4e2678546ca241b\",\n \"is_use_auth_key\": true,\n \"is_enable_retry\": false\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:54.705173+00:00"
+}

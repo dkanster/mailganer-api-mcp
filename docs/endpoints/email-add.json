@@ -1,0 +1,46 @@
+{
+  "path": "/documentation/email/add",
+  "title": "Добавление нового подписчика",
+  "category": "Работа с подписчиками",
+  "url": "https://mailganer.com/documentation/email/add",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/emails/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Пример запроса (json)",
+    "Список параметров ответа в случае успеха (json)",
+    "Возможные значения статусов подписчика",
+    "Примеры ответов",
+    "Возможные ошибки",
+    "Детализированный ответ (JSON)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса (json)",
+      "code": "{\r\n \"email\": \"test@example.com\",\r\n \"source\": 49767, // [49767,50145] - для добавления в несколько списков, all - для добавления во все списки\r\n \"phone\": \"+79123456789\",\r\n \"name\": \"Федор\",\r\n \"patronymic\": \"Федорович\",\r\n \"surname\": \"Федоров\",\r\n \"gender\": 1,\r\n \"birthday\": \"01.01.1988\",\r\n \"add_tag\": \"метка1\",\r\n \"delete_tag\": \"метка2\",\r\n \"add_category\": \"Категория1\",\r\n \"delete_category\": \"Категория2\",\r\n \"user_vars\": {\r\n \"text\": \"Текст\", // строковый тип переменной\r\n \"integer\": 12, // целое число\r\n \"float\": 12.5, // вещественное число\r\n \"date\": \"01.01.1971\", // дата\r\n \"dateTime\": \"01.01.1971 11:00:00\", // дата и время\r\n \"boolean\": true, // логический\r\n \"goods\": [ // json-массив\r\n {\"name\": \"Apple iPhone X\", \"price\": 54000}, \r\n {\"name\": \"Samsung Galaxy S21\", \"price\": 64000}\r\n ]\r\n }\r\n}"
+    },
+    {
+      "label": "Примеры ответов",
+      "code": "{\r\n \"id\": 45763880,\r\n \"mg_hash\": \"53158545763880e054b31ecbad2cf3265d4001d1\",\r\n \"email_status\": \"fixed\", // статус подписчика подробно описан в таблице ниже\r\n \"bunce_log\": \"mailbox size limit exceeded\", // причина несуществования имейла для статуса not_available\r\n \"corrected_email\": \"test@mail.ru\", // для статуса fixed передаётся новый имейл, если исправлена опечатка\r\n}"
+    },
+    {
+      "label": "example_3",
+      "code": "{\r\n \"status\": \"invalid\",\r\n \"error\": {\r\n \"source\": [\"Not found site (source_id=497671) or site blocked\"],\r\n \"birthday\": [\"Неправильный формат date. Используйте формат: DD.MM.YYYY\"],\r\n ...\r\n }\r\n}"
+    },
+    {
+      "label": "example_4",
+      "code": "{\n \"status\": \"invalid\",\n \"error\": [\n \"Название тега не должно превышать 140 символов.\"\n ]\n}"
+    },
+    {
+      "label": "example_5",
+      "code": "{\n \"successful\": [\n {\n \"id\": 325280336,\n \"mg_hash\": \"e221e83252803364563bfda200a\",\n \"email\": \"test@gmail.com\",\n \"source\": 1048,\n \"email_status\": \"active\",\n \"corrected_email\": null,\n \"name\": \"\",\n \"patronymic\": \"\",\n \"surname\": \"\",\n \"gender\": 0,\n \"birthday\": null,\n \"phone\": null,\n \"city\": null,\n \"country\": null,\n \"is_valid\": false,\n \"doi_is_delivery\": false,\n \"doi_is_open\": false,\n \"doi_is_click\": false,\n \"user_vars\": {\n \"date_glob\": null,\n \"glob\": null,\n \"globalnayatest1\": null,\n \"str_glob_2\": null\n },\n \"bunce_log\": null,\n \"tags\": [\n \"желтый\"\n ],\n \"categories\": [],\n \"created\": \"2026-04-08T12:48:15.302810\",\n \"modified\": \"2026-04-08T12:55:33.550935\"\n }\n ],\n \"failed\": []\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:42.015813+00:00"
+}

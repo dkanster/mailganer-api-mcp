@@ -1,0 +1,61 @@
+{
+  "path": "/documentation/trigger/send/v2",
+  "title": "Отправка триггера",
+  "category": "Работа с триггерами",
+  "url": "https://mailganer.com/documentation/trigger/send/v2",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/triggers/{{trigger_id}}/send/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Пример запроса (с кастомным отправителем)",
+    "Пример запроса",
+    "Пример вёрстки письма, с использованием оператора for",
+    "Использование оператора if",
+    "Использование оператора forloop.counter, forloop.first и forloop.last",
+    "Использование оператора forloop|length",
+    "Работа с переменными типа float и date",
+    "Список параметров ответа (json)",
+    "Возможные значения ошибок"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса (с кастомным отправителем)",
+      "code": "{\n \"email\": \"test@example.com\",\n \"sender_email\": \"consultant@company.ru\",\n \"sender_name\": \"Иван Петров\",\n \"update_variables\": true,\n \"variables\": {\n \"order_id\": 1234,\n \"first_name\": \"Test\",\n \"delivery_address\": \"Москва, Красная площадь, Кремль\",\n \"goods\": [\n { \"link\": \"https://domain.ru/products/11021\", \"title\": \"Туфли1\", \"cost\": \"39500\" },\n { \"link\": \"https://domain.ru/products/11022\", \"title\": \"Туфли2\", \"cost\": \"39500\" }\n ]\n }\n}"
+    },
+    {
+      "label": "Пример запроса",
+      "code": "{\n \"email\": \"test@example.com\",\n \"phone\": \"79991112233\",\n \"update_variables\": true,\n \"variables\": {\n \"order_id\": 1234,\n \"first_name\": \"Test\",\n \"delivery_address\": \"Москва, Красная площадь, Кремль\",\n \"goods\": [\n {\n \"link\": \"https://domain.ru/products/11021\",\n \"title\": \"Туфли1\",\n \"cost\": \"39500\"\n },\n {\n \"link\": \"https://domain.ru/products/11022\",\n \"title\": \"Туфли2\",\n \"cost\": \"39500\"\n },\n {\n \"link\": \"https://domain.ru/products/11023\",\n \"title\": \"Туфли3\",\n \"cost\": \"39500\"\n }\n ]\n }\n}"
+    },
+    {
+      "label": "Пример вёрстки письма, с использованием оператора for",
+      "code": "<html>\r\n <body>\r\n <h1>Здравствуйте, {{first_name}} {{last_name}}</h1>\r\n <p>Спасибо за заказ {{order_id}} на сайте domain.ru</p>\r\n <h2>Состав заказа</h2>\r\n {% for item in goods %} //начало цикла, в каждой итерации берётся следующий элемент из массива goods\r\n <div>\r\n <p><a href=\"{{ item.url }}\"><img src=\"{{ item.image_url }}\"/></a></p>\r\n <p>{{ item.name }} {{ item.size }}, {{ item.quantity }} шт., {{ item.cost }} руб.</p>\r\n </div>\r\n {% endfor %} //конец цикла\r\n <p>Адрес доставки: {{delivery_address}}</p>\r\n <p>\r\n Cтоимость доставки: {{shipping}} руб.<br/>\r\n Сумма заказа: {{total_cost}} руб.\r\n </p>\r\n <p>С уважением, команда domain.ru</p>\r\n </body>\r\n</html>"
+    },
+    {
+      "label": "example_4",
+      "code": "...\r\n{% for item in goods %}\r\n<div>\r\n <p><a href=\"{{ item.url }}\"><img src=\"{{ item.image_url }}\"/></a></p>\r\n <p>{{ item.name }}{% if item.size %}, Размер: {{ item.size }}{% endif %}, {{ item.quantity }} шт., {{ item.cost }} руб.</p>\r\n</div>\r\n{% endfor %}\r\n..."
+    },
+    {
+      "label": "example_5",
+      "code": "...\r\n{% for item in goods %}\r\n<div>\r\n {% if forloop.first %}<hr/>{% endif %}\r\n <p><a href=\"{{ item.url }}\"><img src=\"{{ item.image_url }}\"/></a></p>\r\n <p>{{ item.name }}{% if item.size %}, Размер: {{ item.size }}{% endif %}, {{ item.quantity }} шт., {{ item.cost }} руб.</p>\r\n {% if forloop.last %}<hr/>{% endif %}\r\n</div>\r\n{% endfor %}\r\n..."
+    },
+    {
+      "label": "example_6",
+      "code": "...\r\n{% if goods|length >= 5 %} \r\n {% for item in goods %}\r\n <div>\r\n {% if forloop.first %}<hr/>{% endif %}\r\n <p><a href=\"{{ item.url }}\"><img src=\"{{ item.image_url }}\"/></a></p>\r\n <p>{{ item.name }}{% if item.size %}, Размер: {{ item.size }}{% endif %}, {{ item.cost }} руб.</p>\r\n {% if forloop.last %}<hr/>{% endif %}\r\n </div>\r\n {% endfor %}\r\n{% endif %}\r\n..."
+    },
+    {
+      "label": "example_7",
+      "code": "...\r\n{% if goods|length >= 5 %} \r\n {% for item in goods %}\r\n <div>\r\n {% if forloop.first %}<hr/>{% endif %}\r\n <p><a href=\"{{ item.url }}\"><img src=\"{{ item.image_url }}\"/></a></p>\r\n <p>{{ item.name }}{% if item.size %}, Размер: {{ item.size }}{% endif %}, {{ item.cost }} руб.</p>\r\n {% if forloop.last %}<hr/>{% endif %}\r\n </div>\r\n {% endfor %}\r\n{% endif %}\r\n..."
+    },
+    {
+      "label": "example_8",
+      "code": "{\n \"status\": 1,\n \"updated_variables\": [],\n \"status_text\": \"Success. Complete <TriggerEmail[191015674]> on 0.453127 sec.\",\n \"result\": 191015674\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:17.596314+00:00"
+}

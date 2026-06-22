@@ -1,0 +1,26 @@
+{
+  "path": "/documentation/triggers",
+  "title": "Получить список триггеров",
+  "category": "Работа с триггерами",
+  "url": "https://mailganer.com/documentation/triggers",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/triggers/"
+  ],
+  "headings": [
+    "Список параметров ответа (json)",
+    "Содержимое массива results",
+    "Пример ответа"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответа",
+      "code": "{\r\n \"count\": 2,\r\n \"next\": null,\r\n \"previous\": null,\r\n \"results\": [\r\n {\r\n \"id\": 1,\r\n \"name\": \"Тестовый триггер\",\r\n \"sites\": [\r\n 32424,\r\n 1234,\r\n 13231\r\n ]\r\n },\r\n {\r\n \"id\": 4,\r\n \"name\": null,\r\n \"sites\": [\r\n 9199\r\n ]\r\n }\r\n ]\r\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:25.077273+00:00"
+}

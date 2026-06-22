@@ -1,0 +1,35 @@
+{
+  "path": "/documentation/email/update",
+  "title": "Обновление информации о подписчике",
+  "category": "Работа с подписчиками",
+  "url": "https://mailganer.com/documentation/email/update",
+  "http_methods": [
+    "PATCH"
+  ],
+  "endpoints": [
+    "PATCH https://mailganer.com/api/v2/emails/update/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Пример запроса (json)",
+    "Пример ответа в случае успеха (json)",
+    "Пример ответа в случае ошибки (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса (json)",
+      "code": "{\n \"email\": \"test@example.com\",\n \"source\": 49767, // [49767,50145] - для добавления в несколько списков, all - для добавления во все списки\n \"phone\": \"+79123456789\",\n \"name\": \"Федор\",\n \"patronymic\": \"Федорович\",\n \"surname\": \"Федоров\",\n \"gender\": 1,\n \"birthday\": \"01.01.1988\",\n \"add_tag\": \"метка1\",\n \"delete_tag\": \"метка2\",\n \"add_category\": \"Категория1\",\n \"delete_category\": \"Категория2\",\n \"user_vars\": {\n \"text\": \"Текст\", // строковый тип переменной\n \"old_value\": null, // удалить переменную\n \"integer\": 12, // целое число\n \"float\": 12.5, // вещественное число\n \"date\": \"01.01.1971\", // дата\n \"dateTime\": \"01.01.1971 11:00:00\", // дата и время\n \"boolean\": true, // логический\n \"goods\": [ // json-массив\n {\"name\": \"Apple iPhone X\", \"price\": 54000},\n {\"name\": \"Samsung Galaxy S21\", \"price\": 64000}\n ]\n }\n}"
+    },
+    {
+      "label": "Пример ответа в случае успеха (json)",
+      "code": "{\r\n \"id\": 45763880,\r\n \"mg_hash\": \"53158545763880e054b31ecbad2cf3265d4001d1\"\r\n}"
+    },
+    {
+      "label": "Пример ответа в случае ошибки (json)",
+      "code": "{\r\n \"status\": \"invalid\",\r\n \"error\": {\r\n \"source\": [\"Not found site (source_id=497671) or site blocked\"],\r\n \"birthday\": [\"Неправильный формат date. Используйте формат: DD.MM.YYYY\"],\r\n ...\r\n }\r\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:44.573813+00:00"
+}

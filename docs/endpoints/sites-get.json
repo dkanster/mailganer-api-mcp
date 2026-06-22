@@ -1,0 +1,32 @@
+{
+  "path": "/documentation/sites/get",
+  "title": "Получить массив списков",
+  "category": "Работа со списками",
+  "url": "https://mailganer.com/documentation/sites/get",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/sites/"
+  ],
+  "headings": [
+    "Параметры запроса (query parameters)",
+    "Список параметров ответа (json)",
+    "Содержимое массива results",
+    "Содержимое массива results (упрощенный формат, simple=true)",
+    "Пример ответа"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответа",
+      "code": "{\n \"count\": 5,\n \"next\": null,\n \"previous\": null,\n \"results\": [\n {\n \"id\": 98765,\n \"domain\": \"Список №1\",\n \"domain_ext\": \"domain.com\",\n \"url\": \"Список №1\",\n \"logo\": null,\n \"user\": 146450,\n \"source_type\": 3,\n \"source\": 2,\n \"active\": true,\n \"click_domain\": \"click.domain.com\",\n \"count_emails\": 4,\n \"count_emails_active\": 3\n }\n ]\n}"
+    },
+    {
+      "label": "example_2",
+      "code": "{\n \"count\": 2,\n \"next\": \"https://mailganer.com/api/v2/sites/?page=2&simple=true\",\n \"previous\": null,\n \"results\": [\n {\n \"id\": 56555,\n \"domain\": \"name\"\n },\n {\n \"id\": 453433,\n \"domain\": \"4654654\"\n }\n ]\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:53.568191+00:00"
+}

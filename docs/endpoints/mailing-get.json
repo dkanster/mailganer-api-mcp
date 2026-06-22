@@ -1,0 +1,25 @@
+{
+  "path": "/documentation/mailing/get",
+  "title": "Получение информации о рассылке",
+  "category": "Работа с рассылками",
+  "url": "https://mailganer.com/documentation/mailing/get",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/mailing/{{public_id}}"
+  ],
+  "headings": [
+    "Список параметров ответа (json)",
+    "Пример ответа"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответа",
+      "code": "{\n \"public_id\": 166775985258,\n \"datetime_send\": \"07.11.2022 03:37\",\n \"send\": \"2022-11-07T03:37:02.141548\",\n \"name\": \"Название рассылки\",\n \"subject\": \"Тема письма\",\n \"subject2\": \"Тема письма 2\",\n \"preheader\": \"Прехедер\",\n \"segment_name\": \"Название сегмента\",\n \"segment_id\": 7502,\n \"from_name\": \"Имя Отправителя\",\n \"from_email\": \"example@email.com\",\n \"utm_campaign\": \"166775985258\",\n \"utm_source\": \"mailganer\",\n \"utm_medium\": \"email\",\n \"text\": \"HTML-content\",\n \"count_spam\": 0,\n \"count_unsubscribe\": 14,\n \"count_click\": 447,\n \"count_open\": 1485,\n \"count_delivery\": 13348,\n \"count_sent\": 13349,\n \"clickmap\": \"https://mailganer.com/app/mailing/text/template/1724869995456/828558/?use_test_vars=True\",\n \"webversion\": \"https://click.email.com/webversion/166775985258/\",\n \"user_utms\": {\n \"param1\": \"param1\",\n \"param2\": \"param2\"\n }\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:09.262277+00:00"
+}

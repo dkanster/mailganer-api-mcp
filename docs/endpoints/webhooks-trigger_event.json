@@ -1,0 +1,19 @@
+{
+  "path": "/documentation/webhooks/trigger_event",
+  "title": "Срабатывание события в триггере",
+  "category": "Вебхуки",
+  "url": "https://mailganer.com/documentation/webhooks/trigger_event",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [],
+  "headings": [
+    "Список параметров запроса (form-values)"
+  ],
+  "paragraphs": [
+    "Хук отправляется каждый раз когда срабатывает событие в триггере. Используется когда нужно вместе с отправкой письма, передать информацию во внешнюю систему. Или, например, не отпрвлять письмо, а только передать эту информацию наружу."
+  ],
+  "code_examples": [],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:40.389545+00:00"
+}

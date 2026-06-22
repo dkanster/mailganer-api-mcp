@@ -1,0 +1,26 @@
+{
+  "path": "/documentation/recomend/orders",
+  "title": "Передача оформленных заказов",
+  "category": "Товарные рекомендации",
+  "url": "https://mailganer.com/documentation/recomend/orders",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v1/recomend/orders/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Пример запроса",
+    "Список параметров ответа (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса",
+      "code": "{\n \"api_key\": \"***\", // api ключ\n \"source_id\": \"50883\", // id списка\n \"orders\": [\n {\n \"id\": \"12345\", // номер заказа\n \"status\": \"Новый\", // статус заказа\n \"date\": \"1619155834\", // дата заказа в формате timestamp\n \"email\": \"email@domain.com\", // имейл покупателя\n \"channel\": \"website\", // например website/app/callcenter/offline\n \"value\": {\n \"total\": 0.0 // сумма заказа\n },\n \"items\": [\n {\n \"id\": 0, // id первого товара в заказе\n \"price\": 0.0, // цена товара\n \"quantity\": 0.0, // количество\n \"categories\": [1, 2, 3] // id категори товара\n }\n ]\n }\n ]\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:31.179560+00:00"
+}

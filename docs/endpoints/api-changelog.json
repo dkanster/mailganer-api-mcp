@@ -1,0 +1,51 @@
+{
+  "path": "/documentation/api/changelog",
+  "title": "Changelog Mailganer",
+  "category": "API личного кабинета",
+  "url": "https://mailganer.com/documentation/api/changelog",
+  "http_methods": [
+    "GET",
+    "POST"
+  ],
+  "endpoints": [],
+  "headings": [
+    "04-05-2026",
+    "28-04-2026",
+    "08-04-2026",
+    "31-03-2026",
+    "12-02-2026",
+    "04-02-2026"
+  ],
+  "paragraphs": [
+    "Обновление метода: Получение информации о подписчиках\n\nВ метод выгрузки подписчиков добавлена возможность получать данные о количестве дней с момента последней активности (последнее открытие массовой рассылки или триггерного письма). Значение рассчитывается синхронно на момент выполнения запроса.\n\nМетод: GET /api/v2/emails/\n\nПараметры:\nlast_activity_days (опциональный, int) — если передать значение 1, в объекте каждого подписчика вернется дополнительное поле last_activity_info (число дней с последней активности или null, если активности не найдено)\n\nПример запроса (с получением данных об активности):",
+    "Новый метод: Отправка триггера на сегмент\n\nДобавлен API-метод для запуска триггерной рассылки на уже существующий сегмент. Поддерживает два режима: с учётом условий триггера (Когда отправить и время отправки) или с немедленной отправкой без учёта условий.\n\nМетод: POST /api/v2/segments/{segment_id}/send_trigger/\n\nПараметры:\n trigger_id (обязательный) — ID триггера ignore_trigger_conditions (опциональный, bool) — если true, отправка происходит сразу, игнорируя все условия триггера",
+    "Метод создания рассылки : добавлена возможность одновременной передачи HTML и AMP-версии письма\n\nHTML-часть используется как fallback для почтовых клиентов, не поддерживающих AMP.",
+    "Метод получения информации о подписчике : добавлен фильтр по дате подписки/импорта",
+    "Скачивание отчётов через API\n\nДобавлена возможность асинхронного скачивания списков, сегментов и отчётов по рассылкам в форматах CSV и XLSX.\n\nМетоды:\n POST /api/v2/tasks/emails_report — создание задачи GET /api/v2/tasks/<task_id> - статус задачи GET /api/v2/tasks/<task_id>/download_file — скачивание файла Параметры для POST /api/v2/tasks/emails_report:\n\n site_id — ID списка segment_id — ID сегмента mailing_id + mailing_report_type (general_report_type / clicks) — отчёт по рассылке file_type — csv или xlsx start_date, end_date (опционально, только для списка и сегмента)",
+    "Метод отправки триггера : добавлена возможность указать отправителя\n\nРанее метод /api/v2/triggers/{{trigger_id}}/send/ использовал только отправителя, заданного в настройках триггера. Теперь можно динамически подставлять любой подтверждённый email отправителя (с обязательным указанием имени).\n\nПараметры (опциональные):\n\n sender_email — email отправителя (должен быть подтверждён и привязан к аккаунту) sender_name — имя отправителя (обязателен, если передан sender_email)"
+  ],
+  "code_examples": [
+    {
+      "label": "example_1",
+      "code": "curl --location 'https://mailganer.com/api/v2/emails/?last_activity_days=1'\n--header 'Authorization: CodeRequest your_api_key'"
+    },
+    {
+      "label": "example_2",
+      "code": "curl --location 'https://mailganer.com/api/v2/segments/245611/send_trigger/' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: CodeRequest your_api_key' \\\n--data-raw '{\n \"trigger_id\": 145674,\n \"ignore_trigger_conditions\": true\n}'"
+    },
+    {
+      "label": "example_3",
+      "code": "curl --location 'https://mailganer.com/api/v1/mailing/create/' \\\n--form 'api_key=\"your_api_key\"' \\\n--form 'theme=\"Тема письма\"' \\\n--form 'name=\"Название рассылки\"' \\\n--form 'segment_id=\"123456\"' \\\n--form 'html-content=\"<html>... обычный HTML ...</html>\"' \\\n--form 'amp-html-content=\"<html ⚡4email>... AMP-версия ...</html>\"'"
+    },
+    {
+      "label": "example_4",
+      "code": "https://mailganer.com/api/v2/emails/?start_date=2024-10-10&end_date=2025-10-10"
+    },
+    {
+      "label": "example_5",
+      "code": "curl --location 'https://mailganer.com/api/v2/triggers/113292/send/' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: CodeRequest your_api_key' \\\n--data-raw '{\n \"email\": \"subscriber@example.com\",\n \"sender_email\": \"consultant@company.ru\",\n \"sender_name\": \"Иван Консультант\"\n}'"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:40.782216+00:00"
+}

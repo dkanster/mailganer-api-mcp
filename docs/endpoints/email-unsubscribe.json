@@ -1,0 +1,30 @@
+{
+  "path": "/documentation/email/unsubscribe",
+  "title": "Отписка подписчика",
+  "category": "Работа с подписчиками",
+  "url": "https://mailganer.com/documentation/email/unsubscribe",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/emails/unsubscribe/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Пример ответа в случае успеха (json)",
+    "Пример ответа в случае ошибки (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответа в случае успеха (json)",
+      "code": "{\r\n \"email_status\": \"unsubscribe\"\r\n}"
+    },
+    {
+      "label": "Пример ответа в случае ошибки (json)",
+      "code": "{\r\n \"status\": \"error\",\r\n \"error\": \"Не найдено.\"\r\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:49.065786+00:00"
+}

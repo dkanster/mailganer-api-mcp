@@ -1,0 +1,27 @@
+{
+  "path": "/documentation/mailing/get_id",
+  "title": "Получить список рассылок",
+  "category": "Работа с рассылками",
+  "url": "https://mailganer.com/documentation/mailing/get_id",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/mailing/"
+  ],
+  "headings": [
+    "Список параметров запроса",
+    "Пример запроса",
+    "Список параметров ответа (json)",
+    "Содержимое массива results"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса",
+      "code": "curl --location 'https://mailganer.com/api/v2/mailing/?start_date=2024-04-01&end_date=2024-04-13' \\\n--header 'Authorization: CodeRequest ХХХ' \\"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:11.738031+00:00"
+}

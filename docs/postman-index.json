@@ -1,0 +1,277 @@
+{
+  "source": "https://documenter.getpostman.com/view/23131434/VUxPvnhA",
+  "collection_api_url": "https://documenter.gw.postman.com/api/collections/23131434/VUxPvnhA?segregateAuth=true&versionTag=latest",
+  "synced_at": "2026-06-22T21:25:17.445324+00:00",
+  "collection_name": "REST API Mailganer",
+  "collection_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+  "requests": [
+    {
+      "name": "Добавление нового подписчика",
+      "method": "POST",
+      "path": "/api/v2/emails/",
+      "url": "https://mailganer.com/api/v2/emails/",
+      "description": "<blockquote>\n<p>Имейл добавляется в статусе <strong>Запрошено подтверждение</strong>. На имейл будет отправлено письмо с подтверждением подписки.<br />Полезная статья: <a href=\"https://mailganer.com/ru/explanation/kak-sozdat-pismo-podtverzhdeniya-podpiski\">Как изменить стандартное письмо-подтверждение подписки</a>.<br />Когда подписчик кликнет по ссылке из письма подтверждения, статус изменится на <strong>Активен</strong>. Параметры not_doi и need_activate по-умолчанию не работают, запросите их активацию в поддержке.</p>\n</blockquote>\n<h2 id=\"список-параметров-запроса-json\">Список параметров запроса (json)</h2>\n<div class=\"click-to-expand-wrapper is-table-wrapper\"><table>\n<thead>\n<tr>\n<th><strong>Переменная</strong></th>\n<th><strong>Название</strong></th>\n<th><strong>Тип</strong></th>\n<th><strong>Обязательный</strong></th>\n<th><strong>Комментарий</strong></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>email</td>\n<td>Имейл</td>\n<td>Строка</td>\n<td>Да</td>\n<td></td>\n</tr>\n<tr>\n<td>source</td>\n<td>ID списка</td>\n<td>Список</td>\n<td>Да</td>\n<td><a href=\"https://mailganer.com/app/settings/\">Узнать ID списка</a></td>\n</tr>\n<tr>\n<td>name</td>\n<td>Имя</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>surname</td>\n<td>Фамилия</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>patronymic</td>\n<td>Отчество</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>gender</td>\n<td>Пол</td>\n<td>Целое число</td>\n<td>Нет</td>\n<td>1-мужской, 2-женский</td>\n</tr>\n<tr>\n<td>birthday</td>\n<td>Дата рождения</td>\n<td>Дата</td>\n<td>Нет</td>\n<td>Формат даты dd.mm.yyyy</td>\n</tr>\n<tr>\n<td>city</td>\n<td>Город</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>add_tag</td>\n<td>Добавить метку</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>delete_tag</td>\n<td>Удалить метку</td>\n<td>Строка</td>\n<td>Нет</td>\n<td></td>\n</tr>\n<tr>\n<td>user_vars</td>\n<td>Пользовательские переменные</td>\n<td>Массив</td>\n<td>Нет</td>\n<td>Массив с пользовательскими переменными</td>\n</tr>\n<tr>\n<td>not_doi</td>\n<td>Отменить DOI</td>\n<td>Булев</td>\n<td>Нет</td>\n<td>Наличие этого параметра отменяет отправку письма подтверждения. Имейл добавляется в список в статусе Активен.</td>\n</tr>\n<tr>\n<td>need_activate</td>\n<td>Отправить DOI</td>\n<td>Булев</td>\n<td>Нет</td>\n<td>Наличие этого параметра отправляет письмо подтверждения, даже если имейл в статусе Запрошено подтверждение.</td>\n</tr>\n</tbody>\n</table>\n</div><h2 id=\"список-параметров-ответа-в-случае-успеха-json\">Список параметров ответа в случае успеха (json)</h2>\n<div class=\"click-to-expand-wrapper is-table-wrapper\"><table>\n<thead>\n<tr>\n<th><strong>Переменная</strong></th>\n<th></th>\n<th><strong>Тип</strong></th>\n<th><strong>Обязательный</strong></th>\n<th><strong>Комментарий</strong></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>id</td>\n<td>ID подписчика</td>\n<td>Целое число</td>\n<td>Да</td>\n<td></td>\n</tr>\n<tr>\n<td>mg_hash</td>\n<td>Хэш имейла</td>\n<td>Строка</td>\n<td>Да</td>\n<td></td>\n</tr>\n<tr>\n<td>in_base</td>\n<td>Есть в базе</td>\n<td>Булев</td>\n<td>Да</td>\n<td>Возвращает true если имейл уже был в базе</td>\n</tr>\n<tr>\n<td>email_status</td>\n<td>Статус подписчика</td>\n<td>Строка</td>\n<td>Да</td>\n<td></td>\n</tr>\n<tr>\n<td>bunce_log</td>\n<td>Причина недоступности</td>\n<td>Строка</td>\n<td>Нет</td>\n<td>причина несуществования имейла для статуса not_available</td>\n</tr>\n<tr>\n<td>corrected_email</td>\n<td>Исправленный имейл</td>\n<td>Строка</td>\n<td>Нет</td>\n<td>Для статуса fixed передаётся новый имейл, в случае если в имейле была допущена опечатка</td>\n</tr>\n</tbody>\n</table>\n</div><h2 id=\"возможные-значения-статусов-подписчика\">Возможные значения статусов подписчика</h2>\n<div class=\"click-to-expand-wrapper is-table-wrapper\"><table>\n<thead>\n<tr>\n<th><strong>Название</strong></th>\n<th><strong>Переменная</strong></th>\n<th><strong>Тип</strong></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>active</td>\n<td>Активен</td>\n<td>Адресат получает рассылки</td>\n</tr>\n<tr>\n<td>wait_activated</td>\n<td>Запрошено подтверждение</td>\n<td>Адресат пока не перешёл по ссылке подтверждения в письме подтверждения подписки</td>\n</tr>\n<tr>\n<td>spam</td>\n<td>Сервер считает спамом</td>\n<td>Во время последней отправки почтовый сервер адресата отказался принимать письмо, сочтя его спамом</td>\n</tr>\n<tr>\n<td>unsubscribe</td>\n<td>Отписался от рассылок</td>\n<td>Адресат отписался от рассылки. Рассылать на этот адрес нельзя</td>\n</tr>\n<tr>\n<td>not_available</td>\n<td>Недоступен</td>\n<td>Попытки доставить почту на этот адрес неоднократно заканчивались неудачей. На этот адрес система прекратила отправлять рассылки</td>\n</tr>\n<tr>\n<td>fixed</td>\n<td>Исправлен</td>\n<td>Исправили опечатку в домене имейла</td>\n</tr>\n</tbody>\n</table>\n</div>",
+      "folder": "Подписчики"
+    },
+    {
+      "name": "Обновление информации о подписчике 1 способ",
+      "method": "PATCH",
+      "path": "/api/v2/emails/:email_hash/",
+      "url": "https://mailganer.com/api/v2/emails/:email_hash/",
+      "description": "",
+      "folder": "Подписчики"
+    },
+    {
+      "name": "Обновление информации о подписчике 2 способ",
+      "method": "PATCH",
+      "path": "/api/v2/emails/update/",
+      "url": "https://mailganer.com/api/v2/emails/update/",
+      "description": "",
+      "folder": "Подписчики"
+    },
+    {
+      "name": "Массовое добавление подписчиков",
+      "method": "POST",
+      "path": "/api/v2/emails/",
+      "url": "https://mailganer.com/api/v2/emails/",
+      "description": "",
+      "folder": "Подписчики"
+    },
+    {
+      "name": "Получение информации о подписчике 1 способ",
+      "method": "GET",
+      "path": "/api/v2/emails/",
+      "url": "https://mailganer.com/api/v2/emails/?email=test@example.com&source=51488",
+      "description": "",
+      "folder": "Подписчики"
+    },
+    {
+      "name": "Получение информации о подписчике 2 способ",
+      "method": "GET",
+      "path": "/api/v2/emails/:email_hash/",
+      "url": "https://mailganer.com/api/v2/emails/:email_hash/",
+      "description": "",
+      "folder": "Подписчики"
+    },
+    {
+      "name": "Отписка подписчика 1 способ",
+      "method": "POST",
+      "path": "/api/v2/emails/:email_hash/unsubscribe/",
+      "url": "https://mailganer.com/api/v2/emails/:email_hash/unsubscribe/",
+      "description": "",
+      "folder": "Подписчики"
+    },
+    {
+      "name": "Отписка подписчика 2 способ",
+      "method": "POST",
+      "path": "/api/v2/emails/unsubscribe/",
+      "url": "https://mailganer.com/api/v2/emails/unsubscribe/",
+      "description": "",
+      "folder": "Подписчики"
+    },
+    {
+      "name": "Валидация подписчика",
+      "method": "POST",
+      "path": "/api/v2/emails/validate/",
+      "url": "https://mailganer.com/api/v2/emails/validate/",
+      "description": "",
+      "folder": "Подписчики"
+    },
+    {
+      "name": "Создать список",
+      "method": "POST",
+      "path": "/api/v2/sites/",
+      "url": "https://mailganer.com/api/v2/sites/",
+      "description": "",
+      "folder": "Списки"
+    },
+    {
+      "name": "Получить массив списков",
+      "method": "GET",
+      "path": "/api/v2/sites/",
+      "url": "https://mailganer.com/api/v2/sites/",
+      "description": "",
+      "folder": "Списки"
+    },
+    {
+      "name": "Проверка верификации домена",
+      "method": "GET",
+      "path": "/api/v2/sites/verify_domain/",
+      "url": "https://mailganer.com/api/v2/sites/verify_domain/",
+      "description": "",
+      "folder": "Списки"
+    },
+    {
+      "name": "Создать сегмент",
+      "method": "POST",
+      "path": "/api/v2/segments/",
+      "url": "https://mailganer.com/api/v2/segments/",
+      "description": "",
+      "folder": "Сегменты"
+    },
+    {
+      "name": "Получить массив сегментов",
+      "method": "GET",
+      "path": "/api/v2/segments/",
+      "url": "https://mailganer.com/api/v2/segments/",
+      "description": "",
+      "folder": "Сегменты"
+    },
+    {
+      "name": "Получить информацию о сегменте",
+      "method": "GET",
+      "path": "/api/v2/segments/:segment_id",
+      "url": "https://mailganer.com/api/v2/segments/:segment_id",
+      "description": "",
+      "folder": "Сегменты"
+    },
+    {
+      "name": "Добавление пользовательской переменной",
+      "method": "POST",
+      "path": "/api/v2/user_vars/",
+      "url": "https://mailganer.com/api/v2/user_vars/",
+      "description": "",
+      "folder": "Переменные"
+    },
+    {
+      "name": "Получить список пользовательских переменных",
+      "method": "GET",
+      "path": "/api/v2/user_vars/",
+      "url": "https://mailganer.com/api/v2/user_vars/",
+      "description": "",
+      "folder": "Переменные"
+    },
+    {
+      "name": "Создание рассылки",
+      "method": "POST",
+      "path": "/api/v1/mailing/create/",
+      "url": "https://mailganer.com/api/v1/mailing/create/",
+      "description": "",
+      "folder": "Рассылки"
+    },
+    {
+      "name": "Отправка рассылки",
+      "method": "POST",
+      "path": "/api/v2/mailing/send/",
+      "url": "https://mailganer.com/api/v2/mailing/send/",
+      "description": "",
+      "folder": "Рассылки"
+    },
+    {
+      "name": "Получение информации о рассылке",
+      "method": "GET",
+      "path": "/api/v2/mailing/:public_id",
+      "url": "https://mailganer.com/api/v2/mailing/:public_id",
+      "description": "",
+      "folder": "Рассылки"
+    },
+    {
+      "name": "Получить список рассылок",
+      "method": "GET",
+      "path": "/api/v2/mailing/",
+      "url": "https://mailganer.com/api/v2/mailing/",
+      "description": "",
+      "folder": "Рассылки"
+    },
+    {
+      "name": "Отправка триггера",
+      "method": "POST",
+      "path": "/api/v2/triggers/:trigger_id/send/",
+      "url": "https://mailganer.com/api/v2/triggers/:trigger_id/send/",
+      "description": "",
+      "folder": "Триггеры"
+    },
+    {
+      "name": "Статистика триггера",
+      "method": "GET",
+      "path": "/api/v2/triggers/:trigger_id/stat/",
+      "url": "https://mailganer.com/api/v2/triggers/:trigger_id/stat/?start_date=2022-08-01&end_date=2023-08-03",
+      "description": "",
+      "folder": "Триггеры"
+    },
+    {
+      "name": "Получение статистики по отправке триггера",
+      "method": "POST",
+      "path": "/api/v1/trigger/id_stat/",
+      "url": "https://mailganer.com/api/v1/trigger/id_stat/",
+      "description": "",
+      "folder": "Триггеры"
+    },
+    {
+      "name": "Получить список триггеров",
+      "method": "GET",
+      "path": "/api/v2/triggers/",
+      "url": "https://mailganer.com/api/v2/triggers/",
+      "description": "",
+      "folder": "Триггеры"
+    },
+    {
+      "name": "Получить информацию о триггере",
+      "method": "GET",
+      "path": "/api/v2/triggers/:trigger_id/meta/",
+      "url": "https://mailganer.com/api/v2/triggers/:trigger_id/meta/",
+      "description": "",
+      "folder": "Триггеры"
+    },
+    {
+      "name": "Передача оформленных заказов",
+      "method": "POST",
+      "path": "/api/v1/recomend/orders/",
+      "url": "https://mailganer.com/api/v1/recomend/orders/",
+      "description": "",
+      "folder": "Товарные рекомендации"
+    },
+    {
+      "name": "Создать пользователя",
+      "method": "POST",
+      "path": "/api/v2/users/",
+      "url": "https://mailganer.com/api/v2/users/",
+      "description": "",
+      "folder": "Пользователи"
+    },
+    {
+      "name": "Получить ссылку на пополнение баланса",
+      "method": "POST",
+      "path": "/api/v2/pay/",
+      "url": "https://mailganer.com/api/v2/pay/",
+      "description": "",
+      "folder": "Пользователи"
+    },
+    {
+      "name": "Изменить пользователя",
+      "method": "PATCH",
+      "path": "/api/v2/users/:id/",
+      "url": "https://mailganer.com/api/v2/users/:id/",
+      "description": "",
+      "folder": "Пользователи"
+    },
+    {
+      "name": "Получить информацию о пользователе",
+      "method": "GET",
+      "path": "/api/v2/users/:id/",
+      "url": "https://mailganer.com/api/v2/users/:id/",
+      "description": "",
+      "folder": "Пользователи"
+    },
+    {
+      "name": "Получение токена другого пользователя",
+      "method": "POST",
+      "path": "/api/auth/",
+      "url": "https://mailganer.com/api/auth/",
+      "description": "",
+      "folder": "Пользователи"
+    },
+    {
+      "name": "Получить список пользователей",
+      "method": "GET",
+      "path": "/api/v2/users/",
+      "url": "https://mailganer.com/api/v2/users/",
+      "description": "",
+      "folder": "Пользователи"
+    }
+  ],
+  "stats": {
+    "requests_total": 33,
+    "folders_total": 8
+  }
+}

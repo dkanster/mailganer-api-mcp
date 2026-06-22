@@ -1,0 +1,36 @@
+{
+  "path": "/documentation/trigger/stat/v2",
+  "title": "Статистика по триггеру",
+  "category": "Работа с триггерами",
+  "url": "https://mailganer.com/documentation/trigger/stat/v2",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/triggers/{{trigger_id}}/stat/"
+  ],
+  "headings": [
+    "Список параметров запроса (url-query)",
+    "Пример запроса",
+    "Пример ответа без заданной даты",
+    "Пример ответа с заданной датой",
+    "Список параметров ответа (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса",
+      "code": "curl --location 'https://mailganer.com/api/v2/triggers/1111/stat/?start_date=2022-08-01&end_date=2023-08-03' \\\r\n--header 'Authorization: CodeRequest XXX'"
+    },
+    {
+      "label": "Пример ответа без заданной даты",
+      "code": "{\r\n \"summary\": {\r\n \"delivered\": 163538,\r\n \"clicked\": 7990,\r\n \"opened\": 57910,\r\n \"not_available\": 584,\r\n \"unsubscribed\": 675,\r\n \"spammed\": 931,\r\n \"sent\": 165341\r\n }\r\n}"
+    },
+    {
+      "label": "Пример ответа с заданной датой",
+      "code": "{\r\n \"2023-08-01\": {\r\n \"delivered\": 338,\r\n \"clicked\": 13,\r\n \"opened\": 60,\r\n \"not_available\": 4,\r\n \"unsubscribed\": 1,\r\n \"spammed\": 0,\r\n \"sent\": 344\r\n },\r\n \"2023-08-02\": {\r\n \"delivered\": 315,\r\n \"clicked\": 12,\r\n \"opened\": 54,\r\n \"not_available\": 0,\r\n \"unsubscribed\": 2,\r\n \"spammed\": 0,\r\n \"sent\": 316\r\n },\r\n \"2023-08-03\": {\r\n \"delivered\": 369,\r\n \"clicked\": 13,\r\n \"opened\": 57,\r\n \"not_available\": 0,\r\n \"unsubscribed\": 0,\r\n \"spammed\": 0,\r\n \"sent\": 369\r\n },\r\n \"summary\": {\r\n \"delivered\": 1022,\r\n \"clicked\": 38,\r\n \"opened\": 171,\r\n \"not_available\": 4,\r\n \"unsubscribed\": 3,\r\n \"spammed\": 0,\r\n \"sent\": 1029\r\n }\r\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:18.865240+00:00"
+}

@@ -1,0 +1,16 @@
+{
+  "source": "https://mailganer.com/sitemap.xml",
+  "filter": "/documentation/",
+  "fetched_at": "2026-06-22T21:23:33.682485+00:00",
+  "pages": [
+    {
+      "path": "/documentation",
+      "url": "https://mailganer.com/documentation",
+      "slug": "documentation",
+      "lastmod": "2026-06-21T17:51:22+00:00"
+    }
+  ],
+  "stats": {
+    "pages_total": 1
+  }
+}

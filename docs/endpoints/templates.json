@@ -1,0 +1,26 @@
+{
+  "path": "/documentation/templates",
+  "title": "Получение HTML-вёрстки шаблона",
+  "category": "Шаблоны",
+  "url": "https://mailganer.com/documentation/templates",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/template/{{template_id}}/"
+  ],
+  "headings": [
+    "Список параметров запроса",
+    "Успешный ответ (200 OK)",
+    "Возможные ошибки"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Успешный ответ (200 OK)",
+      "code": "{\n \"text\": \"<!DOCTYPE html>...</html>\"\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:59.227225+00:00"
+}

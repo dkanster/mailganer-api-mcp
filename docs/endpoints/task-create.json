@@ -1,0 +1,64 @@
+{
+  "path": "/documentation/task/create",
+  "title": "Создать задачу на формирование отчета",
+  "category": "Отчеты",
+  "url": "https://mailganer.com/documentation/task/create",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/tasks/emails_report"
+  ],
+  "headings": [
+    "Список параметров запроса",
+    "Пример запросов",
+    "Список параметров ответа (json)",
+    "Пример ответа в случае успеха (json)",
+    "Пример ответов в случае ошибки (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запросов",
+      "code": "{\n \"file_type\": \"csv\"\n}"
+    },
+    {
+      "label": "example_2",
+      "code": "{\n \"segment_id\": 257649,\n \"file_type\": \"xlsx\"\n}"
+    },
+    {
+      "label": "example_3",
+      "code": "{\n \"mailing_id\": 177022020521,\n \"mailing_report_type\": \"general_mailing_report\",\n \"file_type\": \"csv\"\n}"
+    },
+    {
+      "label": "example_4",
+      "code": "{\n \"mailing_id\": 177022020521,\n \"mailing_report_type\": \"clicks\",\n \"file_type\": \"xlsx\"\n}"
+    },
+    {
+      "label": "Пример ответа в случае успеха (json)",
+      "code": "{\n \"task_id\": \"c8549c22-21f9-467b-9c74-870c34523432a048b\",\n \"state\": \"IN_PROGRESS\",\n \"task_type\": \"DOWNLOAD_MAILING_REPORT\"\n}"
+    },
+    {
+      "label": "Пример ответов в случае ошибки (json)",
+      "code": "{\n \"status\": \"invalid\",\n \"error\": \"Request cannot contain parameters from different report types: 'mailing_id' cannot be used with 'segment_id' or 'site_id'.\"\n}"
+    },
+    {
+      "label": "example_7",
+      "code": "{\n \"status\": \"invalid\",\n \"error\": {\n \"detail\": [\n \"mailing_id is required for mailing_report_type parameter\"\n ]\n }\n}"
+    },
+    {
+      "label": "example_8",
+      "code": "{\n \"status\": \"invalid\",\n \"error\": {\n \"detail\": [\n \"mailing_id is required for mailing_report_type parameter\"\n ]\n }\n}"
+    },
+    {
+      "label": "example_9",
+      "code": "{\n \"status\": \"invalid\",\n \"error\": {\n \"file_type\": [\n \"\\\"pdf\\\" не является корректным значением.\"\n ]\n }\n}"
+    },
+    {
+      "label": "example_10",
+      "code": "{\n \"error\": \"Site does not exist\"\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:25:01.185174+00:00"
+}

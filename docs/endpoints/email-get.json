@@ -1,0 +1,63 @@
+{
+  "path": "/documentation/email/get",
+  "title": "Получение информации о подписчике",
+  "category": "Работа с подписчиками",
+  "url": "https://mailganer.com/documentation/email/get",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/emails/"
+  ],
+  "headings": [
+    "Список параметров запроса",
+    "Особенности работы с фильтрами по датам:",
+    "Особенности параметра last_activity_days",
+    "Пример запросов",
+    "Список параметров ответа (json)",
+    "Пример ответа в случае успеха (json)",
+    "Возможные значения статусов подписчика",
+    "Пример ответов в случае ошибки (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запросов",
+      "code": "https://mailganer.com/api/v2/emails/"
+    },
+    {
+      "label": "example_2",
+      "code": "https://mailganer.com/api/v2/emails/?email=test@example.com&source=49767"
+    },
+    {
+      "label": "example_3",
+      "code": "https://mailganer.com/api/v2/emails/?start_date=2024-10-10&end_date=2025-10-10"
+    },
+    {
+      "label": "example_4",
+      "code": "https://mailganer.com/api/v2/emails/?updated_at_start=2025-10-29&updated_at_end=2025-10-30"
+    },
+    {
+      "label": "example_5",
+      "code": "https://mailganer.com/api/v2/emails/?source=49767&last_activity_days=1"
+    },
+    {
+      "label": "Пример ответа в случае успеха (json)",
+      "code": "{\n \"next\": null,\n \"previous\": null,\n \"results\": [\n {\n \"id\": 321456817,\n \"mg_hash\": \"54ede83211718173f544604ebe5ad1867543b348185\",\n \"email\": \"test@gmail.com\",\n \"source\": 104363,\n \"email_status\": \"active\", // Active (Активен), not_available (Недоступен), unsubscribe (Отписался), wait_activated (Запрошено подтверждение), fixed (Исправлен) или spam (Адресат считает спамом)\n \"corrected_email\": null,\n \"name\": \"\",\n \"patronymic\": \"\",\n \"surname\": \"\",\n \"gender\": 0,\n \"birthday\": null,\n \"phone\": null,\n \"city\": null,\n \"country\": null,\n \"is_valid\": false,\n \"doi_is_delivery\": false,\n \"doi_is_open\": false,\n \"doi_is_click\": false,\n \"user_vars\": {\n \"date_glob\": null,\n \"glob\": 66432,\n \"globalnayatest1\": null,\n \"str_glob_2\": null\n },\n \"bunce_log\": null,\n \"tags\": [],\n \"categories\": [],\n \"created\": \"2026-03-03T16:06:29.724362\",\n \"modified\": \"2026-03-03T16:06:29.740263\"\n }\n ],\n \"count\": 1\n}"
+    },
+    {
+      "label": "Пример ответов в случае ошибки (json)",
+      "code": "{\r\n \"status\": \"invalid\",\r\n \"error\": {\r\n \"source\": [\"Not found site (source_id=497671) or site blocked\"],\r\n \"birthday\": [\"Неправильный формат date. Используйте формат: DD.MM.YYYY\"],\r\n ...\r\n }\r\n}"
+    },
+    {
+      "label": "example_8",
+      "code": "{\n \"status\": \"invalid\",\n \"error\": {\n \"end_date\": [\n \"Введите правильную дату.\"\n ]\n }\n}"
+    },
+    {
+      "label": "example_9",
+      "code": "{\n \"status\": \"invalid\",\n \"error\": {\n \"detail\": \"start_date cannot be later than end_date\"\n }\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:47.733735+00:00"
+}

@@ -1,0 +1,25 @@
+{
+  "path": "/documentation/trigger/meta",
+  "title": "Получение информации о триггере",
+  "category": "Работа с триггерами",
+  "url": "https://mailganer.com/documentation/trigger/meta",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/triggers/{{trigger_id}}/meta"
+  ],
+  "headings": [
+    "Список параметров ответа (json)",
+    "Пример ответа"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответа",
+      "code": "{\n \"name\": \"Trigger 1\",\n \"group\": null,\n \"topic\": \"Спасибо, что подписались на нас\",\n \"sites\": [\n 12345\n ],\n \"sites_names\": [\n \"mailganer.com\"\n ],\n \"event\": \"Подписчик подтвердил подписку\",\n \"sender_name\": \"Mailganer\",\n \"sender_email\": \"info@mailganer.com\",\n \"utm_campaign\": \"\",\n \"utm_source\": \"\",\n \"utm_medium\": \"\",\n \"user_utms\": \"custom_utm1=value1&custom_utm2=value2\",\n \"webversion\": \"https://mailganer.com/app/trigger/webversion/XXXXXXXXXXX/\",\n \"html_code\": \"<!DOCTYPE html PUBLIC \\\" ..... </html>\"\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:26.181180+00:00"
+}

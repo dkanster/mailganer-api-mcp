@@ -1,0 +1,28 @@
+{
+  "path": "/documentation/webhooks/mail_status",
+  "title": "Взаимодействие с письмом",
+  "category": "Вебхуки",
+  "url": "https://mailganer.com/documentation/webhooks/mail_status",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [],
+  "headings": [
+    "Список параметров запроса (form-values)",
+    "Пример запроса",
+    "Возможные значения переменной mail_type",
+    "Возможные значения переменной action"
+  ],
+  "paragraphs": [
+    "Результат приходит в виде query-параметров",
+    "Хук отправляется на каждое письмо массовой или триггерной рассылки, когда происходит любое взаимодействие с письмом."
+  ],
+  "code_examples": [
+    {
+      "label": "Пример запроса",
+      "code": "mail_id=999129235&public_id=166118134802&mail_type=mailing&action=1&timestamp=2022-08-22+15%3A18%3A44.960548&type=3&email=example%40mail.ru"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:37.387381+00:00"
+}

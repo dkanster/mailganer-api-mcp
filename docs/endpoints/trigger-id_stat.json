@@ -1,0 +1,32 @@
+{
+  "path": "/documentation/trigger/id_stat",
+  "title": "Получение статистики по отправке триггера",
+  "category": "Работа с триггерами",
+  "url": "https://mailganer.com/documentation/trigger/id_stat",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v1/trigger/id_stat/"
+  ],
+  "headings": [
+    "Список параметров запроса (form-data)",
+    "Пример запроса (form-data)",
+    "Список параметров ответа (json)",
+    "Список параметров массива result",
+    "Пример ответа"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса (form-data)",
+      "code": "{\r\n \"api_key\": \"***************\",\r\n \"id_list\": [\r\n 123, 456\r\n ]\r\n}"
+    },
+    {
+      "label": "Пример ответа",
+      "code": "{\r\n \"status\": 1,\r\n \"status_text\": \"success\",\r\n \"result\": [\r\n {\r\n \"id\": \"123\", // id отправки\r\n \"status\": \"Доставлено\", // статус письма\r\n },\r\n {\r\n \"id\": \"456\", // id отправки\r\n \"status\": \"Не доставлено\", // статус письма\r\n }\r\n ]\r\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:23.597077+00:00"
+}

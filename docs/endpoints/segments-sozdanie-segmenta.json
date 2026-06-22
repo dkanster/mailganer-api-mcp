@@ -1,0 +1,33 @@
+{
+  "path": "/documentation/segments/sozdanie-segmenta",
+  "title": "Создать сегмент",
+  "category": "Работа с сегментами",
+  "url": "https://mailganer.com/documentation/segments/sozdanie-segmenta",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/segments/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Пример запроса",
+    "Список значений поля condition",
+    "Список значений поля type_value",
+    "Список параметров ответа (json)",
+    "Пример ответа в случае успеха"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса",
+      "code": "{\r\n \"title\": \"Тест API\",\r\n \"conditions\": [\r\n {\r\n \"condition\": 6,\r\n \"type_value\": 4,\r\n \"value\": [\r\n \"Тег\"\r\n ]\r\n },\r\n {\r\n \"condition\": 5,\r\n \"type_value\": 4,\r\n \"value\": [\r\n \"51822\"\r\n ]\r\n }\r\n ]\r\n}"
+    },
+    {
+      "label": "Пример ответа в случае успеха",
+      "code": "{\r\n \"status\": \"success\",\r\n \"segment_url\": \"https://mailganer.com/app/segment/edit/19254/\",\r\n \"segment_id\": 19254\r\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:57.085233+00:00"
+}

@@ -1,0 +1,26 @@
+{
+  "path": "/documentation/sites/verify_domain",
+  "title": "Проверка верификации домена",
+  "category": "Работа со списками",
+  "url": "https://mailganer.com/documentation/sites/verify_domain",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/sites/verify_domain/"
+  ],
+  "headings": [
+    "Список параметров ответа (json)",
+    "Параметры ответа",
+    "Пример ответа"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответа",
+      "code": "{\r\n \"verification_status\": true,\r\n \"spf_status\": true,\r\n \"dmarc_status\": true,\r\n \"dkim_status\": true\r\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:55.771768+00:00"
+}

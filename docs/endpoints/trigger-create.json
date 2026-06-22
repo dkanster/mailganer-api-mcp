@@ -1,0 +1,37 @@
+{
+  "path": "/documentation/trigger/create",
+  "title": "Создание триггера",
+  "category": "Работа с триггерами",
+  "url": "https://mailganer.com/documentation/trigger/create",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/triggers/create/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Пример запроса cURL",
+    "Список параметров ответа (json)",
+    "Пример успешного ответа",
+    "Пример ответа с ошибкой",
+    "Возможные значения error"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса cURL",
+      "code": "curl --location 'https://mailganer.com/api/v2/triggers/create/' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: CodeRequest xxx' \\\n--data '{\n\"name\": \"Новый триггер\",\n\"theme\": \"Новый триггер\",\n\"sites\": [94321],\n\"html-content\": \"<p>Привет, это пример HTML-содержимого письма.</p>\",\n\"zip-content\": \"\"\n}'"
+    },
+    {
+      "label": "Пример успешного ответа",
+      "code": "{\n \"status\": 1,\n \"step1_url\": \"https://mailganer.com/app/trigger/step1/53223/\",\n \"status_text\": \"success\",\n \"trigger_id\": 16434\n}"
+    },
+    {
+      "label": "Пример ответа с ошибкой",
+      "code": "{\n \"status\": \"invalid\",\n \"error\": {\n \"name\": [\n \"Это поле обязательно.\"\n ]\n }\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:16.362659+00:00"
+}

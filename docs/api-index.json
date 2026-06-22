@@ -1,0 +1,869 @@
+{
+  "sources": {
+    "primary": "https://mailganer.com/sitemap.xml",
+    "fallback": "https://mailganer.com/documentation/api/",
+    "postman": "https://documenter.getpostman.com/view/23131434/VUxPvnhA"
+  },
+  "source": "https://mailganer.com/documentation/api/",
+  "synced_at": "2026-06-22T21:25:06.068373+00:00",
+  "base_api_url": "https://mailganer.com/api/",
+  "auth": {
+    "v1": "api_key in request body",
+    "v2": "Authorization: CodeRequest {{api_key}} header"
+  },
+  "rate_limit": "500 requests per minute (HTTP 429 on exceed)",
+  "pagination": {
+    "page_size": 25,
+    "fields": [
+      "count",
+      "results",
+      "next",
+      "previous"
+    ]
+  },
+  "categories": {
+    "API личного кабинета": [
+      {
+        "path": "/documentation/api/changelog",
+        "title": "Changelog",
+        "url": "https://mailganer.com/documentation/api/changelog",
+        "slug": "api-changelog"
+      }
+    ],
+    "Работа с подписчиками": [
+      {
+        "path": "/documentation/email/add",
+        "title": "Добавление подписчика",
+        "url": "https://mailganer.com/documentation/email/add",
+        "slug": "email-add"
+      },
+      {
+        "path": "/documentation/email/add/mass",
+        "title": "Массовое добавление подписчиков",
+        "url": "https://mailganer.com/documentation/email/add/mass",
+        "slug": "email-add-mass"
+      },
+      {
+        "path": "/documentation/email/update",
+        "title": "Обновление подписчика",
+        "url": "https://mailganer.com/documentation/email/update",
+        "slug": "email-update"
+      },
+      {
+        "path": "/documentation/email/update/mass",
+        "title": "Массовое обновление подписчиков",
+        "url": "https://mailganer.com/documentation/email/update/mass",
+        "slug": "email-update-mass"
+      },
+      {
+        "path": "/documentation/email/get",
+        "title": "Получение информации о подписчике",
+        "url": "https://mailganer.com/documentation/email/get",
+        "slug": "email-get"
+      },
+      {
+        "path": "/documentation/email/unsubscribe",
+        "title": "Отписка подписчика",
+        "url": "https://mailganer.com/documentation/email/unsubscribe",
+        "slug": "email-unsubscribe"
+      }
+    ],
+    "Валидация подписчиков": [
+      {
+        "path": "/documentation/email/validate",
+        "title": "Валидация подписчика",
+        "url": "https://mailganer.com/documentation/email/validate",
+        "slug": "email-validate"
+      }
+    ],
+    "Работа со списками": [
+      {
+        "path": "/documentation/sites/post",
+        "title": "Создать список",
+        "url": "https://mailganer.com/documentation/sites/post",
+        "slug": "sites-post"
+      },
+      {
+        "path": "/documentation/sites/get",
+        "title": "Получить массив списков",
+        "url": "https://mailganer.com/documentation/sites/get",
+        "slug": "sites-get"
+      },
+      {
+        "path": "/documentation/sites/set_webhook_url",
+        "title": "Задать ссылку на webhook",
+        "url": "https://mailganer.com/documentation/sites/set_webhook_url",
+        "slug": "sites-set_webhook_url"
+      },
+      {
+        "path": "/documentation/sites/verify_domain",
+        "title": "Проверка верификации домена",
+        "url": "https://mailganer.com/documentation/sites/verify_domain",
+        "slug": "sites-verify_domain"
+      }
+    ],
+    "Работа с сегментами": [
+      {
+        "path": "/documentation/segments/sozdanie-segmenta",
+        "title": "Создать сегмент",
+        "url": "https://mailganer.com/documentation/segments/sozdanie-segmenta",
+        "slug": "segments-sozdanie-segmenta"
+      },
+      {
+        "path": "/documentation/segments/send_trigger",
+        "title": "Отправка триггера на сегмент",
+        "url": "https://mailganer.com/documentation/segments/send_trigger",
+        "slug": "segments-send_trigger"
+      }
+    ],
+    "Работа с переменными": [
+      {
+        "path": "/documentation/user_var/add",
+        "title": "Добавление пользовательской переменной",
+        "url": "https://mailganer.com/documentation/user_var/add",
+        "slug": "user_var-add"
+      },
+      {
+        "path": "/documentation/user_var/get",
+        "title": "Получить список пользовательских переменных",
+        "url": "https://mailganer.com/documentation/user_var/get",
+        "slug": "user_var-get"
+      }
+    ],
+    "Работа с тегами": [
+      {
+        "path": "/documentation/tags/add",
+        "title": "Добавление тега",
+        "url": "https://mailganer.com/documentation/tags/add",
+        "slug": "tags-add"
+      },
+      {
+        "path": "/documentation/tags/get",
+        "title": "Получить список тегов",
+        "url": "https://mailganer.com/documentation/tags/get",
+        "slug": "tags-get"
+      }
+    ],
+    "Работа с рассылками": [
+      {
+        "path": "/documentation/mailing/create",
+        "title": "Создание рассылки",
+        "url": "https://mailganer.com/documentation/mailing/create",
+        "slug": "mailing-create"
+      },
+      {
+        "path": "/documentation/mailing/send",
+        "title": "Отправка рассылки",
+        "url": "https://mailganer.com/documentation/mailing/send",
+        "slug": "mailing-send"
+      },
+      {
+        "path": "/documentation/mailing/get",
+        "title": "Получение информации о рассылке",
+        "url": "https://mailganer.com/documentation/mailing/get",
+        "slug": "mailing-get"
+      },
+      {
+        "path": "/documentation/mailing/get_id",
+        "title": "Получить список рассылок",
+        "url": "https://mailganer.com/documentation/mailing/get_id",
+        "slug": "mailing-get_id"
+      },
+      {
+        "path": "/documentation/mailing/stat",
+        "title": "Статистика по рассылке",
+        "url": "https://mailganer.com/documentation/mailing/stat",
+        "slug": "mailing-stat"
+      }
+    ],
+    "Работа с триггерами": [
+      {
+        "path": "/documentation/trigger/create",
+        "title": "Создание триггера",
+        "url": "https://mailganer.com/documentation/trigger/create",
+        "slug": "trigger-create"
+      },
+      {
+        "path": "/documentation/trigger/send/v2",
+        "title": "Отправка триггера",
+        "url": "https://mailganer.com/documentation/trigger/send/v2",
+        "slug": "trigger-send-v2"
+      },
+      {
+        "path": "/documentation/trigger/stat/v2",
+        "title": "Статистика триггера",
+        "url": "https://mailganer.com/documentation/trigger/stat/v2",
+        "slug": "trigger-stat-v2"
+      },
+      {
+        "path": "/documentation/trigger/id_stat",
+        "title": "Статистики по отправке триггера",
+        "url": "https://mailganer.com/documentation/trigger/id_stat",
+        "slug": "trigger-id_stat"
+      },
+      {
+        "path": "/documentation/triggers",
+        "title": "Получить список триггеров",
+        "url": "https://mailganer.com/documentation/triggers",
+        "slug": "triggers"
+      },
+      {
+        "path": "/documentation/trigger/meta",
+        "title": "Информация о триггере",
+        "url": "https://mailganer.com/documentation/trigger/meta",
+        "slug": "trigger-meta"
+      },
+      {
+        "path": "/documentation/trigger/emails",
+        "title": "История имейлов",
+        "url": "https://mailganer.com/documentation/trigger/emails",
+        "slug": "trigger-emails"
+      }
+    ],
+    "Товарные рекомендации": [
+      {
+        "path": "/documentation/recomend-layout-guide",
+        "title": "Триггеры с товарными рекомендациями",
+        "url": "https://mailganer.com/documentation/recomend-layout-guide",
+        "slug": "recomend-layout-guide"
+      },
+      {
+        "path": "/documentation/recomend/orders",
+        "title": "Передача оформленных заказов",
+        "url": "https://mailganer.com/documentation/recomend/orders",
+        "slug": "recomend-orders"
+      },
+      {
+        "path": "/documentation/recomend/rfm_segment",
+        "title": "Передача RFM-сегмента",
+        "url": "https://mailganer.com/documentation/recomend/rfm_segment",
+        "slug": "recomend-rfm_segment"
+      }
+    ],
+    "Вебхуки": [
+      {
+        "path": "/documentation/webhooks/email_status",
+        "title": "Изменение статуса подписчика",
+        "url": "https://mailganer.com/documentation/webhooks/email_status",
+        "slug": "webhooks-email_status"
+      },
+      {
+        "path": "/documentation/webhooks/email_meta",
+        "title": "Изменение данных о подписчике",
+        "url": "https://mailganer.com/documentation/webhooks/email_meta",
+        "slug": "webhooks-email_meta"
+      },
+      {
+        "path": "/documentation/webhooks/mail_status",
+        "title": "Взаимодействие с письмом",
+        "url": "https://mailganer.com/documentation/webhooks/mail_status",
+        "slug": "webhooks-mail_status"
+      },
+      {
+        "path": "/documentation/webhooks/trigger_event",
+        "title": "Срабатывание события в триггере",
+        "url": "https://mailganer.com/documentation/webhooks/trigger_event",
+        "slug": "webhooks-trigger_event"
+      }
+    ],
+    "Постбек": [
+      {
+        "path": "/documentation/postback",
+        "title": "Передача конверсий по рассылкам",
+        "url": "https://mailganer.com/documentation/postback",
+        "slug": "postback"
+      },
+      {
+        "path": "/documentation/variables_on_click",
+        "title": "Обновление переменой по ссылке",
+        "url": "https://mailganer.com/documentation/variables_on_click",
+        "slug": "variables_on_click"
+      }
+    ],
+    "Работа с пользователями": [
+      {
+        "path": "/documentation/users",
+        "title": "Создать пользователя",
+        "url": "https://mailganer.com/documentation/users",
+        "slug": "users"
+      },
+      {
+        "path": "/documentation/auth",
+        "title": "Получить токен пользователя",
+        "url": "https://mailganer.com/documentation/auth",
+        "slug": "auth"
+      },
+      {
+        "path": "/documentation/users/payment",
+        "title": "Получить ссылку на пополнение баланса",
+        "url": "https://mailganer.com/documentation/users/payment",
+        "slug": "users-payment"
+      },
+      {
+        "path": "/documentation/users/balance",
+        "title": "Получить баланс",
+        "url": "https://mailganer.com/documentation/users/balance",
+        "slug": "users-balance"
+      }
+    ],
+    "Шаблоны": [
+      {
+        "path": "/documentation/templates",
+        "title": "Получить HTML-верстку шаблона",
+        "url": "https://mailganer.com/documentation/templates",
+        "slug": "templates"
+      }
+    ],
+    "Отчеты": [
+      {
+        "path": "/documentation/task/create",
+        "title": "Создать задачу на формирование отчета",
+        "url": "https://mailganer.com/documentation/task/create",
+        "slug": "task-create"
+      },
+      {
+        "path": "/documentation/task/status",
+        "title": "Получение статуса задачи",
+        "url": "https://mailganer.com/documentation/task/status",
+        "slug": "task-status"
+      },
+      {
+        "path": "/documentation/task/download",
+        "title": "Скачивание готового файла",
+        "url": "https://mailganer.com/documentation/task/download",
+        "slug": "task-download"
+      }
+    ]
+  },
+  "endpoints": [
+    {
+      "slug": "documentation",
+      "path": "/documentation",
+      "title": "Документация по API личного кабинета для Mailganer",
+      "category": "Sitemap",
+      "source": "sitemap",
+      "endpoints": [],
+      "file": "endpoints/documentation.json"
+    },
+    {
+      "slug": "api-changelog",
+      "path": "/documentation/api/changelog",
+      "title": "Changelog Mailganer",
+      "category": "API личного кабинета",
+      "source": "menu",
+      "endpoints": [],
+      "file": "endpoints/api-changelog.json"
+    },
+    {
+      "slug": "email-add",
+      "path": "/documentation/email/add",
+      "title": "Добавление нового подписчика",
+      "category": "Работа с подписчиками",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/emails/"
+      ],
+      "file": "endpoints/email-add.json"
+    },
+    {
+      "slug": "email-add-mass",
+      "path": "/documentation/email/add/mass",
+      "title": "Массовое добавление подписчиков",
+      "category": "Работа с подписчиками",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/emails/"
+      ],
+      "file": "endpoints/email-add-mass.json"
+    },
+    {
+      "slug": "email-update",
+      "path": "/documentation/email/update",
+      "title": "Обновление информации о подписчике",
+      "category": "Работа с подписчиками",
+      "source": "menu",
+      "endpoints": [
+        "PATCH https://mailganer.com/api/v2/emails/update/"
+      ],
+      "file": "endpoints/email-update.json"
+    },
+    {
+      "slug": "email-update-mass",
+      "path": "/documentation/email/update/mass",
+      "title": "Массовое обновление подписчиков",
+      "category": "Работа с подписчиками",
+      "source": "menu",
+      "endpoints": [
+        "PATCH https://mailganer.com/api/v2/emails/mass/"
+      ],
+      "file": "endpoints/email-update-mass.json"
+    },
+    {
+      "slug": "email-get",
+      "path": "/documentation/email/get",
+      "title": "Получение информации о подписчике",
+      "category": "Работа с подписчиками",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/emails/"
+      ],
+      "file": "endpoints/email-get.json"
+    },
+    {
+      "slug": "email-unsubscribe",
+      "path": "/documentation/email/unsubscribe",
+      "title": "Отписка подписчика",
+      "category": "Работа с подписчиками",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/emails/unsubscribe/"
+      ],
+      "file": "endpoints/email-unsubscribe.json"
+    },
+    {
+      "slug": "email-validate",
+      "path": "/documentation/email/validate",
+      "title": "Валидация подписчика",
+      "category": "Валидация подписчиков",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/emails/validate/"
+      ],
+      "file": "endpoints/email-validate.json"
+    },
+    {
+      "slug": "sites-post",
+      "path": "/documentation/sites/post",
+      "title": "Создать список",
+      "category": "Работа со списками",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/sites/"
+      ],
+      "file": "endpoints/sites-post.json"
+    },
+    {
+      "slug": "sites-get",
+      "path": "/documentation/sites/get",
+      "title": "Получить массив списков",
+      "category": "Работа со списками",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/sites/"
+      ],
+      "file": "endpoints/sites-get.json"
+    },
+    {
+      "slug": "sites-set_webhook_url",
+      "path": "/documentation/sites/set_webhook_url",
+      "title": "Задать ссылку на webhook",
+      "category": "Работа со списками",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/sites/set_webhook"
+      ],
+      "file": "endpoints/sites-set_webhook_url.json"
+    },
+    {
+      "slug": "sites-verify_domain",
+      "path": "/documentation/sites/verify_domain",
+      "title": "Проверка верификации домена",
+      "category": "Работа со списками",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/sites/verify_domain/"
+      ],
+      "file": "endpoints/sites-verify_domain.json"
+    },
+    {
+      "slug": "segments-sozdanie-segmenta",
+      "path": "/documentation/segments/sozdanie-segmenta",
+      "title": "Создать сегмент",
+      "category": "Работа с сегментами",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/segments/"
+      ],
+      "file": "endpoints/segments-sozdanie-segmenta.json"
+    },
+    {
+      "slug": "segments-send_trigger",
+      "path": "/documentation/segments/send_trigger",
+      "title": "Отправка триггера на сегмент",
+      "category": "Работа с сегментами",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/segments/{segment_id}/send_trigger/",
+        "POST https://mailganer.com/api/v2/segments/27645611/send_trigger/",
+        "POST https://mailganer.com/api/v2/segments/2734511/send_trigger/"
+      ],
+      "file": "endpoints/segments-send_trigger.json"
+    },
+    {
+      "slug": "user_var-add",
+      "path": "/documentation/user_var/add",
+      "title": "Добавление пользовательской переменной",
+      "category": "Работа с переменными",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/user_vars/"
+      ],
+      "file": "endpoints/user_var-add.json"
+    },
+    {
+      "slug": "user_var-get",
+      "path": "/documentation/user_var/get",
+      "title": "Получить список пользовательских переменных",
+      "category": "Работа с переменными",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/user_vars/"
+      ],
+      "file": "endpoints/user_var-get.json"
+    },
+    {
+      "slug": "tags-add",
+      "path": "/documentation/tags/add",
+      "title": "Добавление тега",
+      "category": "Работа с тегами",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/tags/"
+      ],
+      "file": "endpoints/tags-add.json"
+    },
+    {
+      "slug": "tags-get",
+      "path": "/documentation/tags/get",
+      "title": "Получить список тегов",
+      "category": "Работа с тегами",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/tags/"
+      ],
+      "file": "endpoints/tags-get.json"
+    },
+    {
+      "slug": "mailing-create",
+      "path": "/documentation/mailing/create",
+      "title": "Создание рассылки",
+      "category": "Работа с рассылками",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v1/mailing/create/"
+      ],
+      "file": "endpoints/mailing-create.json"
+    },
+    {
+      "slug": "mailing-send",
+      "path": "/documentation/mailing/send",
+      "title": "Отправка рассылки",
+      "category": "Работа с рассылками",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/mailing/send/"
+      ],
+      "file": "endpoints/mailing-send.json"
+    },
+    {
+      "slug": "mailing-get",
+      "path": "/documentation/mailing/get",
+      "title": "Получение информации о рассылке",
+      "category": "Работа с рассылками",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/mailing/{{public_id}}"
+      ],
+      "file": "endpoints/mailing-get.json"
+    },
+    {
+      "slug": "mailing-get_id",
+      "path": "/documentation/mailing/get_id",
+      "title": "Получить список рассылок",
+      "category": "Работа с рассылками",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/mailing/"
+      ],
+      "file": "endpoints/mailing-get_id.json"
+    },
+    {
+      "slug": "mailing-stat",
+      "path": "/documentation/mailing/stat",
+      "title": "Статистика по рассылке",
+      "category": "Работа с рассылками",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/mailing/{{public_id}}/stat/"
+      ],
+      "file": "endpoints/mailing-stat.json"
+    },
+    {
+      "slug": "trigger-create",
+      "path": "/documentation/trigger/create",
+      "title": "Создание триггера",
+      "category": "Работа с триггерами",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/triggers/create/"
+      ],
+      "file": "endpoints/trigger-create.json"
+    },
+    {
+      "slug": "trigger-send-v2",
+      "path": "/documentation/trigger/send/v2",
+      "title": "Отправка триггера",
+      "category": "Работа с триггерами",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/triggers/{{trigger_id}}/send/"
+      ],
+      "file": "endpoints/trigger-send-v2.json"
+    },
+    {
+      "slug": "trigger-stat-v2",
+      "path": "/documentation/trigger/stat/v2",
+      "title": "Статистика по триггеру",
+      "category": "Работа с триггерами",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/triggers/{{trigger_id}}/stat/"
+      ],
+      "file": "endpoints/trigger-stat-v2.json"
+    },
+    {
+      "slug": "trigger-id_stat",
+      "path": "/documentation/trigger/id_stat",
+      "title": "Получение статистики по отправке триггера",
+      "category": "Работа с триггерами",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v1/trigger/id_stat/"
+      ],
+      "file": "endpoints/trigger-id_stat.json"
+    },
+    {
+      "slug": "triggers",
+      "path": "/documentation/triggers",
+      "title": "Получить список триггеров",
+      "category": "Работа с триггерами",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/triggers/"
+      ],
+      "file": "endpoints/triggers.json"
+    },
+    {
+      "slug": "trigger-meta",
+      "path": "/documentation/trigger/meta",
+      "title": "Получение информации о триггере",
+      "category": "Работа с триггерами",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/triggers/{{trigger_id}}/meta"
+      ],
+      "file": "endpoints/trigger-meta.json"
+    },
+    {
+      "slug": "trigger-emails",
+      "path": "/documentation/trigger/emails",
+      "title": "История имейлов по триггеру",
+      "category": "Работа с триггерами",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/triggers/{{trigger_id}}/emails/"
+      ],
+      "file": "endpoints/trigger-emails.json"
+    },
+    {
+      "slug": "recomend-layout-guide",
+      "path": "/documentation/recomend-layout-guide",
+      "title": "Инструкция по подготовке вёрстки триггера с блоком рекомендаций",
+      "category": "Товарные рекомендации",
+      "source": "menu",
+      "endpoints": [],
+      "file": "endpoints/recomend-layout-guide.json"
+    },
+    {
+      "slug": "recomend-orders",
+      "path": "/documentation/recomend/orders",
+      "title": "Передача оформленных заказов",
+      "category": "Товарные рекомендации",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v1/recomend/orders/"
+      ],
+      "file": "endpoints/recomend-orders.json"
+    },
+    {
+      "slug": "recomend-rfm_segment",
+      "path": "/documentation/recomend/rfm_segment",
+      "title": "Передача RFM-сегмента",
+      "category": "Товарные рекомендации",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/recomend/orders/"
+      ],
+      "file": "endpoints/recomend-rfm_segment.json"
+    },
+    {
+      "slug": "webhooks-email_status",
+      "path": "/documentation/webhooks/email_status",
+      "title": "Изменение статуса подписчика",
+      "category": "Вебхуки",
+      "source": "menu",
+      "endpoints": [],
+      "file": "endpoints/webhooks-email_status.json"
+    },
+    {
+      "slug": "webhooks-email_meta",
+      "path": "/documentation/webhooks/email_meta",
+      "title": "Изменение данных о подписчике",
+      "category": "Вебхуки",
+      "source": "menu",
+      "endpoints": [],
+      "file": "endpoints/webhooks-email_meta.json"
+    },
+    {
+      "slug": "webhooks-mail_status",
+      "path": "/documentation/webhooks/mail_status",
+      "title": "Взаимодействие с письмом",
+      "category": "Вебхуки",
+      "source": "menu",
+      "endpoints": [],
+      "file": "endpoints/webhooks-mail_status.json"
+    },
+    {
+      "slug": "webhooks-trigger_event",
+      "path": "/documentation/webhooks/trigger_event",
+      "title": "Срабатывание события в триггере",
+      "category": "Вебхуки",
+      "source": "menu",
+      "endpoints": [],
+      "file": "endpoints/webhooks-trigger_event.json"
+    },
+    {
+      "slug": "postback",
+      "path": "/documentation/postback",
+      "title": "Передача конверсий по рассылкам",
+      "category": "Постбек",
+      "source": "menu",
+      "endpoints": [],
+      "file": "endpoints/postback.json"
+    },
+    {
+      "slug": "variables_on_click",
+      "path": "/documentation/variables_on_click",
+      "title": "Обновление переменной по ссылке",
+      "category": "Постбек",
+      "source": "menu",
+      "endpoints": [],
+      "file": "endpoints/variables_on_click.json"
+    },
+    {
+      "slug": "users",
+      "path": "/documentation/users",
+      "title": "Создать пользователя",
+      "category": "Работа с пользователями",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/users/"
+      ],
+      "file": "endpoints/users.json"
+    },
+    {
+      "slug": "auth",
+      "path": "/documentation/auth",
+      "title": "Получение токена",
+      "category": "Работа с пользователями",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/auth/"
+      ],
+      "file": "endpoints/auth.json"
+    },
+    {
+      "slug": "users-payment",
+      "path": "/documentation/users/payment",
+      "title": "Получить ссылку на пополнение баланса",
+      "category": "Работа с пользователями",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/pay/"
+      ],
+      "file": "endpoints/users-payment.json"
+    },
+    {
+      "slug": "users-balance",
+      "path": "/documentation/users/balance",
+      "title": "Получить баланс",
+      "category": "Работа с пользователями",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/users/get_balance/"
+      ],
+      "file": "endpoints/users-balance.json"
+    },
+    {
+      "slug": "templates",
+      "path": "/documentation/templates",
+      "title": "Получение HTML-вёрстки шаблона",
+      "category": "Шаблоны",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/template/{{template_id}}/"
+      ],
+      "file": "endpoints/templates.json"
+    },
+    {
+      "slug": "task-create",
+      "path": "/documentation/task/create",
+      "title": "Создать задачу на формирование отчета",
+      "category": "Отчеты",
+      "source": "menu",
+      "endpoints": [
+        "POST https://mailganer.com/api/v2/tasks/emails_report"
+      ],
+      "file": "endpoints/task-create.json"
+    },
+    {
+      "slug": "task-status",
+      "path": "/documentation/task/status",
+      "title": "Получение статуса задачи",
+      "category": "Отчеты",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/tasks/{{task_id}}"
+      ],
+      "file": "endpoints/task-status.json"
+    },
+    {
+      "slug": "task-download",
+      "path": "/documentation/task/download",
+      "title": "Скачивание готового файла",
+      "category": "Отчеты",
+      "source": "menu",
+      "endpoints": [
+        "GET https://mailganer.com/api/v2/tasks/{{task_id}}/download_file"
+      ],
+      "file": "endpoints/task-download.json"
+    }
+  ],
+  "failures": [],
+  "sitemap": {
+    "url": "https://mailganer.com/sitemap.xml",
+    "pages_total": 1,
+    "error": null,
+    "file": "sitemap-pages.json"
+  },
+  "stats": {
+    "categories": 15,
+    "pages_total": 48,
+    "pages_scraped": 48,
+    "pages_failed": 0,
+    "pages_from_sitemap": 1,
+    "pages_from_menu": 47,
+    "pages_new": 1,
+    "pages_previously_scraped": 47
+  }
+}

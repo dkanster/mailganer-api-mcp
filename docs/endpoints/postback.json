@@ -1,0 +1,21 @@
+{
+  "path": "/documentation/postback",
+  "title": "Передача конверсий по рассылкам",
+  "category": "Постбек",
+  "url": "https://mailganer.com/documentation/postback",
+  "http_methods": [],
+  "endpoints": [],
+  "headings": [
+    "Список параметров запроса",
+    "Пример url"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример url",
+      "code": "http://postback.mailganer.com/v1/?mailing_id={{public_id}}&sum=1000&currency=RUB&offer=order&email_hash={{email_hash}}&goto_url=domain.com"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:43.616187+00:00"
+}

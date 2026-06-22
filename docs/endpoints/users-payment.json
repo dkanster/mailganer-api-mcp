@@ -1,0 +1,21 @@
+{
+  "path": "/documentation/users/payment",
+  "title": "Получить ссылку на пополнение баланса",
+  "category": "Работа с пользователями",
+  "url": "https://mailganer.com/documentation/users/payment",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/pay/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Состав массива requisites (json)",
+    "Список параметров ответа (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:52.445433+00:00"
+}

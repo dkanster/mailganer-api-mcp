@@ -1,0 +1,42 @@
+{
+  "path": "/documentation/email/add/mass",
+  "title": "Массовое добавление подписчиков",
+  "category": "Работа с подписчиками",
+  "url": "https://mailganer.com/documentation/email/add/mass",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [
+    "POST https://mailganer.com/api/v2/emails/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Пример запроса (json)",
+    "Список параметров ответа в случае успеха (json)",
+    "Возможные значения статусов подписчика",
+    "Пример ответа в случае успеха (json)",
+    "Пример ответа в случае ошибки (json)",
+    "Детализированный ответ (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса (json)",
+      "code": "[\n {\n \"email\": \"test@example.com\",\n \"source\": 85760,\n \"phone\": \"+79123456789\",\n \"name\": \"Федор\",\n \"patronymic\": \"Федорович\",\n \"surname\": \"Федоров\",\n \"gender\": 1,\n \"birthday\": \"01.01.1988\",\n \"add_tag\": \"метка1\",\n \"delete_tag\": \"метка2\",\n \"add_category\": \"Категория1\",\n \"delete_category\": \"Категория2\",\n \"user_vars\": {\n \"text\": \"Текст\",\n \"integer\": 12,\n \"float\": 12.5,\n \"date\": \"01.01.1971\",\n \"dateTime\": \"01.01.1971 11:00:00\",\n \"boolean\": true,\n \"goods\": [\n {\"name\": \"Apple iPhone X\", \"price\": 54000},\n {\"name\": \"Samsung Galaxy S21\", \"price\": 64000}\n ]\n }\n },\n {\n \"email\": \"test2@example.com\",\n \"source\": 85760,\n \"phone\": \"+79123456789\",\n \"name\": \"Иван\",\n \"patronymic\": \"Иванович\",\n \"surname\": \"Иванов\",\n \"gender\": 1,\n \"birthday\": \"01.01.1988\",\n \"add_tag\": \"метка1\",\n \"delete_tag\": \"метка2\",\n \"add_category\": \"Категория1\",\n \"delete_category\": \"Категория2\",\n \"user_vars\": {\n \"text\": \"Текст\",\n \"integer\": 12,\n \"float\": 12.5,\n \"date\": \"01.01.1971\",\n \"dateTime\": \"01.01.1971 11:00:00\",\n \"boolean\": true,\n \"goods\": [\n {\"name\": \"Apple iPhone X\", \"price\": 54000},\n {\"name\": \"Samsung Galaxy S21\", \"price\": 64000}\n ]\n }\n }\n]"
+    },
+    {
+      "label": "Пример ответа в случае успеха (json)",
+      "code": "[\r\n {\r\n \"id\": 45764030,\r\n \"mg_hash\": \"100330457640309ee63894dced455d110aebcb2b\",\r\n \"in_base\": true,\r\n \"email_status\": \"active\"\r\n },\r\n {\r\n \"id\": 45764025,\r\n \"mg_hash\": \"e031e245764025457cb340b96fd670419cf95bb2\",\r\n \"in_base\": false,\r\n \"email_status\": \"wait_activated\"\r\n }\r\n]"
+    },
+    {
+      "label": "Пример ответа в случае ошибки (json)",
+      "code": "{\r\n \"status\": \"invalid\",\r\n \"error\": [\r\n {},\r\n {\r\n \"source\": [\"Not found site (source_id=497672) or site blocked\"]\r\n }\r\n ]\r\n}"
+    },
+    {
+      "label": "example_4",
+      "code": "{\n \"successful\": [\n {\n \"id\": 2803521837,\n \"mg_hash\": \"58dbe0280456837f2062d3be345242232d9d9cc402511\",\n \"email\": \"test1@example.com\",\n \"source\": 88546,\n \"email_status\": \"wait_activated\",\n \"corrected_email\": \"test1@example.com\",\n \"name\": \"Федор\",\n \"patronymic\": \"Федорович\",\n \"surname\": \"Федоров\",\n \"gender\": 1,\n \"birthday\": \"01.01.1988\",\n \"phone\": null,\n \"city\": null,\n \"country\": null,\n \"is_valid\": false,\n \"doi_is_delivery\": false,\n \"doi_is_open\": false,\n \"doi_is_click\": false,\n \"user_vars\": {},\n \"bunce_log\": null,\n \"tags\": [],\n \"categories\": []\n },\n {\n \"id\": 2803521837,\n \"mg_hash\": \"58dbe0280456837f2062d3be345242232d9d9cc402511\",\n \"email\": \"test2@example.com\",\n \"source\": 88523,\n \"email_status\": \"not_available\",\n \"corrected_email\": null,\n \"name\": \"Пётр\",\n \"patronymic\": \"Петрович\",\n \"surname\": \"Петров\",\n \"gender\": 1,\n \"birthday\": \"01.01.1988\",\n \"phone\": null,\n \"city\": null,\n \"country\": null,\n \"is_valid\": false,\n \"doi_is_delivery\": false,\n \"doi_is_open\": false,\n \"doi_is_click\": false,\n \"user_vars\": {},\n \"bunce_log\": \"User stop list email hash: 04665f235633226bc59ca14ab38bf167ec9ff5941\",\n \"tags\": [],\n \"categories\": []\n }\n ],\n \"failed\": [\n {\n \"errors\": {\n \"source\": [\n \"Not found site (source=[51488]) or site blocked\"\n ]\n },\n \"email\": \"test3@example.com\"\n }\n ]\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:43.216880+00:00"
+}

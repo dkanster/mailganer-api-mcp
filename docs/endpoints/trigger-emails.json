@@ -1,0 +1,32 @@
+{
+  "path": "/documentation/trigger/emails",
+  "title": "История имейлов по триггеру",
+  "category": "Работа с триггерами",
+  "url": "https://mailganer.com/documentation/trigger/emails",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/triggers/{{trigger_id}}/emails/"
+  ],
+  "headings": [
+    "Список параметров запроса (url-query)",
+    "Пример запроса",
+    "Пример ответа",
+    "Список параметров ответа (json)",
+    "Список параметров массива results"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса",
+      "code": "curl --location 'https://mailganer.com/api/v2/triggers/1111/emails/?start_date=2024-08-01&end_date=2024-08-03' \\\n--header 'Authorization: CodeRequest XXX'"
+    },
+    {
+      "label": "Пример ответа",
+      "code": "{\n \"count\": 562458,\n \"next\": \"https://mailganer.com/api/v2/triggers/1111/emails/?end_date=2024-08-30&page=2&start_date=2024-08-01\",\n \"previous\": null,\n \"results\": [\n {\n \"id\": 213250918,\n \"queue_date\": \"2024-08-30T10:21:48.397765\",\n \"sended\": null,\n \"email\": \"example1@mail.com\",\n \"email_id\": \"1234567890\",\n \"mg_hash\": \"XXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n \"source_id\": \"12345\",\n \"status\": 0,\n \"action\": \"Не открыл\"\n },\n {\n \"id\": 213250910,\n \"queue_date\": \"2024-08-30T10:21:37.976559\",\n \"sended\": null,\n \"email\": \"example1@mail.com\",\n \"email_id\": \"1234567891\",\n \"mg_hash\": \"XXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n \"source_id\": \"12345\",\n \"status\": 0,\n \"action\": \"Не открыл\"\n },\n]\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:27.971644+00:00"
+}

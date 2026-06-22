@@ -1,0 +1,19 @@
+{
+  "path": "/documentation/webhooks/email_meta",
+  "title": "Изменение данных о подписчике",
+  "category": "Вебхуки",
+  "url": "https://mailganer.com/documentation/webhooks/email_meta",
+  "http_methods": [
+    "POST"
+  ],
+  "endpoints": [],
+  "headings": [
+    "Список параметров запроса (form-values)"
+  ],
+  "paragraphs": [
+    "Хук отправляется каждый раз когда изменяется какое либо поле в карточке подписчика."
+  ],
+  "code_examples": [],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:34.677428+00:00"
+}

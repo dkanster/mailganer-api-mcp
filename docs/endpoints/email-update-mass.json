@@ -1,0 +1,35 @@
+{
+  "path": "/documentation/email/update/mass",
+  "title": "Массовое обновление подписчиков",
+  "category": "Работа с подписчиками",
+  "url": "https://mailganer.com/documentation/email/update/mass",
+  "http_methods": [
+    "PATCH"
+  ],
+  "endpoints": [
+    "PATCH https://mailganer.com/api/v2/emails/mass/"
+  ],
+  "headings": [
+    "Список параметров запроса (json)",
+    "Пример запроса (json)",
+    "Пример ответа в случае успеха (json)",
+    "Пример ответа в случае ошибки (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса (json)",
+      "code": "{\r\n \"email\": \"test@example.com\",\r\n \"source\": 49767, // [49767,50145] - для добавления в несколько списков, all - для добавления во все списки\r\n \"phone\": \"+79123456789\",\r\n \"name\": \"Федор\",\r\n \"patronymic\": \"Федорович\",\r\n \"surname\": \"Федоров\",\r\n \"gender\": 1,\r\n \"birthday\": \"01.01.1988\",\r\n \"add_tag\": \"метка1\",\r\n \"delete_tag\": \"метка2\",\r\n \"add_category\": \"Категория1\",\r\n \"delete_category\": \"Категория2\",\r\n \"user_vars\": {\r\n \"text\": \"Текст\", // строковый тип переменной\r\n \"integer\": 12, // целое число\r\n \"float\": 12.5, // вещественное число\r\n \"date\": \"01.01.1971\", // дата\r\n \"dateTime\": \"01.01.1971 11:00:00\", // дата и время\r\n \"boolean\": true, // логический\r\n \"goods\": [ // json-массив\r\n {\"name\": \"Apple iPhone X\", \"price\": 54000}, \r\n {\"name\": \"Samsung Galaxy S21\", \"price\": 64000}\r\n ]\r\n }\r\n}"
+    },
+    {
+      "label": "Пример ответа в случае успеха (json)",
+      "code": "[\r\n {\r\n \"id\": 45764030,\r\n \"mg_hash\": \"100330457640309ee63894dced455d110aebcb2b\"\r\n },\r\n {\r\n \"id\": 45764025,\r\n \"mg_hash\": \"e031e245764025457cb340b96fd670419cf95bb2\"\r\n }\r\n]"
+    },
+    {
+      "label": "Пример ответа в случае ошибки (json)",
+      "code": "{\r\n \"status\": \"invalid\",\r\n \"error\": [\r\n {},\r\n {\r\n \"source\": [\"Not found site (source_id=497672) or site blocked\"]\r\n }\r\n ]\r\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:23:46.228547+00:00"
+}

@@ -1,0 +1,21 @@
+{
+  "path": "/documentation/variables_on_click",
+  "title": "Обновление переменной по ссылке",
+  "category": "Постбек",
+  "url": "https://mailganer.com/documentation/variables_on_click",
+  "http_methods": [],
+  "endpoints": [],
+  "headings": [
+    "Список параметров запроса",
+    "Пример url"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример url",
+      "code": "https://postback.mailganer.com/v1/?email_hash={{email_hash}}&mailing_id={{public_id}}&nps=10&goto_url=https%3A%2F%2Fdomain.com%2F%3Futm_source%3Dsource%26clickid%3D%{{clickid}}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:46.506155+00:00"
+}

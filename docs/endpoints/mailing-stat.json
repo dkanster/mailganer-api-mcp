@@ -1,0 +1,31 @@
+{
+  "path": "/documentation/mailing/stat",
+  "title": "Статистика по рассылке",
+  "category": "Работа с рассылками",
+  "url": "https://mailganer.com/documentation/mailing/stat",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/mailing/{{public_id}}/stat/"
+  ],
+  "headings": [
+    "Список параметров запроса (url-query)",
+    "Пример запроса",
+    "Пример ответа",
+    "Список параметров ответа (json)"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример запроса",
+      "code": "curl --location 'https://mailganer.com/api/v2/mailing/459562475965/stat/?start_date=2023-12-11&end_date=2023-12-13' \\\n--header 'Authorization: CodeRequest XXX'"
+    },
+    {
+      "label": "Пример ответа",
+      "code": "[\n {\n \"2024-06-14\": {\n \"count_sent\": 4907,\n \"count_delivery\": 3683,\n \"count_spam\": 0,\n \"count_unsubscribe\": 0,\n \"count_click\": 0,\n \"count_open\": 0\n }\n },\n {\n \"2024-06-15\": {\n \"count_sent\": 4907,\n \"count_delivery\": 3683,\n \"count_spam\": 0,\n \"count_unsubscribe\": 0,\n \"count_click\": 0,\n \"count_open\": 0\n }\n },\n {\n \"2024-06-16\": {\n \"count_sent\": 4907,\n \"count_delivery\": 3683,\n \"count_spam\": 0,\n \"count_unsubscribe\": 0,\n \"count_click\": 0,\n \"count_open\": 0\n }\n },\n {\n \"2024-06-17\": {\n \"count_sent\": 4907,\n \"count_delivery\": 3683,\n \"count_spam\": 0,\n \"count_unsubscribe\": 0,\n \"count_click\": 0,\n \"count_open\": 0\n }\n },\n {\n \"2024-06-18\": {\n \"count_sent\": 4907,\n \"count_delivery\": 3683,\n \"count_spam\": 0,\n \"count_unsubscribe\": 0,\n \"count_click\": 0,\n \"count_open\": 0\n }\n },\n {\n \"summary\": {\n \"count_sent\": 4907,\n \"count_delivery\": 3683,\n \"count_spam\": 0,\n \"count_unsubscribe\": 1,\n \"count_click\": 47,\n \"count_open\": 265\n }\n }\n]"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:13.479265+00:00"
+}

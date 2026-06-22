@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mailganer-api": {
+      "command": ".cursor/api-mcp.sh",
+      "args": []
+    }
+  }
+}

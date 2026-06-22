@@ -1,0 +1,26 @@
+{
+  "path": "/documentation/tags/get",
+  "title": "Получить список тегов",
+  "category": "Работа с тегами",
+  "url": "https://mailganer.com/documentation/tags/get",
+  "http_methods": [
+    "GET"
+  ],
+  "endpoints": [
+    "GET https://mailganer.com/api/v2/tags/"
+  ],
+  "headings": [
+    "Список параметров ответа (json)",
+    "Содержимое массива results",
+    "Пример ответа"
+  ],
+  "paragraphs": [],
+  "code_examples": [
+    {
+      "label": "Пример ответа",
+      "code": "{\n \"count\": 4,\n \"next\": null,\n \"previous\": null,\n \"results\": [\n {\n \"id\": 28174,\n \"name\": \"название_тега2\"\n },\n {\n \"id\": 28173,\n \"name\": \"название_тега\"\n },\n {\n \"id\": 28172,\n \"name\": \"test\"\n },\n {\n \"id\": 28171,\n \"name\": \"тест\"\n }\n ]\n}"
+    }
+  ],
+  "tables": [],
+  "scraped_at": "2026-06-22T21:24:05.164639+00:00"
+}
