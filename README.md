@@ -100,6 +100,8 @@ Workflow [`.github/workflows/sync-docs.yml`](.github/workflows/sync-docs.yml):
 
 После merge PR локально: `git pull` или `./setup.sh .` для обновления кэша.
 
+**Настройка репозитория (один раз):** Settings → Actions → General → Workflow permissions → *Read and write* и включить **Allow GitHub Actions to create and approve pull requests**. Без этого workflow не сможет открыть PR.
+
 ## Источники
 
 | Источник | URL | Скрипт |
