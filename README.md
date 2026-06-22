@@ -14,6 +14,7 @@ mailganer-api-mcp/
 │   ├── sitemap-pages.json   # страницы из sitemap.xml
 │   ├── postman-index.json   # индекс Postman-запросов
 │   ├── crosslinks.json      # связи docs ↔ Postman
+│   ├── manual-crosslinks.json  # ручные связи и пояснения для «дырок»
 │   ├── endpoints/           # JSON по каждой странице API
 │   └── postman/             # Postman collection JSON
 ├── docs_kb.py               # логика KB: поиск, sync, diff
@@ -66,6 +67,7 @@ POSTMAN_API_KEY=PMAK-your_postman_api_key
 | `get_api_endpoint_doc` | Страница docs **+ связанные Postman-запросы** |
 | `get_linked_postman_request` | Postman-запрос **+ связанные страницы docs** |
 | `rebuild_doc_crosslinks` | Пересобрать `docs/crosslinks.json` |
+| `list_crosslink_gaps` | Список «дырок» без связи + пояснения |
 | `check_doc_page` | Сравнить кэш с live-сайтом, показать diff |
 | `get_api_overview` | Обзор: auth, лимиты, пагинация |
 | `search_postman` | Поиск по Postman-коллекции |
@@ -86,6 +88,17 @@ python3 scripts/build-crosslinks.py
 | Sitemap | https://mailganer.com/sitemap.xml | `sync-api-docs.py` |
 | Меню API | https://mailganer.com/documentation/api/ | `sync-api-docs.py` (fallback) |
 | Postman | https://documenter.getpostman.com/view/23131434/VUxPvnhA | `sync-postman.py` |
+
+## Ручные связи (`manual-crosslinks.json`)
+
+Автоматический матчинг не покрывает всё: разные пути (`/api/auth/` vs `/api/v2/auth/`), несколько способов вызова, методы без отдельной doc-страницы.
+
+Файл `docs/manual-crosslinks.json`:
+- `doc_to_postman` — явные связи slug → имена Postman-запросов
+- `doc_notes` — пояснение, почему у страницы нет Postman (webhook, нет в коллекции)
+
+После правок: `python3 scripts/build-crosslinks.py`  
+Проверить «дыры»: MCP-инструмент `list_crosslink_gaps`.
 
 ## Авторизация API (справка)
 

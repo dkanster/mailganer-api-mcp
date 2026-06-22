@@ -142,6 +142,11 @@ async def list_tools() -> list[Tool]:
             description="Rebuild docs ↔ Postman crosslink index in docs/crosslinks.json",
             inputSchema={"type": "object", "properties": {}},
         ),
+        Tool(
+            name="list_crosslink_gaps",
+            description="List docs and Postman requests without crosslinks, with documented reasons",
+            inputSchema={"type": "object", "properties": {}},
+        ),
     ]
 
 
@@ -204,6 +209,9 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
 
     if name == "rebuild_doc_crosslinks":
         return _json(docs_kb.build_crosslinks(save=True))
+
+    if name == "list_crosslink_gaps":
+        return _json(docs_kb.list_crosslink_gaps())
 
     raise ValueError(f"Unknown tool: {name}")
 

@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "description": "Ручные связи docs ↔ Postman там, где автоматический матчинг не справляется",
+  "doc_to_postman": {
+    "email-get": [
+      "Получение информации о подписчике 2 способ"
+    ],
+    "email-update": [
+      "Обновление информации о подписчике 1 способ"
+    ],
+    "email-unsubscribe": [
+      "Отписка подписчика 1 способ"
+    ],
+    "auth": [
+      "Получение токена другого пользователя"
+    ],
+    "segments-sozdanie-segmenta": [
+      "Получить массив сегментов",
+      "Получить информацию о сегменте"
+    ],
+    "users": [
+      "Получить список пользователей",
+      "Получить информацию о пользователе",
+      "Изменить пользователя"
+    ]
+  },
+  "doc_notes": {
+    "api-changelog": "Changelog — не REST-метод",
+    "documentation": "Хаб документации, без API-метода",
+    "webhooks-email_status": "Входящий webhook от Mailganer — не исходящий REST-запрос",
+    "webhooks-email_meta": "Входящий webhook от Mailganer — не исходящий REST-запрос",
+    "webhooks-mail_status": "Входящий webhook от Mailganer — не исходящий REST-запрос",
+    "webhooks-trigger_event": "Входящий webhook от Mailganer — не исходящий REST-запрос",
+    "postback": "Постбек URL для конверсий — не REST API Mailganer",
+    "variables_on_click": "Обновление переменной по клику — постбек, не REST API",
+    "recomend-layout-guide": "Гайд по вёрстке товарных рекомендаций — без API-метода",
+    "tags-add": "POST /api/v2/tags/ — есть в docs, нет в Postman-коллекции",
+    "tags-get": "GET /api/v2/tags/ — есть в docs, нет в Postman-коллекции",
+    "email-update-mass": "PATCH /api/v2/emails/mass/ — есть в docs, нет в Postman-коллекции",
+    "task-create": "Reports API — нет в Postman-коллекции",
+    "task-status": "Reports API — нет в Postman-коллекции",
+    "task-download": "Reports API — нет в Postman-коллекции",
+    "templates": "GET /api/v2/template/:id/ — есть в docs, нет в Postman-коллекции",
+    "mailing-stat": "GET /api/v2/mailing/:id/stat/ — есть в docs, нет в Postman-коллекции",
+    "trigger-create": "POST /api/v2/triggers/create/ — есть в docs, нет в Postman-коллекции",
+    "trigger-emails": "История имейлов триггера — нет в Postman-коллекции",
+    "sites-set_webhook_url": "POST /api/v2/sites/set_webhook — есть в docs, нет в Postman-коллекции",
+    "users-balance": "GET /api/v2/users/get_balance/ — есть в docs, нет в Postman-коллекции",
+    "segments-send_trigger": "POST /api/v2/segments/:id/send_trigger/ — есть в docs, нет в Postman-коллекции",
+    "recomend-rfm_segment": "RFM-сегмент — в Postman только orders, отдельного метода нет"
+  }
+}

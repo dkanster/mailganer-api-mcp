@@ -1,6 +1,6 @@
 [project]
 name = "mailganer-api-mcp"
-version = "0.2.0"
+version = "0.2.1"
 description = "MCP server for managing Mailganer REST API documentation knowledge base"
 readme = "README.md"
 license = {text = "MIT"}

@@ -52,6 +52,12 @@ python3 scripts/sync-postman.py
 
 `check_doc_page` с slug — сравнивает кэш с live-версией и показывает diff.
 
+### «Дыры» в связях docs ↔ Postman
+
+`list_crosslink_gaps` — что не связано и почему (`doc_notes` в `docs/manual-crosslinks.json`).
+
+Ручные связи правятся в `docs/manual-crosslinks.json`, затем `rebuild_doc_crosslinks`.
+
 ### Список страниц по разделу
 
 `list_api_docs` с фильтром `category`, например «подписчик», «триггер», «рассылк».

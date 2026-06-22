@@ -18,7 +18,7 @@ def main() -> int:
     print(
         f"✓ Crosslinks: {stats['docs_with_postman']} docs with Postman, "
         f"{stats['postman_with_docs']} Postman with docs, "
-        f"{stats['total_links']} links"
+        f"{stats['total_links']} links ({stats.get('manual_links', 0)} manual)"
     )
     if stats["unmatched_docs"]:
         print(f"  Docs without Postman match: {len(stats['unmatched_docs'])}")
