@@ -5,7 +5,7 @@
     "postman": "https://documenter.getpostman.com/view/23131434/VUxPvnhA"
   },
   "source": "https://mailganer.com/documentation/api/",
-  "synced_at": "2026-06-22T21:25:06.068373+00:00",
+  "synced_at": "2026-06-22T21:45:01.990637+00:00",
   "base_api_url": "https://mailganer.com/api/",
   "auth": {
     "v1": "api_key in request body",
@@ -863,7 +863,7 @@
     "pages_failed": 0,
     "pages_from_sitemap": 1,
     "pages_from_menu": 47,
-    "pages_new": 1,
-    "pages_previously_scraped": 47
+    "pages_new": 0,
+    "pages_previously_scraped": 48
   }
 }

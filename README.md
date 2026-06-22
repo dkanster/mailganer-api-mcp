@@ -1,8 +1,8 @@
 # Mailganer API MCP
 
-MCP-сервер и локальная база знаний по [REST API Mailganer](https://mailganer.com/documentation/api/).
+MCP-сервер для **управления документацией** [REST API Mailganer](https://mailganer.com/documentation/api/).
 
-Проект кэширует документацию по всем endpoint-страницам и даёт ассистенту инструменты для поиска и чтения справки. Прямые вызовы API — через `mailganer_client.py` (базовый HTTP-клиент).
+Кэширует страницы документации и Postman-коллекцию локально в `docs/` и даёт ассистенту инструменты для поиска, синхронизации и проверки изменений. Live-вызовы API — не основной сценарий (есть заготовка `mailganer_client.py` на будущее).
 
 ## Структура
 
@@ -10,17 +10,17 @@ MCP-сервер и локальная база знаний по [REST API Mail
 mailganer-api-mcp/
 ├── docs/
 │   ├── overview.md          # авторизация, лимиты, пагинация
-│   ├── api-index.json       # каталог всех страниц документации
+│   ├── api-index.json       # каталог всех страниц
 │   ├── sitemap-pages.json   # страницы из sitemap.xml
-│   ├── postman-index.json   # индекс запросов Postman-коллекции
-│   ├── endpoints/           # JSON по каждому методу API
+│   ├── postman-index.json   # индекс Postman-запросов
+│   ├── crosslinks.json      # связи docs ↔ Postman
+│   ├── endpoints/           # JSON по каждой странице API
 │   └── postman/             # Postman collection JSON
+├── docs_kb.py               # логика KB: поиск, sync, diff
 ├── scripts/
 │   ├── sync-api-docs.py     # парсер документации (sitemap + menu)
 │   └── sync-postman.py      # синхронизация Postman-коллекции
-├── server.py                # MCP-сервер (поиск по KB)
-├── mailganer_client.py        # HTTP-клиент Mailganer API
-└── config.py                # чтение .env.api
+└── server.py                # MCP-сервер
 ```
 
 ## Быстрый старт
@@ -31,45 +31,64 @@ chmod +x setup.sh
 ./setup.sh .
 ```
 
-`setup.sh` создаёт venv, `.env.api`, launcher `.cursor/api-mcp.sh`, `.cursor/mcp.json` и синхронизирует документацию.
+Reload MCP в Cursor: **Settings → MCP → Reload**.
+
+Или в чате: **«установи mailganer api docs»** / **«обнови документацию mailganer»**.
 
 ### Переменные окружения (`.env.api`)
 
 ```env
 MAILGANER_API_KEY=your_api_key
 MAILGANER_API_BASE_URL=https://mailganer.com/api
+POSTMAN_API_KEY=PMAK-your_postman_api_key
 ```
 
-API-ключ — в разделе **Настройки аккаунта** личного кабинета Mailganer.
+- **MAILGANER_API_KEY** — раздел **Настройки аккаунта** в личном кабинете Mailganer (для live-вызовов API)
+- **POSTMAN_API_KEY** — [Postman → Settings → API keys](https://go.postman.co/settings/me/api-keys)
 
-### Обновить документацию
+### MCP-серверы
 
-```bash
-python3 scripts/sync-api-docs.py
-python3 scripts/sync-postman.py
-```
+| Сервер | Назначение |
+|---|---|
+| `mailganer-api` | Локальный кэш документации Mailganer API |
+| `postman` | Ваши workspace, коллекции и запросы в Postman |
+
+Режим Postman MCP по умолчанию: `--code`. Чтобы сменить (`--minimal`, `--full`), отредактируйте `.cursor/postman-mcp.sh`.
 
 ## MCP-инструменты
 
 | Инструмент | Описание |
 |---|---|
-| `search_api_docs` | Поиск по кэшированной документации |
-| `get_api_endpoint_doc` | Полная справка по slug (например `email-add`) |
-| `get_api_overview` | Обзор: auth v1/v2, лимиты, пагинация |
+| `get_doc_status` | Статус кэша: дата sync, кол-во страниц, ошибки |
+| `sync_documentation` | Обновить docs с сайта (`all` / `api` / `postman`) |
+| `list_api_docs` | Список страниц, фильтр по категории |
+| `search_api_docs` | Полнотекстовый поиск по кэшу |
+| `get_api_endpoint_doc` | Страница docs **+ связанные Postman-запросы** |
+| `get_linked_postman_request` | Postman-запрос **+ связанные страницы docs** |
+| `rebuild_doc_crosslinks` | Пересобрать `docs/crosslinks.json` |
+| `check_doc_page` | Сравнить кэш с live-сайтом, показать diff |
+| `get_api_overview` | Обзор: auth, лимиты, пагинация |
+| `search_postman` | Поиск по Postman-коллекции |
+| `get_postman_request` | Запрос Postman по имени или path |
 
-## Авторизация API
+## Обновить документацию вручную
 
-- **v1** — `api_key` в теле запроса
-- **v2** — заголовок `Authorization: CodeRequest {{api_key}}`
-
-Лимит: **500 запросов/мин** (HTTP 429 при превышении).
+```bash
+python3 scripts/sync-api-docs.py
+python3 scripts/sync-postman.py
+python3 scripts/build-crosslinks.py
+```
 
 ## Источники
 
 | Источник | URL | Скрипт |
 |---|---|---|
-| Документация (sitemap) | https://mailganer.com/sitemap.xml | `sync-api-docs.py` |
-| Документация (меню API) | https://mailganer.com/documentation/api/ | `sync-api-docs.py` (fallback) |
-| Postman-коллекция | https://documenter.getpostman.com/view/23131434/VUxPvnhA | `sync-postman.py` |
+| Sitemap | https://mailganer.com/sitemap.xml | `sync-api-docs.py` |
+| Меню API | https://mailganer.com/documentation/api/ | `sync-api-docs.py` (fallback) |
+| Postman | https://documenter.getpostman.com/view/23131434/VUxPvnhA | `sync-postman.py` |
 
-Sitemap — основной список страниц; пункты меню на `/documentation/api/` дополняют его, если страницы нет в sitemap.
+## Авторизация API (справка)
+
+- **v1** — `api_key` в теле запроса
+- **v2** — заголовок `Authorization: CodeRequest {{api_key}}`
+- Лимит: **500 запросов/мин**

@@ -4,6 +4,7 @@ __pycache__/
 .DS_Store
 .env.api
 ai/.env.api
+.cursor/mcp.json
 .cache/
 *.egg-info/
 dist/

@@ -6,6 +6,7 @@ PACKAGE_ROOT="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "${1:-.}" && pwd)"
 
 LAUNCHER="$ROOT/.cursor/api-mcp.sh"
+POSTMAN_LAUNCHER="$ROOT/.cursor/postman-mcp.sh"
 MCP_JSON="$ROOT/.cursor/mcp.json"
 MCP_EXAMPLE="$PACKAGE_ROOT/mcp.json.example"
 
@@ -27,16 +28,27 @@ python3 -m venv "$ROOT/.venv"
 ok "venv + editable install"
 
 mkdir -p "$ROOT/.cursor"
-cp "$PACKAGE_ROOT/.cursor/api-mcp.sh" "$LAUNCHER"
-chmod +x "$LAUNCHER"
+install_launcher() {
+  local src="$1" dest="$2"
+  if [[ "$src" != "$dest" ]]; then
+    install -m 755 "$src" "$dest"
+  else
+    chmod +x "$dest"
+  fi
+}
+
+install_launcher "$PACKAGE_ROOT/.cursor/api-mcp.sh" "$LAUNCHER"
 ok "Launcher: .cursor/api-mcp.sh"
+install_launcher "$PACKAGE_ROOT/.cursor/postman-mcp.sh" "$POSTMAN_LAUNCHER"
+ok "Launcher: .cursor/postman-mcp.sh"
 
 python3 - "$MCP_JSON" "$MCP_EXAMPLE" <<'PY'
 import json, sys
 from pathlib import Path
 
 mcp_path, example_path = Path(sys.argv[1]), Path(sys.argv[2])
-entry = {"command": ".cursor/api-mcp.sh", "args": []}
+mailganer_entry = {"command": ".cursor/api-mcp.sh", "args": []}
+postman_entry = {"command": ".cursor/postman-mcp.sh", "args": []}
 
 if mcp_path.exists():
     data = json.loads(mcp_path.read_text(encoding="utf-8"))
@@ -45,7 +57,9 @@ elif example_path.exists():
 else:
     data = {"mcpServers": {}}
 
-data.setdefault("mcpServers", {})["mailganer-api"] = entry
+servers = data.setdefault("mcpServers", {})
+servers["mailganer-api"] = mailganer_entry
+servers["postman"] = postman_entry
 mcp_path.parent.mkdir(parents=True, exist_ok=True)
 mcp_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 PY
@@ -58,6 +72,10 @@ MAILGANER_API_KEY=
 
 # Базовый URL REST API (обычно не меняется)
 MAILGANER_API_BASE_URL=https://mailganer.com/api
+
+# Postman API key для MCP-сервера Postman
+# https://go.postman.co/settings/me/api-keys
+POSTMAN_API_KEY=
 EOF
   ok "Env: ${ENV_FILE#$ROOT/}"
 else
@@ -67,6 +85,7 @@ fi
 info "Синхронизация документации API..."
 "$ROOT/.venv/bin/python" "$PACKAGE_ROOT/scripts/sync-api-docs.py"
 "$ROOT/.venv/bin/python" "$PACKAGE_ROOT/scripts/sync-postman.py"
+"$ROOT/.venv/bin/python" "$PACKAGE_ROOT/scripts/build-crosslinks.py"
 ok "Документация обновлена в docs/"
 
 echo "Готово. Reload MCP в Cursor: Settings → MCP → Reload"

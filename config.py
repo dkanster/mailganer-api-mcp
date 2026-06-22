@@ -34,3 +34,7 @@ def api_key() -> str:
 
 def base_url() -> str:
     return read_env("MAILGANER_API_BASE_URL", "https://mailganer.com/api")
+
+
+def postman_api_key() -> str:
+    return read_env("POSTMAN_API_KEY")

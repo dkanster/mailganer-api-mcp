@@ -3,6 +3,10 @@
     "mailganer-api": {
       "command": ".cursor/api-mcp.sh",
       "args": []
+    },
+    "postman": {
+      "command": ".cursor/postman-mcp.sh",
+      "args": []
     }
   }
 }

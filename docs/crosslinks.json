@@ -1,0 +1,891 @@
+{
+  "built_at": "2026-06-22T21:49:26.508629+00:00",
+  "by_slug": {
+    "api-changelog": {
+      "title": "Changelog Mailganer",
+      "doc_path": "/documentation/api/changelog",
+      "postman_requests": []
+    },
+    "tags-add": {
+      "title": "Добавление тега",
+      "doc_path": "/documentation/tags/add",
+      "postman_requests": []
+    },
+    "email-get": {
+      "title": "Получение информации о подписчике",
+      "doc_path": "/documentation/email/get",
+      "postman_requests": [
+        {
+          "name": "Получение информации о подписчике 1 способ",
+          "method": "GET",
+          "path": "/api/v2/emails/",
+          "url": "https://mailganer.com/api/v2/emails/?email=test@example.com&source=51488",
+          "folder": "Подписчики",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 0.94
+        }
+      ]
+    },
+    "webhooks-email_meta": {
+      "title": "Изменение данных о подписчике",
+      "doc_path": "/documentation/webhooks/email_meta",
+      "postman_requests": []
+    },
+    "trigger-send-v2": {
+      "title": "Отправка триггера",
+      "doc_path": "/documentation/trigger/send/v2",
+      "postman_requests": [
+        {
+          "name": "Отправка триггера",
+          "method": "POST",
+          "path": "/api/v2/triggers/:trigger_id/send/",
+          "url": "https://mailganer.com/api/v2/triggers/:trigger_id/send/",
+          "folder": "Триггеры",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "users-balance": {
+      "title": "Получить баланс",
+      "doc_path": "/documentation/users/balance",
+      "postman_requests": []
+    },
+    "mailing-send": {
+      "title": "Отправка рассылки",
+      "doc_path": "/documentation/mailing/send",
+      "postman_requests": [
+        {
+          "name": "Отправка рассылки",
+          "method": "POST",
+          "path": "/api/v2/mailing/send/",
+          "url": "https://mailganer.com/api/v2/mailing/send/",
+          "folder": "Рассылки",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "email-update-mass": {
+      "title": "Массовое обновление подписчиков",
+      "doc_path": "/documentation/email/update/mass",
+      "postman_requests": []
+    },
+    "task-create": {
+      "title": "Создать задачу на формирование отчета",
+      "doc_path": "/documentation/task/create",
+      "postman_requests": []
+    },
+    "sites-post": {
+      "title": "Создать список",
+      "doc_path": "/documentation/sites/post",
+      "postman_requests": [
+        {
+          "name": "Создать список",
+          "method": "POST",
+          "path": "/api/v2/sites/",
+          "url": "https://mailganer.com/api/v2/sites/",
+          "folder": "Списки",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "task-status": {
+      "title": "Получение статуса задачи",
+      "doc_path": "/documentation/task/status",
+      "postman_requests": []
+    },
+    "webhooks-mail_status": {
+      "title": "Взаимодействие с письмом",
+      "doc_path": "/documentation/webhooks/mail_status",
+      "postman_requests": []
+    },
+    "triggers": {
+      "title": "Получить список триггеров",
+      "doc_path": "/documentation/triggers",
+      "postman_requests": [
+        {
+          "name": "Получить список триггеров",
+          "method": "GET",
+          "path": "/api/v2/triggers/",
+          "url": "https://mailganer.com/api/v2/triggers/",
+          "folder": "Триггеры",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "segments-send_trigger": {
+      "title": "Отправка триггера на сегмент",
+      "doc_path": "/documentation/segments/send_trigger",
+      "postman_requests": []
+    },
+    "task-download": {
+      "title": "Скачивание готового файла",
+      "doc_path": "/documentation/task/download",
+      "postman_requests": []
+    },
+    "webhooks-trigger_event": {
+      "title": "Срабатывание события в триггере",
+      "doc_path": "/documentation/webhooks/trigger_event",
+      "postman_requests": []
+    },
+    "mailing-create": {
+      "title": "Создание рассылки",
+      "doc_path": "/documentation/mailing/create",
+      "postman_requests": [
+        {
+          "name": "Создание рассылки",
+          "method": "POST",
+          "path": "/api/v1/mailing/create/",
+          "url": "https://mailganer.com/api/v1/mailing/create/",
+          "folder": "Рассылки",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "user_var-get": {
+      "title": "Получить список пользовательских переменных",
+      "doc_path": "/documentation/user_var/get",
+      "postman_requests": [
+        {
+          "name": "Получить список пользовательских переменных",
+          "method": "GET",
+          "path": "/api/v2/user_vars/",
+          "url": "https://mailganer.com/api/v2/user_vars/",
+          "folder": "Переменные",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "users": {
+      "title": "Создать пользователя",
+      "doc_path": "/documentation/users",
+      "postman_requests": [
+        {
+          "name": "Создать пользователя",
+          "method": "POST",
+          "path": "/api/v2/users/",
+          "url": "https://mailganer.com/api/v2/users/",
+          "folder": "Пользователи",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "email-update": {
+      "title": "Обновление информации о подписчике",
+      "doc_path": "/documentation/email/update",
+      "postman_requests": [
+        {
+          "name": "Обновление информации о подписчике 2 способ",
+          "method": "PATCH",
+          "path": "/api/v2/emails/update/",
+          "url": "https://mailganer.com/api/v2/emails/update/",
+          "folder": "Подписчики",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 0.94
+        }
+      ]
+    },
+    "recomend-rfm_segment": {
+      "title": "Передача RFM-сегмента",
+      "doc_path": "/documentation/recomend/rfm_segment",
+      "postman_requests": []
+    },
+    "templates": {
+      "title": "Получение HTML-вёрстки шаблона",
+      "doc_path": "/documentation/templates",
+      "postman_requests": []
+    },
+    "email-add": {
+      "title": "Добавление нового подписчика",
+      "doc_path": "/documentation/email/add",
+      "postman_requests": [
+        {
+          "name": "Добавление нового подписчика",
+          "method": "POST",
+          "path": "/api/v2/emails/",
+          "url": "https://mailganer.com/api/v2/emails/",
+          "folder": "Подписчики",
+          "description_plain": "Имейл добавляется в статусе Запрошено подтверждение . На имейл будет отправлено письмо с подтверждением подписки. Полезная статья: Как изменить стандартное письмо-подтверждение подписки . Когда подписчик кликнет по ссылке из письма подтверждения, статус изменится на Активен . Параметры not_doi и need_activate по-умолчанию не работают, запросите их активацию в поддержке. Список параметров запроса (json) Переменная Название Тип Обязательный Комментарий email Имейл Строка Да source ID списка Список Да Узнать ID списка name Имя Строка Нет surname Фамилия Строка Нет patronymic Отчество Строка Нет gender Пол Целое число Нет 1-мужской, 2-женский birthday Дата рождения Дата Нет Формат даты dd.mm.yyyy city Город Строка Нет add_tag Добавить метку Строка Нет delete_tag Удалить метку Строка Нет user_vars Пользовательские переменные Массив Нет Массив с пользовательскими переменными not_doi Отменить DOI Булев Нет Наличие этого параметра отменяет отправку письма подтверждения. Имейл добавляется в список в статусе Активен. need_activate Отправить DOI Булев Нет Наличие этого параметра отправляет письмо подтверждения, даже если имейл в статусе Запрошено подтверждение. Список параметров ответа в случае успеха (json) Переменная Тип Обязательный Комментарий id ID подписчика Целое число Да mg_hash Хэш имейла Строка Да in_base Есть в базе Булев Да Возвращает true если имейл уже был в базе email_status Статус подписчика Строка Да bunce_log Причина недоступности Строка Нет причина несуществования имейла для статуса not_available corrected_email Исправленный имейл Строка Нет Для статуса fixed передаётся новый имейл, в случае если в имейле была допущена опечатка Возможные значения статусов подписчика Название Переменная Тип active Активен Адресат получает рассылки wait_activated Запрошено подтверждение Адресат пока не перешёл по ссылке подтверждения в письме подтверждения подписки spam Сервер считает спамом Во время последней отправки почтовый сервер адресата отказался принимать письмо, сочтя",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "recomend-orders": {
+      "title": "Передача оформленных заказов",
+      "doc_path": "/documentation/recomend/orders",
+      "postman_requests": [
+        {
+          "name": "Передача оформленных заказов",
+          "method": "POST",
+          "path": "/api/v1/recomend/orders/",
+          "url": "https://mailganer.com/api/v1/recomend/orders/",
+          "folder": "Товарные рекомендации",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "postback": {
+      "title": "Передача конверсий по рассылкам",
+      "doc_path": "/documentation/postback",
+      "postman_requests": []
+    },
+    "trigger-meta": {
+      "title": "Получение информации о триггере",
+      "doc_path": "/documentation/trigger/meta",
+      "postman_requests": [
+        {
+          "name": "Получить информацию о триггере",
+          "method": "GET",
+          "path": "/api/v2/triggers/:trigger_id/meta/",
+          "url": "https://mailganer.com/api/v2/triggers/:trigger_id/meta/",
+          "folder": "Триггеры",
+          "description_plain": "",
+          "match_reason": "method_path",
+          "match_score": 0.733
+        }
+      ]
+    },
+    "trigger-id_stat": {
+      "title": "Получение статистики по отправке триггера",
+      "doc_path": "/documentation/trigger/id_stat",
+      "postman_requests": [
+        {
+          "name": "Получение статистики по отправке триггера",
+          "method": "POST",
+          "path": "/api/v1/trigger/id_stat/",
+          "url": "https://mailganer.com/api/v1/trigger/id_stat/",
+          "folder": "Триггеры",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "segments-sozdanie-segmenta": {
+      "title": "Создать сегмент",
+      "doc_path": "/documentation/segments/sozdanie-segmenta",
+      "postman_requests": [
+        {
+          "name": "Создать сегмент",
+          "method": "POST",
+          "path": "/api/v2/segments/",
+          "url": "https://mailganer.com/api/v2/segments/",
+          "folder": "Сегменты",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "sites-get": {
+      "title": "Получить массив списков",
+      "doc_path": "/documentation/sites/get",
+      "postman_requests": [
+        {
+          "name": "Получить массив списков",
+          "method": "GET",
+          "path": "/api/v2/sites/",
+          "url": "https://mailganer.com/api/v2/sites/",
+          "folder": "Списки",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "mailing-get_id": {
+      "title": "Получить список рассылок",
+      "doc_path": "/documentation/mailing/get_id",
+      "postman_requests": [
+        {
+          "name": "Получить список рассылок",
+          "method": "GET",
+          "path": "/api/v2/mailing/",
+          "url": "https://mailganer.com/api/v2/mailing/",
+          "folder": "Рассылки",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "trigger-stat-v2": {
+      "title": "Статистика по триггеру",
+      "doc_path": "/documentation/trigger/stat/v2",
+      "postman_requests": [
+        {
+          "name": "Статистика триггера",
+          "method": "GET",
+          "path": "/api/v2/triggers/:trigger_id/stat/",
+          "url": "https://mailganer.com/api/v2/triggers/:trigger_id/stat/?start_date=2022-08-01&end_date=2023-08-03",
+          "folder": "Триггеры",
+          "description_plain": "",
+          "match_reason": "method_path",
+          "match_score": 0.7
+        }
+      ]
+    },
+    "sites-set_webhook_url": {
+      "title": "Задать ссылку на webhook",
+      "doc_path": "/documentation/sites/set_webhook_url",
+      "postman_requests": []
+    },
+    "tags-get": {
+      "title": "Получить список тегов",
+      "doc_path": "/documentation/tags/get",
+      "postman_requests": []
+    },
+    "users-payment": {
+      "title": "Получить ссылку на пополнение баланса",
+      "doc_path": "/documentation/users/payment",
+      "postman_requests": [
+        {
+          "name": "Получить ссылку на пополнение баланса",
+          "method": "POST",
+          "path": "/api/v2/pay/",
+          "url": "https://mailganer.com/api/v2/pay/",
+          "folder": "Пользователи",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "email-validate": {
+      "title": "Валидация подписчика",
+      "doc_path": "/documentation/email/validate",
+      "postman_requests": [
+        {
+          "name": "Валидация подписчика",
+          "method": "POST",
+          "path": "/api/v2/emails/validate/",
+          "url": "https://mailganer.com/api/v2/emails/validate/",
+          "folder": "Подписчики",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "auth": {
+      "title": "Получение токена",
+      "doc_path": "/documentation/auth",
+      "postman_requests": []
+    },
+    "webhooks-email_status": {
+      "title": "Изменение статуса подписчика",
+      "doc_path": "/documentation/webhooks/email_status",
+      "postman_requests": []
+    },
+    "mailing-get": {
+      "title": "Получение информации о рассылке",
+      "doc_path": "/documentation/mailing/get",
+      "postman_requests": [
+        {
+          "name": "Получение информации о рассылке",
+          "method": "GET",
+          "path": "/api/v2/mailing/:public_id",
+          "url": "https://mailganer.com/api/v2/mailing/:public_id",
+          "folder": "Рассылки",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "user_var-add": {
+      "title": "Добавление пользовательской переменной",
+      "doc_path": "/documentation/user_var/add",
+      "postman_requests": [
+        {
+          "name": "Добавление пользовательской переменной",
+          "method": "POST",
+          "path": "/api/v2/user_vars/",
+          "url": "https://mailganer.com/api/v2/user_vars/",
+          "folder": "Переменные",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "email-add-mass": {
+      "title": "Массовое добавление подписчиков",
+      "doc_path": "/documentation/email/add/mass",
+      "postman_requests": [
+        {
+          "name": "Массовое добавление подписчиков",
+          "method": "POST",
+          "path": "/api/v2/emails/",
+          "url": "https://mailganer.com/api/v2/emails/",
+          "folder": "Подписчики",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "trigger-emails": {
+      "title": "История имейлов по триггеру",
+      "doc_path": "/documentation/trigger/emails",
+      "postman_requests": []
+    },
+    "trigger-create": {
+      "title": "Создание триггера",
+      "doc_path": "/documentation/trigger/create",
+      "postman_requests": []
+    },
+    "variables_on_click": {
+      "title": "Обновление переменной по ссылке",
+      "doc_path": "/documentation/variables_on_click",
+      "postman_requests": []
+    },
+    "mailing-stat": {
+      "title": "Статистика по рассылке",
+      "doc_path": "/documentation/mailing/stat",
+      "postman_requests": []
+    },
+    "email-unsubscribe": {
+      "title": "Отписка подписчика",
+      "doc_path": "/documentation/email/unsubscribe",
+      "postman_requests": [
+        {
+          "name": "Отписка подписчика 2 способ",
+          "method": "POST",
+          "path": "/api/v2/emails/unsubscribe/",
+          "url": "https://mailganer.com/api/v2/emails/unsubscribe/",
+          "folder": "Подписчики",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 0.94
+        }
+      ]
+    },
+    "recomend-layout-guide": {
+      "title": "Инструкция по подготовке вёрстки триггера с блоком рекомендаций",
+      "doc_path": "/documentation/recomend-layout-guide",
+      "postman_requests": []
+    },
+    "sites-verify_domain": {
+      "title": "Проверка верификации домена",
+      "doc_path": "/documentation/sites/verify_domain",
+      "postman_requests": [
+        {
+          "name": "Проверка верификации домена",
+          "method": "GET",
+          "path": "/api/v2/sites/verify_domain/",
+          "url": "https://mailganer.com/api/v2/sites/verify_domain/",
+          "folder": "Списки",
+          "description_plain": "",
+          "match_reason": "method_path+title",
+          "match_score": 1.0
+        }
+      ]
+    },
+    "documentation": {
+      "title": "Документация по API личного кабинета для Mailganer",
+      "doc_path": "/documentation",
+      "postman_requests": []
+    }
+  },
+  "by_postman": {
+    "GET /api/v2/emails/ | Получение информации о подписчике 1 способ": [
+      {
+        "slug": "email-get",
+        "title": "Получение информации о подписчике",
+        "category": "Работа с подписчиками",
+        "path": "/documentation/email/get",
+        "url": "https://mailganer.com/documentation/email/get",
+        "endpoints": [
+          "GET https://mailganer.com/api/v2/emails/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 0.94
+      }
+    ],
+    "POST /api/v2/triggers/:trigger_id/send/ | Отправка триггера": [
+      {
+        "slug": "trigger-send-v2",
+        "title": "Отправка триггера",
+        "category": "Работа с триггерами",
+        "path": "/documentation/trigger/send/v2",
+        "url": "https://mailganer.com/documentation/trigger/send/v2",
+        "endpoints": [
+          "POST https://mailganer.com/api/v2/triggers/{{trigger_id}}/send/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "POST /api/v2/mailing/send/ | Отправка рассылки": [
+      {
+        "slug": "mailing-send",
+        "title": "Отправка рассылки",
+        "category": "Работа с рассылками",
+        "path": "/documentation/mailing/send",
+        "url": "https://mailganer.com/documentation/mailing/send",
+        "endpoints": [
+          "POST https://mailganer.com/api/v2/mailing/send/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "POST /api/v2/sites/ | Создать список": [
+      {
+        "slug": "sites-post",
+        "title": "Создать список",
+        "category": "Работа со списками",
+        "path": "/documentation/sites/post",
+        "url": "https://mailganer.com/documentation/sites/post",
+        "endpoints": [
+          "POST https://mailganer.com/api/v2/sites/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "GET /api/v2/triggers/ | Получить список триггеров": [
+      {
+        "slug": "triggers",
+        "title": "Получить список триггеров",
+        "category": "Работа с триггерами",
+        "path": "/documentation/triggers",
+        "url": "https://mailganer.com/documentation/triggers",
+        "endpoints": [
+          "GET https://mailganer.com/api/v2/triggers/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "POST /api/v1/mailing/create/ | Создание рассылки": [
+      {
+        "slug": "mailing-create",
+        "title": "Создание рассылки",
+        "category": "Работа с рассылками",
+        "path": "/documentation/mailing/create",
+        "url": "https://mailganer.com/documentation/mailing/create",
+        "endpoints": [
+          "POST https://mailganer.com/api/v1/mailing/create/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "GET /api/v2/user_vars/ | Получить список пользовательских переменных": [
+      {
+        "slug": "user_var-get",
+        "title": "Получить список пользовательских переменных",
+        "category": "Работа с переменными",
+        "path": "/documentation/user_var/get",
+        "url": "https://mailganer.com/documentation/user_var/get",
+        "endpoints": [
+          "GET https://mailganer.com/api/v2/user_vars/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "POST /api/v2/users/ | Создать пользователя": [
+      {
+        "slug": "users",
+        "title": "Создать пользователя",
+        "category": "Работа с пользователями",
+        "path": "/documentation/users",
+        "url": "https://mailganer.com/documentation/users",
+        "endpoints": [
+          "POST https://mailganer.com/api/v2/users/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "PATCH /api/v2/emails/update/ | Обновление информации о подписчике 2 способ": [
+      {
+        "slug": "email-update",
+        "title": "Обновление информации о подписчике",
+        "category": "Работа с подписчиками",
+        "path": "/documentation/email/update",
+        "url": "https://mailganer.com/documentation/email/update",
+        "endpoints": [
+          "PATCH https://mailganer.com/api/v2/emails/update/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 0.94
+      }
+    ],
+    "POST /api/v2/emails/ | Добавление нового подписчика": [
+      {
+        "slug": "email-add",
+        "title": "Добавление нового подписчика",
+        "category": "Работа с подписчиками",
+        "path": "/documentation/email/add",
+        "url": "https://mailganer.com/documentation/email/add",
+        "endpoints": [
+          "POST https://mailganer.com/api/v2/emails/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "POST /api/v1/recomend/orders/ | Передача оформленных заказов": [
+      {
+        "slug": "recomend-orders",
+        "title": "Передача оформленных заказов",
+        "category": "Товарные рекомендации",
+        "path": "/documentation/recomend/orders",
+        "url": "https://mailganer.com/documentation/recomend/orders",
+        "endpoints": [
+          "POST https://mailganer.com/api/v1/recomend/orders/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "GET /api/v2/triggers/:trigger_id/meta/ | Получить информацию о триггере": [
+      {
+        "slug": "trigger-meta",
+        "title": "Получение информации о триггере",
+        "category": "Работа с триггерами",
+        "path": "/documentation/trigger/meta",
+        "url": "https://mailganer.com/documentation/trigger/meta",
+        "endpoints": [
+          "GET https://mailganer.com/api/v2/triggers/{{trigger_id}}/meta"
+        ],
+        "match_reason": "method_path",
+        "match_score": 0.733
+      }
+    ],
+    "POST /api/v1/trigger/id_stat/ | Получение статистики по отправке триггера": [
+      {
+        "slug": "trigger-id_stat",
+        "title": "Получение статистики по отправке триггера",
+        "category": "Работа с триггерами",
+        "path": "/documentation/trigger/id_stat",
+        "url": "https://mailganer.com/documentation/trigger/id_stat",
+        "endpoints": [
+          "POST https://mailganer.com/api/v1/trigger/id_stat/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "POST /api/v2/segments/ | Создать сегмент": [
+      {
+        "slug": "segments-sozdanie-segmenta",
+        "title": "Создать сегмент",
+        "category": "Работа с сегментами",
+        "path": "/documentation/segments/sozdanie-segmenta",
+        "url": "https://mailganer.com/documentation/segments/sozdanie-segmenta",
+        "endpoints": [
+          "POST https://mailganer.com/api/v2/segments/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "GET /api/v2/sites/ | Получить массив списков": [
+      {
+        "slug": "sites-get",
+        "title": "Получить массив списков",
+        "category": "Работа со списками",
+        "path": "/documentation/sites/get",
+        "url": "https://mailganer.com/documentation/sites/get",
+        "endpoints": [
+          "GET https://mailganer.com/api/v2/sites/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "GET /api/v2/mailing/ | Получить список рассылок": [
+      {
+        "slug": "mailing-get_id",
+        "title": "Получить список рассылок",
+        "category": "Работа с рассылками",
+        "path": "/documentation/mailing/get_id",
+        "url": "https://mailganer.com/documentation/mailing/get_id",
+        "endpoints": [
+          "GET https://mailganer.com/api/v2/mailing/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "GET /api/v2/triggers/:trigger_id/stat/ | Статистика триггера": [
+      {
+        "slug": "trigger-stat-v2",
+        "title": "Статистика по триггеру",
+        "category": "Работа с триггерами",
+        "path": "/documentation/trigger/stat/v2",
+        "url": "https://mailganer.com/documentation/trigger/stat/v2",
+        "endpoints": [
+          "GET https://mailganer.com/api/v2/triggers/{{trigger_id}}/stat/"
+        ],
+        "match_reason": "method_path",
+        "match_score": 0.7
+      }
+    ],
+    "POST /api/v2/pay/ | Получить ссылку на пополнение баланса": [
+      {
+        "slug": "users-payment",
+        "title": "Получить ссылку на пополнение баланса",
+        "category": "Работа с пользователями",
+        "path": "/documentation/users/payment",
+        "url": "https://mailganer.com/documentation/users/payment",
+        "endpoints": [
+          "POST https://mailganer.com/api/v2/pay/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "POST /api/v2/emails/validate/ | Валидация подписчика": [
+      {
+        "slug": "email-validate",
+        "title": "Валидация подписчика",
+        "category": "Валидация подписчиков",
+        "path": "/documentation/email/validate",
+        "url": "https://mailganer.com/documentation/email/validate",
+        "endpoints": [
+          "POST https://mailganer.com/api/v2/emails/validate/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "GET /api/v2/mailing/:public_id/ | Получение информации о рассылке": [
+      {
+        "slug": "mailing-get",
+        "title": "Получение информации о рассылке",
+        "category": "Работа с рассылками",
+        "path": "/documentation/mailing/get",
+        "url": "https://mailganer.com/documentation/mailing/get",
+        "endpoints": [
+          "GET https://mailganer.com/api/v2/mailing/{{public_id}}"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "POST /api/v2/user_vars/ | Добавление пользовательской переменной": [
+      {
+        "slug": "user_var-add",
+        "title": "Добавление пользовательской переменной",
+        "category": "Работа с переменными",
+        "path": "/documentation/user_var/add",
+        "url": "https://mailganer.com/documentation/user_var/add",
+        "endpoints": [
+          "POST https://mailganer.com/api/v2/user_vars/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "POST /api/v2/emails/ | Массовое добавление подписчиков": [
+      {
+        "slug": "email-add-mass",
+        "title": "Массовое добавление подписчиков",
+        "category": "Работа с подписчиками",
+        "path": "/documentation/email/add/mass",
+        "url": "https://mailganer.com/documentation/email/add/mass",
+        "endpoints": [
+          "POST https://mailganer.com/api/v2/emails/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ],
+    "POST /api/v2/emails/unsubscribe/ | Отписка подписчика 2 способ": [
+      {
+        "slug": "email-unsubscribe",
+        "title": "Отписка подписчика",
+        "category": "Работа с подписчиками",
+        "path": "/documentation/email/unsubscribe",
+        "url": "https://mailganer.com/documentation/email/unsubscribe",
+        "endpoints": [
+          "POST https://mailganer.com/api/v2/emails/unsubscribe/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 0.94
+      }
+    ],
+    "GET /api/v2/sites/verify_domain/ | Проверка верификации домена": [
+      {
+        "slug": "sites-verify_domain",
+        "title": "Проверка верификации домена",
+        "category": "Работа со списками",
+        "path": "/documentation/sites/verify_domain",
+        "url": "https://mailganer.com/documentation/sites/verify_domain",
+        "endpoints": [
+          "GET https://mailganer.com/api/v2/sites/verify_domain/"
+        ],
+        "match_reason": "method_path+title",
+        "match_score": 1.0
+      }
+    ]
+  },
+  "stats": {
+    "docs_total": 48,
+    "postman_total": 33,
+    "docs_with_postman": 24,
+    "postman_with_docs": 24,
+    "total_links": 24,
+    "unmatched_docs": [
+      "api-changelog",
+      "tags-add",
+      "webhooks-email_meta",
+      "users-balance",
+      "email-update-mass",
+      "task-create",
+      "task-status",
+      "webhooks-mail_status",
+      "segments-send_trigger",
+      "task-download",
+      "webhooks-trigger_event",
+      "recomend-rfm_segment",
+      "templates",
+      "postback",
+      "sites-set_webhook_url",
+      "tags-get",
+      "auth",
+      "webhooks-email_status",
+      "trigger-emails",
+      "trigger-create",
+      "variables_on_click",
+      "mailing-stat",
+      "recomend-layout-guide",
+      "documentation"
+    ],
+    "unmatched_postman": [
+      "GET /api/v2/emails/:email_hash/ | Получение информации о подписчике 2 способ",
+      "GET /api/v2/segments/ | Получить массив сегментов",
+      "GET /api/v2/segments/:segment_id/ | Получить информацию о сегменте",
+      "GET /api/v2/users/ | Получить список пользователей",
+      "GET /api/v2/users/:id/ | Получить информацию о пользователе",
+      "PATCH /api/v2/emails/:email_hash/ | Обновление информации о подписчике 1 способ",
+      "PATCH /api/v2/users/:id/ | Изменить пользователя",
+      "POST /api/auth/ | Получение токена другого пользователя",
+      "POST /api/v2/emails/:email_hash/unsubscribe/ | Отписка подписчика 1 способ"
+    ]
+  }
+}

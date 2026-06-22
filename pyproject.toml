@@ -1,7 +1,7 @@
 [project]
 name = "mailganer-api-mcp"
-version = "0.1.0"
-description = "MCP server and knowledge base for Mailganer REST API"
+version = "0.2.0"
+description = "MCP server for managing Mailganer REST API documentation knowledge base"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.11"
@@ -29,9 +29,12 @@ Homepage = "https://github.com/dkanster/mailganer-api-mcp"
 packages = ["."]
 only-include = [
     "server.py",
+    "docs_kb.py",
     "config.py",
     "mailganer_client.py",
     "scripts/sync-api-docs.py",
+    "scripts/sync-postman.py",
+    "scripts/build-crosslinks.py",
 ]
 
 [build-system]

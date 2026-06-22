@@ -1,33 +1,66 @@
-"""Mailganer API MCP server (stub — knowledge base first)."""
+"""Mailganer API documentation MCP server."""
 
 from __future__ import annotations
 
 import asyncio
 import json
-from pathlib import Path
 
 from mcp.server import Server
 from mcp.server.stdio import stdio_server
 from mcp.types import TextContent, Tool
 
-DOCS_DIR = Path(__file__).resolve().parent / "docs"
-INDEX_FILE = DOCS_DIR / "api-index.json"
+import docs_kb
 
 server = Server("mailganer-api")
 
 
-def load_index() -> dict:
-    if not INDEX_FILE.exists():
-        return {"endpoints": [], "categories": {}}
-    return json.loads(INDEX_FILE.read_text(encoding="utf-8"))
+def _json(data: object) -> list[TextContent]:
+    return [TextContent(type="text", text=json.dumps(data, ensure_ascii=False, indent=2))]
+
+
+def _text(data: str) -> list[TextContent]:
+    return [TextContent(type="text", text=data)]
 
 
 @server.list_tools()
 async def list_tools() -> list[Tool]:
     return [
         Tool(
+            name="get_doc_status",
+            description="Get sync status of cached Mailganer API docs and Postman collection",
+            inputSchema={"type": "object", "properties": {}},
+        ),
+        Tool(
+            name="sync_documentation",
+            description="Re-sync Mailganer API documentation from web sources into docs/",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "target": {
+                        "type": "string",
+                        "enum": ["all", "api", "postman"],
+                        "default": "all",
+                        "description": "What to sync: all sources, API pages only, or Postman only",
+                    }
+                },
+            },
+        ),
+        Tool(
+            name="list_api_docs",
+            description="List cached Mailganer API documentation pages, optionally by category",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "category": {
+                        "type": "string",
+                        "description": "Filter by category, e.g. подписчик or триггер",
+                    }
+                },
+            },
+        ),
+        Tool(
             name="search_api_docs",
-            description="Search cached Mailganer REST API documentation by keyword",
+            description="Full-text search in cached Mailganer API documentation",
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -39,13 +72,38 @@ async def list_tools() -> list[Tool]:
         ),
         Tool(
             name="get_api_endpoint_doc",
-            description="Get full cached documentation for a Mailganer API endpoint by slug",
+            description="Get cached Mailganer API doc page with linked Postman requests",
             inputSchema={
                 "type": "object",
                 "properties": {
                     "slug": {
                         "type": "string",
-                        "description": "Endpoint slug, e.g. email-add or trigger-send-v2",
+                        "description": "Page slug, e.g. email-add or trigger-send-v2",
+                    }
+                },
+                "required": ["slug"],
+            },
+        ),
+        Tool(
+            name="get_linked_postman_request",
+            description="Get Postman request with related Mailganer documentation pages",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string", "description": "Partial Postman request name"},
+                    "path": {"type": "string", "description": "API path, e.g. /api/v2/emails/"},
+                },
+            },
+        ),
+        Tool(
+            name="check_doc_page",
+            description="Compare a cached doc page with the live site and report differences",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "slug": {
+                        "type": "string",
+                        "description": "Page slug to check against live documentation",
                     }
                 },
                 "required": ["slug"],
@@ -56,43 +114,96 @@ async def list_tools() -> list[Tool]:
             description="Get Mailganer API overview: auth, limits, pagination",
             inputSchema={"type": "object", "properties": {}},
         ),
+        Tool(
+            name="search_postman",
+            description="Search Mailganer Postman collection requests by keyword",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "Search term"},
+                    "limit": {"type": "integer", "default": 10},
+                },
+                "required": ["query"],
+            },
+        ),
+        Tool(
+            name="get_postman_request",
+            description="Get a Postman request by partial name or exact API path (without related docs)",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string", "description": "Partial request name"},
+                    "path": {"type": "string", "description": "API path, e.g. /api/v2/emails/"},
+                },
+            },
+        ),
+        Tool(
+            name="rebuild_doc_crosslinks",
+            description="Rebuild docs ↔ Postman crosslink index in docs/crosslinks.json",
+            inputSchema={"type": "object", "properties": {}},
+        ),
     ]
 
 
 @server.call_tool()
 async def call_tool(name: str, arguments: dict) -> list[TextContent]:
-    if name == "get_api_overview":
-        overview = DOCS_DIR / "overview.md"
-        if overview.exists():
-            return [TextContent(type="text", text=overview.read_text(encoding="utf-8"))]
-        return [TextContent(type="text", text="Overview not found. Run scripts/sync-api-docs.py first.")]
+    if name == "get_doc_status":
+        return _json(docs_kb.get_doc_status())
 
-    if name == "get_api_endpoint_doc":
-        slug = arguments["slug"]
-        path = DOCS_DIR / "endpoints" / f"{slug}.json"
-        if not path.exists():
-            return [TextContent(type="text", text=f"Endpoint doc not found: {slug}")]
-        return [TextContent(type="text", text=path.read_text(encoding="utf-8"))]
+    if name == "sync_documentation":
+        target = arguments.get("target", "all")
+        return _json(docs_kb.sync_documentation(target=target))
+
+    if name == "list_api_docs":
+        return _json(docs_kb.list_api_docs(category=arguments.get("category")))
 
     if name == "search_api_docs":
-        query = arguments["query"].lower()
-        limit = int(arguments.get("limit", 10))
-        index = load_index()
-        matches = []
-        for item in index.get("endpoints", []):
-            haystack = " ".join(
-                [
-                    item.get("title", ""),
-                    item.get("path", ""),
-                    item.get("category", ""),
-                    " ".join(item.get("endpoints", [])),
-                ]
-            ).lower()
-            if query in haystack:
-                matches.append(item)
-            if len(matches) >= limit:
-                break
-        return [TextContent(type="text", text=json.dumps(matches, ensure_ascii=False, indent=2))]
+        return _json(
+            docs_kb.search_api_docs(
+                arguments["query"],
+                limit=int(arguments.get("limit", 10)),
+            )
+        )
+
+    if name == "get_api_endpoint_doc":
+        return _json(docs_kb.get_linked_endpoint_doc(arguments["slug"]))
+
+    if name == "get_linked_postman_request":
+        return _json(
+            docs_kb.get_linked_postman_request(
+                name=arguments.get("name"),
+                path=arguments.get("path"),
+            )
+        )
+
+    if name == "check_doc_page":
+        return _json(docs_kb.check_doc_page(arguments["slug"]))
+
+    if name == "get_api_overview":
+        overview = docs_kb.DOCS_DIR / "overview.md"
+        if overview.exists():
+            return _text(overview.read_text(encoding="utf-8"))
+        return _text("Overview not found. Run sync_documentation first.")
+
+    if name == "search_postman":
+        return _json(
+            docs_kb.search_postman(
+                arguments["query"],
+                limit=int(arguments.get("limit", 10)),
+            )
+        )
+
+    if name == "get_postman_request":
+        item = docs_kb.get_postman_request(
+            name=arguments.get("name"),
+            path=arguments.get("path"),
+        )
+        if item is None:
+            return _text("Postman request not found")
+        return _json(item)
+
+    if name == "rebuild_doc_crosslinks":
+        return _json(docs_kb.build_crosslinks(save=True))
 
     raise ValueError(f"Unknown tool: {name}")
 
