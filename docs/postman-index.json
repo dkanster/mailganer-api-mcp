@@ -1,7 +1,7 @@
 {
   "source": "https://documenter.getpostman.com/view/23131434/VUxPvnhA",
   "collection_api_url": "https://documenter.gw.postman.com/api/collections/23131434/VUxPvnhA?segregateAuth=true&versionTag=latest",
-  "synced_at": "2026-06-22T22:03:07.647073+00:00",
+  "synced_at": "2026-06-29T10:55:30.043489+00:00",
   "collection_name": "REST API Mailganer",
   "collection_id": "ad2a6101-55ec-46be-9158-ec0369852183",
   "requests": [
@@ -78,6 +78,14 @@
       "folder": "Подписчики"
     },
     {
+      "name": "Массовое обновление подписчиков",
+      "method": "PATCH",
+      "path": "/api/v2/emails/mass/",
+      "url": "https://mailganer.com/api/v2/emails/mass/",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/email/update/mass\">https://mailganer.com/documentation/email/update/mass</a></p>",
+      "folder": "Подписчики"
+    },
+    {
       "name": "Создать список",
       "method": "POST",
       "path": "/api/v2/sites/",
@@ -102,6 +110,14 @@
       "folder": "Списки"
     },
     {
+      "name": "Задать ссылку на webhook",
+      "method": "POST",
+      "path": "/api/v2/sites/set_webhook",
+      "url": "https://mailganer.com/api/v2/sites/set_webhook",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/sites/set_webhook_url\">https://mailganer.com/documentation/sites/set_webhook_url</a></p>",
+      "folder": "Списки"
+    },
+    {
       "name": "Создать сегмент",
       "method": "POST",
       "path": "/api/v2/segments/",
@@ -123,6 +139,14 @@
       "path": "/api/v2/segments/:segment_id",
       "url": "https://mailganer.com/api/v2/segments/:segment_id",
       "description": "",
+      "folder": "Сегменты"
+    },
+    {
+      "name": "Отправка триггера на сегмент",
+      "method": "POST",
+      "path": "/api/v2/segments/:segment_id/send_trigger/",
+      "url": "https://mailganer.com/api/v2/segments/:segment_id/send_trigger/",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/segments/send_trigger\">https://mailganer.com/documentation/segments/send_trigger</a></p>",
       "folder": "Сегменты"
     },
     {
@@ -174,6 +198,14 @@
       "folder": "Рассылки"
     },
     {
+      "name": "Статистика по рассылке",
+      "method": "GET",
+      "path": "/api/v2/mailing/:public_id/stat",
+      "url": "https://mailganer.com/api/v2/mailing/:public_id/stat?start_date=2023-12-11&end_date=2023-12-13",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/mailing/stat\">https://mailganer.com/documentation/mailing/stat</a></p>",
+      "folder": "Рассылки"
+    },
+    {
       "name": "Отправка триггера",
       "method": "POST",
       "path": "/api/v2/triggers/:trigger_id/send/",
@@ -211,6 +243,22 @@
       "path": "/api/v2/triggers/:trigger_id/meta/",
       "url": "https://mailganer.com/api/v2/triggers/:trigger_id/meta/",
       "description": "",
+      "folder": "Триггеры"
+    },
+    {
+      "name": "Создание триггера",
+      "method": "POST",
+      "path": "/api/v2/triggers/create/",
+      "url": "https://mailganer.com/api/v2/triggers/create/",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/trigger/create\">https://mailganer.com/documentation/trigger/create</a></p>",
+      "folder": "Триггеры"
+    },
+    {
+      "name": "История имейлов по триггеру",
+      "method": "GET",
+      "path": "/api/v2/triggers/:trigger_id/emails",
+      "url": "https://mailganer.com/api/v2/triggers/:trigger_id/emails?start_date=2024-08-01&end_date=2024-08-03",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/trigger/emails\">https://mailganer.com/documentation/trigger/emails</a></p>",
       "folder": "Триггеры"
     },
     {
@@ -268,10 +316,66 @@
       "url": "https://mailganer.com/api/v2/users/",
       "description": "",
       "folder": "Пользователи"
+    },
+    {
+      "name": "Получить баланс",
+      "method": "GET",
+      "path": "/api/v2/users/get_balance/",
+      "url": "https://mailganer.com/api/v2/users/get_balance/",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/users/balance\">https://mailganer.com/documentation/users/balance</a></p>",
+      "folder": "Пользователи"
+    },
+    {
+      "name": "Добавление тега",
+      "method": "POST",
+      "path": "/api/v2/tags/",
+      "url": "https://mailganer.com/api/v2/tags/",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/tags/add\">https://mailganer.com/documentation/tags/add</a></p>",
+      "folder": "Теги"
+    },
+    {
+      "name": "Получить список тегов",
+      "method": "GET",
+      "path": "/api/v2/tags/",
+      "url": "https://mailganer.com/api/v2/tags/",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/tags/get\">https://mailganer.com/documentation/tags/get</a></p>",
+      "folder": "Теги"
+    },
+    {
+      "name": "Получение HTML-вёрстки шаблона",
+      "method": "GET",
+      "path": "/api/v2/template/:template_id/",
+      "url": "https://mailganer.com/api/v2/template/:template_id/",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/templates\">https://mailganer.com/documentation/templates</a></p>",
+      "folder": "Шаблоны"
+    },
+    {
+      "name": "Создать задачу на формирование отчёта",
+      "method": "POST",
+      "path": "/api/v2/tasks/emails_report",
+      "url": "https://mailganer.com/api/v2/tasks/emails_report",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/task/create\">https://mailganer.com/documentation/task/create</a></p>",
+      "folder": "Отчёты"
+    },
+    {
+      "name": "Получение статуса задачи",
+      "method": "GET",
+      "path": "/api/v2/tasks/:task_id",
+      "url": "https://mailganer.com/api/v2/tasks/:task_id",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/task/status\">https://mailganer.com/documentation/task/status</a></p>",
+      "folder": "Отчёты"
+    },
+    {
+      "name": "Скачивание готового файла",
+      "method": "GET",
+      "path": "/api/v2/tasks/:task_id/download_file",
+      "url": "https://mailganer.com/api/v2/tasks/:task_id/download_file",
+      "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/task/download\">https://mailganer.com/documentation/task/download</a></p>",
+      "folder": "Отчёты"
     }
   ],
   "stats": {
-    "requests_total": 33,
-    "folders_total": 8
+    "requests_total": 46,
+    "folders_total": 11
   }
 }

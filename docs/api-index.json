@@ -5,7 +5,7 @@
     "postman": "https://documenter.getpostman.com/view/23131434/VUxPvnhA"
   },
   "source": "https://mailganer.com/documentation/api/",
-  "synced_at": "2026-06-22T22:03:07.285470+00:00",
+  "synced_at": "2026-06-29T10:55:29.258562+00:00",
   "base_api_url": "https://mailganer.com/api/",
   "auth": {
     "v1": "api_key in request body",
