@@ -939,6 +939,65 @@
           },
           "response": [],
           "_postman_id": "20add6a8-c551-41db-a942-d25566c8a714"
+        },
+        {
+          "name": "Массовое обновление подписчиков",
+          "id": "14e2f946-b5f3-4682-bb90-ddd22fb763c8",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n    {\n        \"email\": \"test@example.com\",\n        \"source\": 49767,\n        \"name\": \"Федор\",\n        \"surname\": \"Федоров\"\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/emails/mass/",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/email/update/mass\">https://mailganer.com/documentation/email/update/mass</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "emails",
+                "mass",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "14e2f946-b5f3-4682-bb90-ddd22fb763c8"
         }
       ],
       "id": "95e94ec2-5951-40ae-99b8-08f52943c379",
@@ -1394,6 +1453,64 @@
             }
           ],
           "_postman_id": "2b09930b-7969-4c07-9c7f-113e953d476e"
+        },
+        {
+          "name": "Задать ссылку на webhook",
+          "id": "4597f5c7-c4e0-4c53-aedb-bead8670dbb0",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"source\": 49767,\n    \"url\": \"https://webhook.site/example\",\n    \"is_active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/sites/set_webhook",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/sites/set_webhook_url\">https://mailganer.com/documentation/sites/set_webhook_url</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "sites",
+                "set_webhook"
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "4597f5c7-c4e0-4c53-aedb-bead8670dbb0"
         }
       ],
       "id": "b4ca07a4-5892-4bb3-8b1c-a576b04614e2",
@@ -1753,6 +1870,72 @@
             }
           ],
           "_postman_id": "40c6e519-417c-4a4a-b62c-f49b416bc93b"
+        },
+        {
+          "name": "Отправка триггера на сегмент",
+          "id": "eb65b4d1-8968-475c-9300-2646f53e80d1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"trigger_id\": 34521\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/segments/:segment_id/send_trigger/",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/segments/send_trigger\">https://mailganer.com/documentation/segments/send_trigger</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "segments",
+                ":segment_id",
+                "send_trigger",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "id": "53075ee9-17ae-4488-8e30-1c4f9de7b4a3",
+                  "type": "any",
+                  "key": "segment_id"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "eb65b4d1-8968-475c-9300-2646f53e80d1"
         }
       ],
       "id": "2e287fd0-ccc8-459a-a507-d732f095a328",
@@ -2266,6 +2449,70 @@
             }
           ],
           "_postman_id": "b27af799-e9f0-42d8-b8c1-31921a14f018"
+        },
+        {
+          "name": "Статистика по рассылке",
+          "id": "757ee17d-410d-4390-b3b1-b3af517fd4cd",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/mailing/:public_id/stat?start_date=2023-12-11&end_date=2023-12-13",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/mailing/stat\">https://mailganer.com/documentation/mailing/stat</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "mailing",
+                ":public_id",
+                "stat"
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2023-12-11"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2023-12-13"
+                }
+              ],
+              "variable": [
+                {
+                  "type": "any",
+                  "key": "public_id"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "757ee17d-410d-4390-b3b1-b3af517fd4cd"
         }
       ],
       "id": "a1a8eda9-8919-4b02-b9e7-ef77bb2aede9",
@@ -2507,7 +2754,6 @@
                   ]
                 }
               },
-              "code": 200,
               "_postman_previewlanguage": "json",
               "header": [
                 {
@@ -3094,6 +3340,129 @@
             }
           ],
           "_postman_id": "69440eb2-b302-42cd-905f-ec00285097f3"
+        },
+        {
+          "name": "Создание триггера",
+          "id": "c0b867e7-ddd9-4196-a40c-d6d8e8077dff",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Новый триггер\",\n    \"theme\": \"Новый триггер\",\n    \"sites\": [94321],\n    \"html-content\": \"<p>Привет, это пример HTML-содержимого письма.</p>\",\n    \"zip-content\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/triggers/create/",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/trigger/create\">https://mailganer.com/documentation/trigger/create</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "triggers",
+                "create",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "c0b867e7-ddd9-4196-a40c-d6d8e8077dff"
+        },
+        {
+          "name": "История имейлов по триггеру",
+          "id": "33b530f8-2774-4687-98f5-c34070ba9a39",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/triggers/:trigger_id/emails?start_date=2024-08-01&end_date=2024-08-03",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/trigger/emails\">https://mailganer.com/documentation/trigger/emails</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "triggers",
+                ":trigger_id",
+                "emails"
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2024-08-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2024-08-03"
+                }
+              ],
+              "variable": [
+                {
+                  "type": "any",
+                  "key": "trigger_id"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "33b530f8-2774-4687-98f5-c34070ba9a39"
         }
       ],
       "id": "5acff894-bb6b-460a-b5cf-d22a563d5378",
@@ -3617,6 +3986,56 @@
           },
           "response": [],
           "_postman_id": "ab41f53e-baa6-4a90-b8de-5eff17a8c663"
+        },
+        {
+          "name": "Получить баланс",
+          "id": "15a59ca8-652c-4334-8999-801afd0f08d0",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/users/get_balance/",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/users/balance\">https://mailganer.com/documentation/users/balance</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "get_balance",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "15a59ca8-652c-4334-8999-801afd0f08d0"
         }
       ],
       "id": "118f133a-2b9c-4f58-bfa9-54bc60c0faad",
@@ -3677,6 +4096,428 @@
         }
       ],
       "_postman_id": "e078058a-3a22-484a-890e-f3a46b7d7b01"
+    },
+    {
+      "name": "Теги",
+      "item": [
+        {
+          "name": "Добавление тега",
+          "id": "243fe354-c1dc-4848-ae23-682d0953eb9c",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"название_тега\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/tags/",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/tags/add\">https://mailganer.com/documentation/tags/add</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "tags",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "243fe354-c1dc-4848-ae23-682d0953eb9c"
+        },
+        {
+          "name": "Получить список тегов",
+          "id": "9518a7a0-7cd0-4ee6-be85-8aa106354a96",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/tags/",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/tags/get\">https://mailganer.com/documentation/tags/get</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "tags",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "9518a7a0-7cd0-4ee6-be85-8aa106354a96"
+        }
+      ],
+      "id": "f1e35d3b-b419-4239-a937-bbcb3311d7a7",
+      "_postman_id": "f1e35d3b-b419-4239-a937-bbcb3311d7a7",
+      "description": "",
+      "auth": {
+        "type": "apikey",
+        "apikey": {
+          "basicConfig": [
+            {
+              "key": "key",
+              "value": "Authorization"
+            },
+            {
+              "key": "value",
+              "value": "<value>"
+            }
+          ]
+        },
+        "isInherited": true,
+        "source": {
+          "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "name": "REST API Mailganer",
+          "type": "collection"
+        }
+      }
+    },
+    {
+      "name": "Шаблоны",
+      "item": [
+        {
+          "name": "Получение HTML-вёрстки шаблона",
+          "id": "a7181e1a-c40a-4c8b-8751-9c359f5be3fd",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/template/:template_id/",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/templates\">https://mailganer.com/documentation/templates</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "template",
+                ":template_id",
+                ""
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "id": "96e77de4-6be0-479b-bdb5-e55ee12ed783",
+                  "type": "any",
+                  "key": "template_id"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "a7181e1a-c40a-4c8b-8751-9c359f5be3fd"
+        }
+      ],
+      "id": "7f419a4b-1b8c-4574-b1d8-f77ad38630ff",
+      "_postman_id": "7f419a4b-1b8c-4574-b1d8-f77ad38630ff",
+      "description": "",
+      "auth": {
+        "type": "apikey",
+        "apikey": {
+          "basicConfig": [
+            {
+              "key": "key",
+              "value": "Authorization"
+            },
+            {
+              "key": "value",
+              "value": "<value>"
+            }
+          ]
+        },
+        "isInherited": true,
+        "source": {
+          "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "name": "REST API Mailganer",
+          "type": "collection"
+        }
+      }
+    },
+    {
+      "name": "Отчёты",
+      "item": [
+        {
+          "name": "Создать задачу на формирование отчёта",
+          "id": "d337613c-5c68-4bf5-9592-c033b57010e6",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"file_type\": \"csv\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://mailganer.com/api/v2/tasks/emails_report",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/task/create\">https://mailganer.com/documentation/task/create</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "tasks",
+                "emails_report"
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "_postman_id": "d337613c-5c68-4bf5-9592-c033b57010e6"
+        },
+        {
+          "name": "Получение статуса задачи",
+          "id": "656c767b-5e7d-4abd-896f-e64ac50af4b7",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/tasks/:task_id",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/task/status\">https://mailganer.com/documentation/task/status</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "tasks",
+                ":task_id"
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "id": "262def07-431c-4cff-806c-11aee1e50328",
+                  "type": "any",
+                  "key": "task_id"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "656c767b-5e7d-4abd-896f-e64ac50af4b7"
+        },
+        {
+          "name": "Скачивание готового файла",
+          "id": "55e976df-7e00-439b-940d-c4826148d686",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://mailganer.com/api/v2/tasks/:task_id/download_file",
+            "description": "<p>Документация: <a href=\"https://mailganer.com/documentation/task/download\">https://mailganer.com/documentation/task/download</a></p>\n",
+            "auth": {
+              "type": "apikey",
+              "apikey": {
+                "basicConfig": [
+                  {
+                    "key": "key",
+                    "value": "Authorization"
+                  },
+                  {
+                    "key": "value",
+                    "value": "<value>"
+                  }
+                ]
+              },
+              "isInherited": true,
+              "source": {
+                "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+                "name": "REST API Mailganer",
+                "type": "collection"
+              }
+            },
+            "urlObject": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2",
+                "tasks",
+                ":task_id",
+                "download_file"
+              ],
+              "host": [
+                "mailganer",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "id": "393c1c6b-0325-4c3f-95e0-9073b3a15e76",
+                  "type": "any",
+                  "key": "task_id"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "_postman_id": "55e976df-7e00-439b-940d-c4826148d686"
+        }
+      ],
+      "id": "46b48d9d-f556-42f4-b46e-7c0b8866fd68",
+      "_postman_id": "46b48d9d-f556-42f4-b46e-7c0b8866fd68",
+      "description": "",
+      "auth": {
+        "type": "apikey",
+        "apikey": {
+          "basicConfig": [
+            {
+              "key": "key",
+              "value": "Authorization"
+            },
+            {
+              "key": "value",
+              "value": "<value>"
+            }
+          ]
+        },
+        "isInherited": true,
+        "source": {
+          "_postman_id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "id": "ad2a6101-55ec-46be-9158-ec0369852183",
+          "name": "REST API Mailganer",
+          "type": "collection"
+        }
+      }
     }
   ],
   "auth": {
